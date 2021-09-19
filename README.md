@@ -1,5 +1,5 @@
 # Template para Fast API
-[![codecov](https://codecov.io/gh/Maua-Dev/back_fastAPI_template/branch/main/graph/badge.svg?token=M16VBNGBR3)](https://codecov.io/gh/Maua-Dev/back_fastAPI_template)
+[![codecov](https://codecov.io/gh/Maua-Dev/mss_materias/branch/main/graph/badge.svg?token=NIRZLES7VB)](https://codecov.io/gh/Maua-Dev/mss_materias)
 
 Template de MSS para Fast API.
 
