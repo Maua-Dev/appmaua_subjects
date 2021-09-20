@@ -1,13 +1,13 @@
 from src.controladores.fastapi.http.respostas import ResPadrao
-from src.interfaces.i_getters_materias import IGettersMaterias
+from src.interfaces.IRepoMaterias import IRepoMaterias
 from src.usecases.uc_get_all_materias import UCGetAllMaterias
 from src.repositorios.erros.erro_get_all_materias import ErroGetAllMaterias
 
 
 class CGetAllMateriasFastapi:
-    repo: IGettersMaterias
+    repo: IRepoMaterias
 
-    def __init__(self, repo: IGettersMaterias):
+    def __init__(self, repo: IRepoMaterias):
         self.repo = repo
 
     def __call__(self):

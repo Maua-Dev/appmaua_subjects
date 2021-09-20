@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class IGettersMaterias(ABC):
+class IRepoMaterias(ABC):
     """ Interface de modificação de informações de um usuario """
     @abstractmethod
     def getAllMaterias(self) -> list:

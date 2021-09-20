@@ -1,13 +1,13 @@
-from src.interfaces.i_getters_materias import IGettersMaterias
+from src.interfaces.IRepoMaterias import IRepoMaterias
 
 from devmaua.src.models.disciplina import Disciplina
 
-class RepositorioMateriasVolatil(IGettersMaterias):
+class RepositorioMateriasVolatil(IRepoMaterias):
 
-    repositorio: list[Disciplina]
+    materias: list[Disciplina]
 
     def __init__(self):
-        self.repositorio = []
+        self.materias = []
 
     def getAllMaterias(self) -> list:
-        return self.repositorio
+        return self.materias

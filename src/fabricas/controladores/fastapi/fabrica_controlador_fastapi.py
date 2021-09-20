@@ -3,11 +3,11 @@ from fastapi import FastAPI
 from src.config.proj_config import ProjConfig
 from src.config.enums.fastapi import *
 from src.controladores.fastapi.c_get_all_materias import CGetAllMateriasFastapi
-from src.interfaces.i_getters_materias import IGettersMaterias
+from src.interfaces.IRepoMaterias import IRepoMaterias
 
 
 class FabricaControladorFastapi:
-    repo: IGettersMaterias
+    repo: IRepoMaterias
 
     __config__: dict
 
@@ -19,7 +19,7 @@ class FabricaControladorFastapi:
 
     app: FastAPI
 
-    def __init__(self, repo: IGettersMaterias):
+    def __init__(self, repo: IRepoMaterias):
         self.repo = repo
 
         self.__config__ = ProjConfig.getFastapi()

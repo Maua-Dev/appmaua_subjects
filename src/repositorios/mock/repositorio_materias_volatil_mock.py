@@ -1,4 +1,4 @@
-from src.interfaces.i_getters_materias import IGettersMaterias
+from src.interfaces.IRepoMaterias import IRepoMaterias
 
 from devmaua.src.enum.tipo_email import TipoEmail
 from devmaua.src.enum.tipo_telefone import TipoTelefone
@@ -23,7 +23,7 @@ from devmaua.src.models.aluno import Aluno
 from devmaua.src.models.ra import RA
 from devmaua.src.models.disciplina import Disciplina
 
-class MockRepositorioMateriasVolatil(IGettersMaterias):
+class MockRepositorioMateriasVolatil(IRepoMaterias):
 
     repositorio: list[Disciplina]
 
