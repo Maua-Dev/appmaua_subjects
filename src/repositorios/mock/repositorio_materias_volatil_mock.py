@@ -23,7 +23,7 @@ from devmaua.src.models.aluno import Aluno
 from devmaua.src.models.ra import RA
 from devmaua.src.models.disciplina import Disciplina
 
-class MockRepositorioMateriasVolatil():
+class MockRepositorioMateriasVolatil(IGettersMaterias):
 
     repositorio: list[Disciplina]
 
@@ -63,6 +63,9 @@ class MockRepositorioMateriasVolatil():
                                            alunosMatriculados=[aluno],
                                            aulas=[aula],
                                            ofereceDp=True))
+
+    def getAllMaterias(self) -> list:
+        return self.repositorio
 
     def addMateria(self, materia: Disciplina) -> None:
         self.repositorio.append(materia)
