@@ -69,9 +69,9 @@ jobs:
           targets: ${{ secrets.TARGETS }}
 
           working-directory: /home/ubuntu
-          command: sudo docker pull ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}; sudo docker service update --force aut; docker exec $(docker ps -q -f name=aut) uvicorn src.main:app --host 0.0.0.0 --port 8080
+          command: sudo docker pull ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}; sudo docker service update --force mat; docker exec $(docker ps -q -f name=mat) uvicorn src.main:app --host 0.0.0.0 --port 8080
           comment: atualizar imagem
-          ↑↑↑↑↑↑ COLOCAR O NOME DO SERVICO CERTO↑↑↑↑↑↑↑↑↑↑
+
           
           
           
