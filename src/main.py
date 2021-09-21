@@ -19,15 +19,9 @@ def main():
         print(req)
         return req
 
-
-    @_ctrl.app.get('/rota1', response_model=ResPadrao)
-    async def rota1():
-        return _ctrl.metodoControlador1()
-
-
-    @_ctrl.app.post('/rota2', response_model=ResArg)
-    async def rota2(myReq: ReqExemplo):
-        return _ctrl.metodoControlador2(myReq.arg)
+    @_ctrl.app.get('/materias')
+    async def getAllMaterias():
+        return _ctrl.getAllMaterias()
 
     return _, _ctrl
 

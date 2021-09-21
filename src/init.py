@@ -1,7 +1,7 @@
 from src.config.proj_config import ProjConfig
 from src.config.erros.deployment import *
 from src.config.enums.deployment import *
-from src.repositorios.mock.r_mock import RepoMock
+from src.repositorios.mock.repositorio_materias_volatil_mock import MockRepositorioMateriasVolatil
 from src.fabricas.controladores.fastapi.fabrica_controlador_fastapi import FabricaControladorFastapi
 
 
@@ -13,7 +13,7 @@ class Init:
     ):
         # Instanciando tipo de REPOSITORIO
         if tipo_repo == REPOSITORIO.MOCK.value:
-            repo = RepoMock()
+            repo = MockRepositorioMateriasVolatil()
         else:
             raise ErroDeployment1()
 
