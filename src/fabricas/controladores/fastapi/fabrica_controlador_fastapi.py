@@ -37,5 +37,5 @@ class FabricaControladorFastapi:
     def getAllMaterias(self):
         return CGetAllMateriasFastapi(self.repo)
 
-    def getMateriaPorID(self, id: str):
+    def getMateriaPorID(self):
         return CGetMateriaPorIDFastapi(self.repo)
