@@ -2,4 +2,4 @@ from src.repositorios.mock.repositorio_materias_volatil_mock import MockReposito
 
 def test_create_instance():
     repositorioMock = MockRepositorioMateriasVolatil()
-    assert len(repositorioMock.repositorio) == 3
+    assert len(repositorioMock.materias) == 3
