@@ -19,5 +19,4 @@ class CGetMateriaPorIDFastapi:
         except Exception as e:
             resposta = ResPadrao(msg="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e))
 
-
         return resposta
