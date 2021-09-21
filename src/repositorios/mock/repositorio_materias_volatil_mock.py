@@ -25,7 +25,7 @@ from devmaua.src.models.disciplina import Disciplina
 
 class MockRepositorioMateriasVolatil(IRepoMaterias):
 
-    repositorio: list[Disciplina]
+    materias: list[Disciplina]
 
     def __init__(self):
         email = self.mockEmail()
@@ -38,41 +38,49 @@ class MockRepositorioMateriasVolatil(IRepoMaterias):
         sala = self.mockSala()
         aula = self.mockAula(sala, professor)
 
-        self.repositorio = []
-        self.repositorio.append(Disciplina(codigo=CodigoDisciplina.ECM251,
-                                tipo=TipoDisciplina.GRADUACAO,
-                                semestralidade=Semestralidade.ANUAL,
-                                profOrientador=professor,
-                                professores=[professor],
-                                alunosMatriculados=[aluno],
-                                aulas=[aula],
-                                ofereceDp=True))
-        self.repositorio.append(Disciplina(codigo=CodigoDisciplina.ECM251,
-                                           tipo=TipoDisciplina.POS_GRADUACAO,
-                                           semestralidade=Semestralidade.PRIMEIRO_SEMESTRE,
-                                           profOrientador=professor,
-                                           professores=[professor],
-                                           alunosMatriculados=[aluno],
-                                           aulas=[aula],
-                                           ofereceDp=True))
-        self.repositorio.append(Disciplina(codigo=CodigoDisciplina.ECM251,
-                                           tipo=TipoDisciplina.PAE,
-                                           semestralidade=Semestralidade.SEGUNDO_SEMESTRE,
-                                           profOrientador=professor,
-                                           professores=[professor],
-                                           alunosMatriculados=[aluno],
-                                           aulas=[aula],
-                                           ofereceDp=True))
+        self.materias = []
+        self.materias.append(Disciplina(codigo=CodigoDisciplina.ECM251,
+                                        tipo=TipoDisciplina.GRADUACAO,
+                                        semestralidade=Semestralidade.ANUAL,
+                                        profOrientador=professor,
+                                        professores=[professor],
+                                        alunosMatriculados=[aluno],
+                                        aulas=[aula],
+                                        ofereceDp=True))
+        self.materias.append(Disciplina(codigo=CodigoDisciplina.ECM251,
+                                        tipo=TipoDisciplina.POS_GRADUACAO,
+                                        semestralidade=Semestralidade.PRIMEIRO_SEMESTRE,
+                                        profOrientador=professor,
+                                        professores=[professor],
+                                        alunosMatriculados=[aluno],
+                                        aulas=[aula],
+                                        ofereceDp=True))
+        self.materias.append(Disciplina(codigo=CodigoDisciplina.ECM251,
+                                        tipo=TipoDisciplina.PAE,
+                                        semestralidade=Semestralidade.SEGUNDO_SEMESTRE,
+                                        profOrientador=professor,
+                                        professores=[professor],
+                                        alunosMatriculados=[aluno],
+                                        aulas=[aula],
+                                        ofereceDp=True))
 
     def getAllMaterias(self) -> list:
-        return self.repositorio
+        return self.materias
+
+    def getMateriaPorID(self, id: str) -> object:
+        materia = None
+        for m in self.materias:
+            if m.codigo == CodigoDisciplina[id]:
+                materia = m
+                break
+        return materia
 
     def addMateria(self, materia: Disciplina) -> None:
-        self.repositorio.append(materia)
+        self.materias.append(materia)
 
     def removerMateria(self, materia: Disciplina) -> None:
-        if materia in self.repositorio:
-            self.repositorio.remove(materia)
+        if materia in self.materias:
+            self.materias.remove(materia)
 
     def mockEmail(self):
         return Email(email='teste@teste.com',
