@@ -9,8 +9,11 @@ class UCGetMateriaPorID:
         self.repo = repo
 
     def __call__(self, id: str):
-        materia = self.repo.getMateriaPorID(id.upper())
-        if materia is None:
+        try:
+            materia = self.repo.getMateriaPorID(id.upper())
+            if materia is None:
+                raise ErroMateriaNaoEncontrada
+        except KeyError:
             raise ErroMateriaNaoEncontrada
 
         return materia
