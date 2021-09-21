@@ -17,3 +17,11 @@ def test_read_main():
 def test_read_materias():
     resposta = client.get("/materias")
     assert resposta.status_code == 200
+
+def test_read_materias_id_existe():
+    resposta = client.get("/materias/esm251")
+    assert resposta.status_code == 200
+
+def test_read_materias_id_nao_existe():
+    resposta = client.get("/materias/esm250")
+    assert resposta.status_code == 200
