@@ -2,6 +2,8 @@ from src.interfaces.IRepoMaterias import IRepoMaterias
 
 from devmaua.src.models.disciplina import Disciplina
 
+from devmaua.src.enum.codigo_disciplina import CodigoDisciplina
+
 class RepositorioMateriasVolatil(IRepoMaterias):
 
     materias: list[Disciplina]
@@ -11,3 +13,13 @@ class RepositorioMateriasVolatil(IRepoMaterias):
 
     def getAllMaterias(self) -> list:
         return self.materias
+
+    def getMateriaPorID(self, id: str) -> object:
+        materia = None
+        for m in self.materias:
+            if m.codigo == CodigoDisciplina[id]:
+                materia = m
+                break
+        return materia
+
+
