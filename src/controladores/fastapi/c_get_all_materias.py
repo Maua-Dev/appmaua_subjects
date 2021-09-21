@@ -14,7 +14,7 @@ class CGetAllMateriasFastapi:
         try:
             usecase = UCGetAllMaterias(self.repo)
             resposta = ResPadrao(msg=str(usecase()))
-        except ErroGetAllMaterias:
-            resposta = ResPadrao(msg=str(ErroGetAllMaterias))
+        except ErroGetAllMaterias as e:
+            resposta = ResPadrao(msg=str(e))
 
         return resposta

@@ -14,8 +14,8 @@ class CGetMateriaPorIDFastapi:
         try:
             usecase = UCGetMateriaPorID(self.repo)
             resposta = ResPadrao(msg=str(usecase(id)))
-        except ErroMateriaNaoEncontrada:
-            resposta = ResPadrao(msg=str(ErroMateriaNaoEncontrada))
+        except ErroMateriaNaoEncontrada as e:
+            resposta = ResPadrao(msg=str(e))
         except Exception as e:
             resposta = ResPadrao(msg="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e))
 
