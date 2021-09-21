@@ -19,9 +19,13 @@ def main():
         print(req)
         return req
 
-    @_ctrl.app.get('/materias')
+    @_ctrl.app.get('/materias/')
     async def getAllMaterias():
         return _ctrl.getAllMaterias()
+
+    @_ctrl.app.get('/materias/{id}')
+    async def getMateriaPorID(id: str):
+        return _ctrl.getMateriaPorID(id)
 
     return _, _ctrl
 
