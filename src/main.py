@@ -5,6 +5,8 @@ from src.controladores.fastapi.http.requisicoes import *
 from src.controladores.fastapi.http.respostas import *
 from src.init import Init
 
+from devmaua.src.models.disciplina import Disciplina
+
 
 def main():
     (_, _ctrl) = Init()()
@@ -19,11 +21,11 @@ def main():
         print(req)
         return req
 
-    @_ctrl.app.get('/materias/')
+    @_ctrl.app.get('/materias/', response_model=list[Disciplina])
     async def getAllMaterias():
         return _ctrl.getAllMaterias()
 
-    @_ctrl.app.get('/materias/{id}')
+    @_ctrl.app.get('/materias/{id}', response_model=Disciplina)
     async def getMateriaPorID(id: str):
         return _ctrl.getMateriaPorID(id)
 

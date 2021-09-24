@@ -1,3 +1,5 @@
+from fastapi import Response, status
+
 from src.controladores.fastapi.http.respostas import ResPadrao
 from src.interfaces.IRepoMaterias import IRepoMaterias
 from src.usecases.uc_get_materia_por_id import UCGetMateriaPorID
@@ -13,10 +15,10 @@ class CGetMateriaPorIDFastapi:
     def __call__(self, id: str):
         try:
             usecase = UCGetMateriaPorID(self.repo)
-            resposta = ResPadrao(msg=str(usecase(id)))
+            resposta = usecase(id)
         except ErroMateriaNaoEncontrada as e:
-            resposta = ResPadrao(msg=str(e))
+            resposta = Response(content=str(e), status_code=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            resposta = ResPadrao(msg="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e))
+            resposta = Response(content="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e), status_code=400)
 
         return resposta

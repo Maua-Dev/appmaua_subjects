@@ -1,6 +1,6 @@
 from src.controladores.fastapi.c_get_materia_por_id import CGetMateriaPorIDFastapi
 from src.repositorios.mock.repositorio_materias_volatil_mock import MockRepositorioMateriasVolatil
-from src.controladores.fastapi.http.respostas import ResPadrao
+from devmaua.src.models.disciplina import Disciplina
 
 class TestCGetAllMateriasFastAPI():
     repo = MockRepositorioMateriasVolatil()
@@ -8,4 +8,4 @@ class TestCGetAllMateriasFastAPI():
     id = 'ecm251'
     resposta = ctrl(id)
 
-    assert type(resposta) is ResPadrao
+    assert type(resposta) is Disciplina
