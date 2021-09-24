@@ -19,6 +19,6 @@ class CGetMateriaPorIDFastapi:
         except ErroMateriaNaoEncontrada as e:
             resposta = Response(content=str(e), status_code=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            resposta = Response(content="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e), status_code=400)
+            resposta = Response(content="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         return resposta
