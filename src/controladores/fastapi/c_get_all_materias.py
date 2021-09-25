@@ -1,4 +1,4 @@
-from fastapi import Response, status
+from fastapi import HTTPException, status
 
 from src.interfaces.IRepoMaterias import IRepoMaterias
 from src.usecases.uc_get_all_materias import UCGetAllMaterias
@@ -16,6 +16,6 @@ class CGetAllMateriasFastapi:
             usecase = UCGetAllMaterias(self.repo)
             resposta = usecase()
         except ErroGetAllMaterias as e:
-            resposta = Response(content=str(e), status_code=status.HTTP_400_BAD_REQUEST)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
 
         return resposta

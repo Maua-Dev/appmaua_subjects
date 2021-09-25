@@ -12,7 +12,7 @@ class UCGetAllMaterias:
         try:
             materias = self.repo.getAllMaterias()
         except:
-            raise ErroGetAllMaterias()
+            raise ErroGetAllMaterias
 
         return materias
 
