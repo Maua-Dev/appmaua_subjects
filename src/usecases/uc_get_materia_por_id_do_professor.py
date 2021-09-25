@@ -14,6 +14,6 @@ class UCGetMateriaPorIDProfessor:
             if len(materias) == 0 :
                 raise ErroMateriaNaoEncontradaPeloIDProfessor(id)
         except Exception:
-            raise ErroMateriaNaoEncontradaPeloIDProfessor
+            raise ErroMateriaNaoEncontradaPeloIDProfessor(id)
 
         return materias
