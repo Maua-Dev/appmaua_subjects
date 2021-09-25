@@ -17,7 +17,7 @@ class RepositorioMateriasVolatil(IRepoMaterias):
     def getMateriaPorID(self, id: str) -> object:
         materia = None
         for m in self.materias:
-            if m.codigo == CodigoDisciplina[id]:
+            if m.codigo == CodigoDisciplina[id.upper()]:
                 materia = m
                 break
         return materia
@@ -26,7 +26,7 @@ class RepositorioMateriasVolatil(IRepoMaterias):
         materias = []
         for m in self.materias:
             for p in m.professores:
-                if p.ID == id:
+                if p.ID.upper() == id.upper():
                     materias.append(m)
         return materias
 
