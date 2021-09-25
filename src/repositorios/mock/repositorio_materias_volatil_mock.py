@@ -75,6 +75,14 @@ class MockRepositorioMateriasVolatil(IRepoMaterias):
                 break
         return materia
 
+    def getMateriaPorIDProfessor(self, id: str) -> list:
+        materias = []
+        for m in self.materias:
+            for p in m.professores:
+                if p.ID == id:
+                    materias.append(m)
+        return materias
+
     def addMateria(self, materia: Disciplina) -> None:
         self.materias.append(materia)
 
