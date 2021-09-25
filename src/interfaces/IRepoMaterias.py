@@ -12,3 +12,8 @@ class IRepoMaterias(ABC):
     def getMateriaPorID(self, id: str) -> object:
         """ Retorna uma matéria (ou não) dado um id """
         pass
+
+    @abstractmethod
+    def getMateriaPorIDProfessor(self, id: str) -> list:
+        """ Retorna uma lista com todas as matérias ministradas por um professor """
+        pass
