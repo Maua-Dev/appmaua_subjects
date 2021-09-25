@@ -13,7 +13,7 @@ from devmaua.src.enum.semestralidade import Semestralidade
 from devmaua.src.enum.tipo_disciplina import TipoDisciplina
 
 
-class TestGetAllMaterias:
+class TestGetMateriaPorID:
     repo = MockRepositorioMateriasVolatil()
     uc = UCGetMateriaPorID(repo)
 
