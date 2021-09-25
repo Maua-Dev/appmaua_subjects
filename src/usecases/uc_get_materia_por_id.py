@@ -10,7 +10,7 @@ class UCGetMateriaPorID:
 
     def __call__(self, id: str):
         try:
-            materia = self.repo.getMateriaPorID()
+            materia = self.repo.getMateriaPorID(id)
             if materia is None:
                 raise ErroMateriaNaoEncontrada
         except KeyError:
