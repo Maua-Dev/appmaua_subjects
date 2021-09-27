@@ -16,6 +16,6 @@ class CGetAllMateriasFastapi:
             usecase = UCGetAllMaterias(self.repo)
             resposta = usecase()
         except ErroGetAllMaterias as e:
-            raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return resposta
