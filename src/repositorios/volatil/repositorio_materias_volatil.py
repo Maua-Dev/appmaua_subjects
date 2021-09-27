@@ -11,10 +11,10 @@ class RepositorioMateriasVolatil(IRepoMaterias):
     def __init__(self):
         self.materias = []
 
-    def getAllMaterias(self) -> list:
+    def getAllMaterias(self):
         return self.materias
 
-    def getMateriaPorID(self, id: str) -> object:
+    def getMateriaPorID(self, id: str):
         materia = None
         for m in self.materias:
             if m.codigo == CodigoDisciplina[id.upper()]:
@@ -22,7 +22,7 @@ class RepositorioMateriasVolatil(IRepoMaterias):
                 break
         return materia
 
-    def getMateriaPorIDProfessor(self, id: str) -> list:
+    def getMateriaPorIDProfessor(self, id: str):
         materias = []
         for m in self.materias:
             for p in m.professores:

@@ -1,5 +1,5 @@
 import uvicorn
-from typing import Union
+from typing import Union, List
 from fastapi import HTTPException, status
 
 from src.config.proj_config import ProjConfig
@@ -23,7 +23,7 @@ def main():
         print(req)
         return req
 
-    @_ctrl.app.get('/materias', response_model=Union[Disciplina, list[Disciplina]])
+    @_ctrl.app.get('/materias', response_model=Union[Disciplina, List[Disciplina]])
     async def getMaterias(idmateria: str = None, idprof: str = None):
         if idmateria is None and idprof is None:
             return _ctrl.getAllMaterias()

@@ -64,29 +64,21 @@ class MockRepositorioMateriasVolatil(IRepoMaterias):
                                         aulas=[aula],
                                         ofereceDp=True))
 
-    def getAllMaterias(self) -> list:
+    def getAllMaterias(self):
         return self.materias
 
-    def getMateriaPorID(self, id: str) -> object:
-        materia = None
-        for m in self.materias:
-            if m.codigo == CodigoDisciplina[id.upper()]:
-                materia = m
-                break
-        return materia
+    def getMateriaPorID(self, id: str):
+        materiasEncontradas = [materia for materia in self.materias if materia.codigo == CodigoDisciplina[id.upper()]]
+        return materiasEncontradas[0] if len(materiasEncontradas) > 0 else None
 
-    def getMateriaPorIDProfessor(self, id: str) -> list:
-        materias = []
-        for m in self.materias:
-            for p in m.professores:
-                if p.ID.upper() == id.upper():
-                    materias.append(m)
+    def getMateriaPorIDProfessor(self, id: str):
+        materias = [m for m in self.materias if len([p for p in m.professores if p.ID.upper() == id.upper()]) > 0]
         return materias
 
-    def addMateria(self, materia: Disciplina) -> None:
+    def addMateria(self, materia: Disciplina):
         self.materias.append(materia)
 
-    def removerMateria(self, materia: Disciplina) -> None:
+    def removerMateria(self, materia: Disciplina):
         if materia in self.materias:
             self.materias.remove(materia)
 
