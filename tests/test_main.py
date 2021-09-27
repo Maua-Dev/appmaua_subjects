@@ -25,4 +25,4 @@ def test_read_materias_id_existe():
 
 def test_read_materias_id_nao_existe():
     resposta = client.get("/materias/esm250")
-    assert resposta.status_code == status.HTTP_400_BAD_REQUEST
+    assert resposta.status_code == status.HTTP_404_NOT_FOUND
