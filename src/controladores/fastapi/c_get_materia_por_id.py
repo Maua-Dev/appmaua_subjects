@@ -17,9 +17,9 @@ class CGetMateriaPorIDFastapi:
             usecase = UCGetMateriaPorID(self.repo)
             resposta = usecase(id)
         except ErroMateriaNaoEncontrada as e:
-            raise HTTPException(detail=str(e), status_code=status.HTTP_400_BAD_REQUEST)
+            raise HTTPException(detail=str(e), status_code=status.HTTP_404_NOT_FOUND)
         except Exception as e:
             raise HTTPException(detail="Erro inesperado ao tentar encontrar matéria pelo ID: " + str(e),
-                                     status_code=status.HTTP_400_BAD_REQUEST)
+                                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return resposta
