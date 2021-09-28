@@ -6,6 +6,7 @@ from src.interfaces.IRepoMaterias import IRepoMaterias
 
 from src.controladores.fastapi.c_get_all_materias import CGetAllMateriasFastapi
 from src.controladores.fastapi.c_get_materia_por_id import CGetMateriaPorIDFastapi
+from src.controladores.fastapi.c_get_materia_por_id_do_professor import CGetMateriaPorIDProfessor
 
 
 class FabricaControladorFastapi:
@@ -39,3 +40,6 @@ class FabricaControladorFastapi:
 
     def getMateriaPorID(self, id: str):
         return CGetMateriaPorIDFastapi(self.repo)(id)
+
+    def getMateriaPorIDProfessor(self, id: str):
+        return CGetMateriaPorIDProfessor(self.repo)(id)

@@ -20,9 +20,21 @@ def test_read_materias():
     assert resposta.status_code == status.HTTP_200_OK
 
 def test_read_materias_id_existe():
-    resposta = client.get("/materias/ecm251")
+    resposta = client.get("/materias/?idmateria=ecm251")
     assert resposta.status_code == status.HTTP_200_OK
 
 def test_read_materias_id_nao_existe():
-    resposta = client.get("/materias/esm250")
+    resposta = client.get("/materias/?idmateria=esm250")
     assert resposta.status_code == status.HTTP_404_NOT_FOUND
+
+def test_read_materias_por_id_prof():
+    resposta = client.get("/materias/?idprof=0002")
+    assert resposta.status_code == status.HTTP_200_OK
+
+def test_read_materias_por_id_prof_erro():
+    resposta = client.get("/materias/?idprof=ABSD")
+    assert resposta.status_code == status.HTTP_404_NOT_FOUND
+
+def test_read_materias_muitos_parametros():
+    resposta = client.get("/materias/?idmateria=ecm251&idprof=0002")
+    assert resposta.status_code == status.HTTP_400_BAD_REQUEST

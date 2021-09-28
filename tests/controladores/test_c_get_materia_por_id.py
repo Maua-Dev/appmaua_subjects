@@ -1,3 +1,6 @@
+import pytest
+
+from src.repositorios.erros.erro_materia_nao_encontrada import ErroMateriaNaoEncontrada
 from src.controladores.fastapi.c_get_materia_por_id import CGetMateriaPorIDFastapi
 from src.repositorios.mock.repositorio_materias_volatil_mock import MockRepositorioMateriasVolatil
 
@@ -39,3 +42,8 @@ class TestCGetAllMateriasFastAPI():
     assert resposta.aulas[0].local.bloco == "U"
     assert resposta.aulas[0].local.numeroDaSala == 22
     assert resposta.ofereceDp == True
+
+    def erro_materia_nao_encontrada(self):
+        id = 'esm251'
+        with pytest.raises(ErroMateriaNaoEncontrada) as e:
+            resposta = self.ctrl(id)

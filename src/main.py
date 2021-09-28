@@ -1,4 +1,6 @@
 import uvicorn
+from typing import Union, List
+from fastapi import HTTPException, status
 
 from src.config.proj_config import ProjConfig
 from src.controladores.fastapi.http.requisicoes import *
@@ -21,13 +23,16 @@ def main():
         print(req)
         return req
 
-    @_ctrl.app.get('/materias/', response_model=list[Disciplina])
-    async def getAllMaterias():
-        return _ctrl.getAllMaterias()
-
-    @_ctrl.app.get('/materias/{id}', response_model=Disciplina)
-    async def getMateriaPorID(id: str):
-        return _ctrl.getMateriaPorID(id)
+    @_ctrl.app.get('/materias', response_model=Union[Disciplina, List[Disciplina]])
+    async def getMaterias(idmateria: str = None, idprof: str = None):
+        if idmateria is None and idprof is None:
+            return _ctrl.getAllMaterias()
+        if idmateria is not None and idprof is None:
+            return _ctrl.getMateriaPorID(idmateria)
+        if idmateria is None and idprof is not None:
+            return _ctrl.getMateriaPorIDProfessor(idprof)
+        else:
+            raise HTTPException(detail="Muitos argumentos foram passados", status_code=status.HTTP_400_BAD_REQUEST)
 
     return _, _ctrl
 
