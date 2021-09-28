@@ -1,3 +1,3 @@
 class ErroRepo(Exception):
     def __init__(self):
-        super().__init__("Erro de repositorio")
+        super().__init__("Erro de repositório")

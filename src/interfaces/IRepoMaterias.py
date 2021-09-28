@@ -7,3 +7,8 @@ class IRepoMaterias(ABC):
     def getAllMaterias(self) -> list:
         """ Retorna todas as matérias cadastradas """
         pass
+
+    @abstractmethod
+    def getMateriaPorID(self, id: str) -> object:
+        """ Retorna uma matéria (ou não) dado um id """
+        pass

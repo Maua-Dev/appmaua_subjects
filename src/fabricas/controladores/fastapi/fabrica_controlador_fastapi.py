@@ -2,8 +2,10 @@ from fastapi import FastAPI
 
 from src.config.proj_config import ProjConfig
 from src.config.enums.fastapi import *
-from src.controladores.fastapi.c_get_all_materias import CGetAllMateriasFastapi
 from src.interfaces.IRepoMaterias import IRepoMaterias
+
+from src.controladores.fastapi.c_get_all_materias import CGetAllMateriasFastapi
+from src.controladores.fastapi.c_get_materia_por_id import CGetMateriaPorIDFastapi
 
 
 class FabricaControladorFastapi:
@@ -33,4 +35,7 @@ class FabricaControladorFastapi:
         self.app = FastAPI()
 
     def getAllMaterias(self):
-        return CGetAllMateriasFastapi(self.repo)
+        return CGetAllMateriasFastapi(self.repo)()
+
+    def getMateriaPorID(self, id: str):
+        return CGetMateriaPorIDFastapi(self.repo)(id)
