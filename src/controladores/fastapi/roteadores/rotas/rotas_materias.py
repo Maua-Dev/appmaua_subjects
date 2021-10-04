@@ -1,16 +1,13 @@
 from typing import Union, List
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from src.fabricas.controladores.fastapi.fabrica_controlador_fastapi import FabricaControladorFastapi
-
 from devmaua.src.models.disciplina import Disciplina
 
 
 class RotaMaterias:
-    def __call__(self, _ctrl: FabricaControladorFastapi):
+    def __call__(self, _ctrl):
 
         RoteadorMaterias = APIRouter(prefix="/materias",
-                             dependencies=[Depends(FabricaControladorFastapi)],
                              responses={404: {"description": "Not found"}})
 
         @RoteadorMaterias.get('', response_model=Union[Disciplina, List[Disciplina]])
