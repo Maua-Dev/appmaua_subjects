@@ -2,14 +2,9 @@ import uvicorn
 
 from src.init import Init
 
-from src.controladores.fastapi.roteadores.roteador import Roteador
-
 
 def main():
     (_, _ctrl) = Init()()
-
-    _ctrl.app.include_router(Roteador)
-
     return _, _ctrl
 
 
