@@ -7,7 +7,7 @@ from devmaua.src.models.disciplina import Disciplina
 
 
 class RotaMaterias:
-    def __init__(self, _ctrl: FabricaControladorFastapi):
+    def __call__(self, _ctrl: FabricaControladorFastapi):
 
         RoteadorMaterias = APIRouter(prefix="/materias",
                              dependencies=[Depends(FabricaControladorFastapi)],
@@ -23,3 +23,5 @@ class RotaMaterias:
                 return _ctrl.getMateriaPorIDProfessor(idprof)
             else:
                 raise HTTPException(detail="Muitos argumentos foram passados", status_code=status.HTTP_400_BAD_REQUEST)
+
+        return RoteadorMaterias

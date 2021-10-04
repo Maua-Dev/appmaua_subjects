@@ -6,7 +6,7 @@ from src.controladores.fastapi.http.respostas import *
 
 class RotaMssInfo:
 
-    def __init__(self):
+    def __call__(self):
 
         RoteadorMssInfo = APIRouter(prefix="",
                              responses={404: {"description": "Not found"}})
@@ -19,3 +19,5 @@ class RotaMssInfo:
 
             print(req)
             return req
+
+        return RoteadorMssInfo
