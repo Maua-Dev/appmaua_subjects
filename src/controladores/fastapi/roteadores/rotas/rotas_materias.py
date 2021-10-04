@@ -7,7 +7,7 @@ from devmaua.src.models.disciplina import Disciplina
 
 
 class RotaMaterias:
-    def __init__(self, _ctrl):
+    def __init__(self, _ctrl: FabricaControladorFastapi):
 
         RoteadorMaterias = APIRouter(prefix="/materias",
                              dependencies=[Depends(FabricaControladorFastapi)],
