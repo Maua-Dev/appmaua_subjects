@@ -1,35 +1,18 @@
-from typing import Union, List
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter
 
-from src.config.proj_config import ProjConfig
-from src.controladores.fastapi.http.respostas import *
-from src.init import Init
+from .rotas.rotas_mssinfo import RotaMssInfo
+from .rotas.rotas_materias import RotaMaterias
 
-from devmaua.src.models.disciplina import Disciplina
-
-Roteador = APIRouter(prefix="",
-                     dependencies=[Depends(Init)],
-                     responses={404: {"description": "Not found"}})
-(_, _ctrl) = Init()()
+from ....fabricas.controladores.fastapi.fabrica_controlador_fastapi import FabricaControladorFastapi
 
 
-@Roteador.get("/", response_model=ResRoot)
-async def root():
-    req = ResRoot(
-        deployment=ProjConfig.getDeployment(),
-        controlador=ProjConfig.getFastapi())
+class Roteador:
 
-    print(req)
-    return req
+    def __call__(self, _ctrl: FabricaControladorFastapi):
+        roteador = APIRouter()
 
+        roteador.include_router(RotaMssInfo()())
+        roteador.include_router(RotaMaterias()(_ctrl))
 
-@Roteador.get('/materias', response_model=Union[Disciplina, List[Disciplina]])
-async def getMaterias(idmateria: str = None, idprof: str = None):
-    if idmateria is None and idprof is None:
-        return _ctrl.getAllMaterias()
-    if idmateria is not None and idprof is None:
-        return _ctrl.getMateriaPorID(idmateria)
-    if idmateria is None and idprof is not None:
-        return _ctrl.getMateriaPorIDProfessor(idprof)
-    else:
-        raise HTTPException(detail="Muitos argumentos foram passados", status_code=status.HTTP_400_BAD_REQUEST)
+        return roteador
+
