@@ -9,11 +9,11 @@ from devmaua.src.models.disciplina import Disciplina
 class RotaMaterias:
     def __init__(self, _ctrl):
 
-        RoteadorMaterias = APIRouter(prefix="",
+        RoteadorMaterias = APIRouter(prefix="/materias",
                              dependencies=[Depends(FabricaControladorFastapi)],
                              responses={404: {"description": "Not found"}})
 
-        @RoteadorMaterias.get('/materias', response_model=Union[Disciplina, List[Disciplina]])
+        @RoteadorMaterias.get('', response_model=Union[Disciplina, List[Disciplina]])
         async def getMaterias(idmateria: str = None, idprof: str = None):
             if idmateria is None and idprof is None:
                 return _ctrl.getAllMaterias()
