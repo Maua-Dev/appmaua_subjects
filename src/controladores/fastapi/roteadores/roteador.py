@@ -7,13 +7,13 @@ from src.init import Init
 
 from devmaua.src.models.disciplina import Disciplina
 
-roteador = APIRouter(prefix="",
+Roteador = APIRouter(prefix="",
                      dependencies=[Depends(Init)],
                      responses={404: {"description": "Not found"}})
 (_, _ctrl) = Init()()
 
 
-@roteador.get("/", response_model=ResRoot)
+@Roteador.get("/", response_model=ResRoot)
 async def root():
     req = ResRoot(
         deployment=ProjConfig.getDeployment(),
@@ -23,7 +23,7 @@ async def root():
     return req
 
 
-@roteador.get('/materias', response_model=Union[Disciplina, List[Disciplina]])
+@Roteador.get('/materias', response_model=Union[Disciplina, List[Disciplina]])
 async def getMaterias(idmateria: str = None, idprof: str = None):
     if idmateria is None and idprof is None:
         return _ctrl.getAllMaterias()
