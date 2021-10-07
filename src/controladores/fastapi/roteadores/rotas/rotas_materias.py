@@ -1,5 +1,5 @@
 from typing import Union, List
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, HTTPException, status
 
 from devmaua.src.models.disciplina import Disciplina
 

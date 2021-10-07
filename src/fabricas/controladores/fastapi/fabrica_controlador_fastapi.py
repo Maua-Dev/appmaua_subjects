@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI
 from src.controladores.fastapi.roteadores.roteador import Roteador
 
 from src.config.proj_config import ProjConfig
