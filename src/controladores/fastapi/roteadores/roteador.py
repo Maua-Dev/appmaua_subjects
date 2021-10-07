@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from .rotas.rotas_mssinfo import RotaMssInfo
+from .rotas.rotas_mss_info import RotaMssInfo
 from .rotas.rotas_materias import RotaMaterias
 
 
