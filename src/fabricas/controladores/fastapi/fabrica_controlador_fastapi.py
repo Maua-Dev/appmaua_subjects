@@ -35,7 +35,7 @@ class FabricaControladorFastapi:
         self.url = f'{self.protocolo}://{self.host}:{self.porta}{self.root}'
 
         self.app = FastAPI()
-        self.app.include_router(Roteador()(self))
+        self.app.include_router(Roteador(self))
 
     def getAllMaterias(self):
         return CGetAllMateriasFastapi(self.repo)()
