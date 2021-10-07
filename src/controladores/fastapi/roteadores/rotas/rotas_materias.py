@@ -2,12 +2,11 @@ from typing import Union, List
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from devmaua.src.models.disciplina import Disciplina
-from src.fabricas.controladores.fastapi.fabrica_controlador_fastapi import FabricaControladorFastapi
 
 
 class RotasMaterias(APIRouter):
 
-    def __init__(self, _ctrl: FabricaControladorFastapi):
+    def __init__(self, _ctrl):
 
         super().__init__(prefix="/materias")
 
