@@ -1,16 +1,14 @@
 from fastapi import APIRouter
 
-from .rotas.rotas_mss_info import RotaMssInfo
-from .rotas.rotas_materias import RotaMaterias
+from .rotas.rotas_mss_info import RotasMssInfo
+from .rotas.rotas_materias import RotasMaterias
 
 
-class Roteador:
+class Roteador(APIRouter):
 
-    def __call__(self, _ctrl):
-        roteador = APIRouter()
+    def __init__(self, _ctrl):
 
-        roteador.include_router(RotaMssInfo()())
-        roteador.include_router(RotaMaterias()(_ctrl))
+        super().__init__()
 
-        return roteador
-
+        self.include_router(RotasMssInfo())
+        self.include_router(RotasMaterias(_ctrl))

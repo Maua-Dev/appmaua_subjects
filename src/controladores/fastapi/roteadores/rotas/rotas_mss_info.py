@@ -4,14 +4,13 @@ from src.config.proj_config import ProjConfig
 from src.controladores.fastapi.http.respostas import *
 
 
-class RotaMssInfo:
+class RotasMssInfo(APIRouter):
 
-    def __call__(self):
+    def __init__(self):
 
-        RoteadorMssInfo = APIRouter(prefix="",
-                             responses={404: {"description": "Not found"}})
+        super().__init__()
 
-        @RoteadorMssInfo.get("/", response_model=ResRoot)
+        @self.get("/", response_model=ResRoot)
         async def root():
             req = ResRoot(
                 deployment=ProjConfig.getDeployment(),
@@ -19,5 +18,3 @@ class RotaMssInfo:
 
             print(req)
             return req
-
-        return RoteadorMssInfo
