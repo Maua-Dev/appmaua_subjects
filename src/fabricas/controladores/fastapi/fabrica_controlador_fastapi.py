@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from starlette.middleware.base import BaseHTTPMiddleware
+
 from src.controladores.fastapi.roteadores.roteador import Roteador
 
 from src.config.proj_config import ProjConfig
@@ -8,6 +10,7 @@ from src.interfaces.IRepoMaterias import IRepoMaterias
 from src.controladores.fastapi.c_get_all_materias import CGetAllMateriasFastapi
 from src.controladores.fastapi.c_get_materia_por_id import CGetMateriaPorIDFastapi
 from src.controladores.fastapi.c_get_materia_por_id_do_professor import CGetMateriaPorIDProfessor
+from src.controladores.fastapi.middleware.middleware import add_redirect_auth
 
 
 class FabricaControladorFastapi:
@@ -35,6 +38,7 @@ class FabricaControladorFastapi:
         self.url = f'{self.protocolo}://{self.host}:{self.porta}{self.root}'
 
         self.app = FastAPI()
+        self.app.add_middleware(BaseHTTPMiddleware, dispatch=add_redirect_auth)
         self.app.include_router(Roteador(self))
 
     def getAllMaterias(self):
