@@ -10,7 +10,7 @@ class ConfigLocal(Config):
 class ConfigDes(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = 'postgresql://***REMOVED***@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/DevMaua_DB_dev'
+        self.sqlConnection = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PW")}@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/{os.getenv("DB_NAME")}'
 class ConfigProd(Config):
     def __init__(self) -> None:
         super().__init__()
