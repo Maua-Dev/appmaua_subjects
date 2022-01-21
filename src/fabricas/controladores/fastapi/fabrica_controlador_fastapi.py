@@ -27,7 +27,7 @@ class FabricaControladorFastapi:
         self.repo = repo
 
         self.__config__ = ProjConfig.getFastapi()
-
+                
         self.protocolo = self.__config__[KEY.PROTOCOLO.value]
         self.host = self.__config__[KEY.HOST.value]
         self.porta = self.__config__[KEY.PORTA.value]
