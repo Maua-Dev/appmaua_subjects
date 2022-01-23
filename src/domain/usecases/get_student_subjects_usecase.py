@@ -8,10 +8,9 @@ class GetStudentSubjectsUsecase:
     
     def __call__(self,idStudent: int) -> List[Subject]:
         try:
-            if(idStudent == None): raise Exception()
+            if(idStudent == None): raise Exception('idStudent is None')
             subjects = self._subjectRepository.getStudentSubjects(idStudent=idStudent)
 
             return subjects;
-
-        except:
+        except Exception as error :             
             raise UnexpectedError('GetStudentSubject')

@@ -23,6 +23,6 @@ def getStudentSubjectsById(idStudent: int, response: Response):
         'idStudent': idStudent
     }
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)    
-    response = getStudentSubjectsController(req=HttpRequest(query=query))
-    response.status_code = status.get(response.status_code)
-    return response.body
+    result = getStudentSubjectsController(req=HttpRequest(query=query))    
+    response.status_code = status.get(result.status_code)    
+    return result.body

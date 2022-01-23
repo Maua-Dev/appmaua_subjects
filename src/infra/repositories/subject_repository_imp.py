@@ -10,6 +10,8 @@ class SubjectRepositoryImp(ISubjectRepository):
         self._datasource = datasource
     
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
-        response = self._datasource.getSubjectsByStudent(idStudent=idStudent)
-    
-        return list(map(lambda x: x.toEntity(),response))
+        try:
+            response = self._datasource.getSubjectsByStudent(idStudent=idStudent)    
+            return list(map(lambda x: x.toEntity(),response))
+        except Exception as error:                
+            raise error

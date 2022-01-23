@@ -11,9 +11,9 @@ class PostgresDataSource(IDataSource):
 
     def getSubjectsByStudent(self, idStudent: int) -> List[SubjectDTO]:
         with DBConnectionHandler() as db:
-            try:
-                subjects = db.session.query(SubjectDTO).join('students').filter(StudentSubjectDTO.idStudent == idStudent).all()
+            try:                
+                subjects = db.session.query(SubjectDTO).join('students').filter(StudentSubjectDTO.idStudent == idStudent).all()                
                 return subjects
-            except Exception as error:                
-                raise             
+            except Exception as error:                              
+                raise Exception('DataSource Error')
         
