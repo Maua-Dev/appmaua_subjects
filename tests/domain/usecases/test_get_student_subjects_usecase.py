@@ -10,12 +10,14 @@ class SubjectRepositoryMock(ISubjectRepository):
         super().__init__()
         self._studentsSubjects = [
             {
-                'idAluno': 1,
+                'idStudent': 1,
                 'subjects': [
                     Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'), 
                     Subject(id=2, codeSubject='ECM502', name='Devops')
-                ],
-                'idAluno': 2,
+                ]
+            },
+            {
+                'idStudent': 2,
                 'subjects': [
                     Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'), 
                     Subject(id=2, codeSubject='ECM502', name='Devops'),
@@ -23,8 +25,8 @@ class SubjectRepositoryMock(ISubjectRepository):
                 ]
             }
         ]
-    def getStudentSubjects(self, idAluno: int) -> List[Subject]:
-        return filter(lambda subject: subject['idAluno'] == idAluno,self._studentsSubjects)
+    def getStudentSubjects(self, idStudent: int) -> List[Subject]:
+        return list(filter(lambda subject: subject['idStudent'] == idStudent,self._studentsSubjects))
 
 
 class Test_GetStudentSubjectsUsecase:
@@ -40,4 +42,4 @@ class Test_GetStudentSubjectsUsecase:
     def test_get_student_subjects_error(self):
         getStudentSubjectsUsecase = GetStudentSubjectsUsecase(subjectRepository=SubjectRepositoryMock())
         with pytest.raises(UnexpectedError):
-            getStudentSubjectsUsecase(idAluno=None)
+            getStudentSubjectsUsecase(idStudent=None)
