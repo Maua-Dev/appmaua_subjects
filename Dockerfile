@@ -11,4 +11,4 @@ EXPOSE 8000
 
 COPY . /app
 
-CMD ["uvicorn", "src.server:app", "--reload", "--host", "0.0.0.0" ] 
+CMD ["uvicorn", "src.server:app", "--reload", "--host", "0.0.0.0"] 

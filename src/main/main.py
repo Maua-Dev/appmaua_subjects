@@ -8,6 +8,7 @@ from src.adpters.viewmodels.average_subjects_viewmodel import AverageSubjectsVie
 from src.main.helpers.status import status
 from src.main.subjects.module import Modular
 
+
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
