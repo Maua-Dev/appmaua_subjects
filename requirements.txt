@@ -3,4 +3,6 @@ uvicorn==0.14.0
 pytest==6.2.4
 pytest-cov==2.12.1
 requests==2.26.0
+sqlalchemy
+alembic
 git+https://github.com/Maua-Dev/models-devmaua
