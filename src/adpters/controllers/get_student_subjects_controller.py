@@ -1,3 +1,4 @@
+from src.adpters.errors.http_exception import HttpException
 from src.adpters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel, AverageViewModel
 from src.domain.errors.errors import UnexpectedError
 from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
@@ -18,5 +19,6 @@ class GetStudentSubjectsController:
             average = list(map(lambda x: AverageViewModel(media=randrange(0,100,5)/10,materia=x.name),subjects))
             response = AverageSubjectsViewModel(nomeGraduacao='Engenharia da Computação',ano=2022,medias=average)
             return Ok(response)
-        except UnexpectedError as error:             
-            raise InternalServerError(error.message)
+        except UnexpectedError as e:  
+            err = InternalServerError(e.message)
+            return HttpException(message=err.body,status_code=err.status_code)
