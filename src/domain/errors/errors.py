@@ -12,5 +12,5 @@ class EntityError(BaseError):
         super().__init__(f'Field {message} is not valid.')
 
 class UnexpectedError(BaseError):
-    def __init__(self, message: str):
-        super().__init__(f'Usecase {message} have a failed.')
+    def __init__(self, message: str,cause: str):
+        super().__init__(f'Usecase {message} have a failed. {cause}')

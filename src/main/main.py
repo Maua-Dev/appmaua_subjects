@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 from src.adpters.controllers.get_student_subjects_controller import GetStudentSubjectsController
-from src.adpters.helpers.http_models import HttpRequest
+from src.adpters.helpers.http_models import HttpRequest, InternalServerError
 
 from src.adpters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel
 
@@ -17,6 +18,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
+@app.exception_handler(InternalServerError)
+def exception_handler(request: Request, exc: InternalServerError):
+    return PlainTextResponse(exc.body, status_code=exc.status_code)
 
 @app.get("/Subjects/{idStudent}",response_model=AverageSubjectsViewModel)
 def getStudentSubjectsById(idStudent: int, response: Response):

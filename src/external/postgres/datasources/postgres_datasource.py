@@ -14,6 +14,6 @@ class PostgresDataSource(IDataSource):
             try:                
                 subjects = db.session.query(SubjectDTO).join('students').filter(StudentSubjectDTO.idStudent == idStudent).all()                
                 return subjects
-            except Exception as error:                              
-                raise Exception('DataSource Error')
+            except Exception as e:                              
+                raise Exception(f'DataSource Error. {str(e)}')
         

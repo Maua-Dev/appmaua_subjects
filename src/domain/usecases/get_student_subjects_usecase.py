@@ -13,4 +13,4 @@ class GetStudentSubjectsUsecase:
 
             return subjects;
         except Exception as error :             
-            raise UnexpectedError('GetStudentSubject')
+            raise UnexpectedError('GetStudentSubject',str(error))

@@ -19,4 +19,4 @@ class GetStudentSubjectsController:
             response = AverageSubjectsViewModel(nomeGraduacao='Engenharia da Computação',ano=2022,medias=average)
             return Ok(response)
         except UnexpectedError as error:             
-            return InternalServerError(error.args)
+            raise InternalServerError(error.message)
