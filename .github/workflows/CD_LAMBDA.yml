@@ -2,6 +2,9 @@ name: CD_lambda
 
 on:
   workflow_dispatch:
+  
+  push:
+    branches: [ feature/clean ]
 
 jobs:
 
