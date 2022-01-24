@@ -1,18 +1,14 @@
 FROM python:3.9.6-alpine
 
-EXPOSE 8080
-
-COPY ./ /app
-
-COPY requirements.txt /app
-
-VOLUME [ "/app" ]
-
 WORKDIR /app
-
 RUN apk update
 RUN apk add git
-RUN apk add python3-dev
-RUN pip install -r requirements.txt
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+RUN pip3 install uvicorn
 
-CMD ["python", "-m", "src.main"]
+EXPOSE 8000
+
+COPY . /app
+
+CMD ["uvicorn", "src.server:app", "--reload", "--host", "0.0.0.0"] 
