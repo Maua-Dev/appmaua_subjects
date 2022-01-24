@@ -37,7 +37,7 @@ jobs:
           mkdir function; \
           cp -R src function; \
           cp -R venv/lib/python3.9/site-packages function; \
-          cd function \
+          cd function; \
           zip -r function.zip *; 
           mv function.zip  ${{ steps.root_directory.outputs.name }}\
         
