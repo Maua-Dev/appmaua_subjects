@@ -3,8 +3,8 @@ name: CD_lambda
 on:
   workflow_dispatch:
   
-  push:
-    branches: [ feature/clean ]
+#   push:
+#     branches: [ feature/clean ]
 
 jobs:
 
@@ -53,9 +53,9 @@ jobs:
         run: aws s3 cp function.zip s3://devmaua-lambda-functions/${{ github.event.repository.name }}/function.zip # HARD CODED
 
       
-#     # Atualizar lambda
-#       - name: Update Lambda Source Code
-#         run: aws lambda update-function-code --function-name infra-playground --s3-bucket devmaua-lambda-functions --s3-key ${{ github.event.repository.name }}/function.zip
+    # Atualizar lambda
+      - name: Update Lambda Source Code
+        run: aws lambda update-function-code --function-name infra-playground --s3-bucket devmaua-lambda-functions --s3-key ${{ github.event.repository.name }}/function.zip
       
 
 
