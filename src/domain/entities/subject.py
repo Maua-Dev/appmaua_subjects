@@ -13,12 +13,12 @@ class Subject(BaseModel):
 
     @validator('codeSubject')
     def codeSubject_is_not_empty(cls,v: str) -> str:
-        if len(v) == 0 or v is None:
+        if len(v) == 0:
             raise EntityError('CodeSubject')
         return v
 
     @validator('name')
     def name_is_not_empty(cls,v: str)-> str:
-        if len(v) == 0 or v is None:
+        if len(v) == 0:
             raise EntityError('Name')
         return v
