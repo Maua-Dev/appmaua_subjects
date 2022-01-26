@@ -12,17 +12,17 @@ class Modular:
     @staticmethod
     def getInject(args: Any):
         for i in Module.binds:
-            if( i == args or issubclass(i,args)):
+            if(i == args or issubclass(i, args)):
                 try:
-                    inject = (args if i == args  else i).__init__.__annotations__
+                    inject = (args if i == args else i).__init__.__annotations__
                 except AttributeError:
                     return i()
 
-                if len(inject) <= 1 :
+                if len(inject) <= 1:
                     return i()
                 else:   
                     params = {}
-                    for j in range(0,len(inject)-1):
+                    for j in range(0, len(inject)-1):
                         instance = Modular.getInject(list(inject.values())[j])
                         param = list(inject.keys())[j]
                         params[param] = instance
