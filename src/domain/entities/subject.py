@@ -32,7 +32,7 @@ class Subject(BaseModel):
         return v
 
     @validator('idStudents')
-    def idstudents_is_not_null(cls, v: List) -> List:
+    def idstudents_is_not_null(cls, v: List[int]) -> List[int]:
         if v is None:
             raise EntityError('idStudents')
         return v
