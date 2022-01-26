@@ -25,8 +25,12 @@ class SubjectRepositoryMock(ISubjectRepository):
                 ]
             }
         ]
+
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         return list(filter(lambda subject: subject['idStudent'] == idStudent,self._studentsSubjects))
+
+    def getSubjectStudents(self, idSubject: int) -> List[int]:
+        pass
 
 
 class Test_GetStudentSubjectsUsecase:

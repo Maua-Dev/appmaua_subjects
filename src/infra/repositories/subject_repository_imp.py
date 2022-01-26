@@ -15,3 +15,6 @@ class SubjectRepositoryImp(ISubjectRepository):
             return list(map(lambda x: x.toEntity(),response))
         except Exception as error:                
             raise error
+
+    def getSubjectStudents(self, idSubject: int) -> List[int]:
+        pass
