@@ -18,3 +18,12 @@ class SubjectRepositoryImp(ISubjectRepository):
 
     def getSubjectStudents(self, idSubject: int) -> List[int]:
         pass
+
+    def getAllSubjects(self) -> List[Subject]:
+        pass
+
+    def getSubjectById(self, idSubject: int) -> List[Subject]:
+        pass
+
+    def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
+        pass
