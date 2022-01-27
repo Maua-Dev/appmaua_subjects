@@ -10,12 +10,12 @@ class GetStudentSubjectsController:
         self._getStudentSubjects = getStudentSubjects
         self._getStudentSubjectsScore = getStudentSubjectsScore
 
-    def __call__(self,req: HttpRequest) -> HttpResponse:
+    async def __call__(self,req: HttpRequest) -> HttpResponse:
         if(type(req.query)['idStudent'] == None): return BadRequest('idStudent is null.')
 
         try:
             idStudent = req.query['idStudent']
-            subjects = self._getStudentSubjects(idStudent=idStudent)            
+            subjects = await self._getStudentSubjects(idStudent=idStudent)            
             average = list(map(lambda x: AverageViewModel(media=randrange(0,100,5)/10,materia=x.name),subjects))
             response = AverageSubjectsViewModel(nomeGraduacao='Engenharia da Computação',ano=2022,medias=average)
             return Ok(response)

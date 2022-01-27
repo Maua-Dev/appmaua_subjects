@@ -6,10 +6,10 @@ class GetStudentSubjectsUsecase:
     def __init__(self,subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
     
-    def __call__(self,idStudent: int) -> List[Subject]:
+    async def __call__(self,idStudent: int) -> List[Subject]:
         try:
             if(idStudent == None): raise Exception('idStudent is None')
-            subjects = self._subjectRepository.getStudentSubjects(idStudent=idStudent)
+            subjects = await self._subjectRepository.getStudentSubjects(idStudent=idStudent)
 
             return subjects;
         except Exception as error :             

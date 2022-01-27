@@ -9,9 +9,9 @@ class SubjectRepositoryImp(ISubjectRepository):
         super().__init__()
         self._datasource = datasource
     
-    def getStudentSubjects(self, idStudent: int) -> List[Subject]:
+    async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
-            response = self._datasource.getSubjectsByStudent(idStudent=idStudent)    
+            response = await self._datasource.getSubjectsByStudent(idStudent=idStudent)    
             return list(map(lambda x: x.toEntity(),response))
         except Exception as error:                
             raise error
