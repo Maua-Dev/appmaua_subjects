@@ -17,6 +17,7 @@ class Test_GetStudentSubjectsController():
         assert answer.body['count'] == 2
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in answer.body['subjects']
         assert Subject(id=2, codeSubject='ECM502', name='Devops') in answer.body['subjects']
+        assert answer.status_code == 200
 
     def test_get_student_subject_2(self):
         getStudentSubjectsController = GetStudentSubjectsController(SubjectRepositoryMock())
@@ -30,6 +31,7 @@ class Test_GetStudentSubjectsController():
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in answer.body['subjects']
         assert Subject(id=5, codeSubject='ECM505', name='Banco de dados') in answer.body['subjects']
         assert Subject(id=6, codeSubject='ECM503', name='Controladores') in answer.body['subjects']
+        assert answer.status_code == 200
 
     def test_get_student_subject_no_item_found(self):
         getStudentSubjectsController = GetStudentSubjectsController(SubjectRepositoryMock())
@@ -37,3 +39,4 @@ class Test_GetStudentSubjectsController():
         answer = getStudentSubjectsController(req)
 
         assert type(answer) is NoContent
+        assert answer.status_code == 204

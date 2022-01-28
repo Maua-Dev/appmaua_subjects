@@ -14,3 +14,4 @@ class Test_GetAllSubjectsController:
         assert type(answer.body['subjects']) is list
         assert len(answer.body['subjects']) == 5
         assert answer.body['count'] == 5
+        assert answer.status_code == 200
