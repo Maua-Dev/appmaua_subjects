@@ -1,7 +1,7 @@
 
 
 from typing import Any
-from src.adpters.controllers.get_student_subjects_controller import GetStudentSubjectsController
+from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.external.postgres.datasources.postgres_datasource import PostgresDataSource

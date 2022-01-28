@@ -1,9 +1,9 @@
-from src.adpters.errors.http_exception import HttpException
-from src.adpters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel, AverageViewModel
+from src.adapters.errors.http_exception import HttpException
+from src.adapters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel, AverageViewModel
 from src.domain.errors.errors import UnexpectedError
 from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
-from src.adpters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok
+from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok
 from random import randrange
 class GetStudentSubjectsController:
     def __init__(self, getStudentSubjects: GetStudentSubjectsUsecase,getStudentSubjectsScore:GetStudentSubjectsScoreUsecase) -> None:

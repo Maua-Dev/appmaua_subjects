@@ -1,7 +1,7 @@
-from src.adpters.errors.http_exception import HttpException
+from src.adapters.errors.http_exception import HttpException
 from src.domain.errors.errors import UnexpectedError
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
-from src.adpters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok
+from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok
 
 
 class GetStudentSubjectsController:
