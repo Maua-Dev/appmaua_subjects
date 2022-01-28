@@ -18,7 +18,7 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    def getSubjectById(self, codeSubject: str) -> Subject:
+    def getSubjectByCode(self, codeSubject: str) -> Subject:
         pass
 
     @abstractmethod
