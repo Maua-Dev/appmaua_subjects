@@ -88,36 +88,49 @@ class SubjectRepositoryMock(ISubjectRepository):
             Subject(id=6, codeSubject='ECM503', name='Controladores')
         ]
 
-    def getStudentSubjects(self, idStudent: int) -> List[Subject]:
+    def getStudentSubjects(self, idStudent: int) -> tuple:
         try:
             subjects: List[Subject] = None
             subjects = [relation['subjects'] for relation in self._studentsSubjects if relation['idStudent'] == idStudent][0]
-            return subjects
+
+            if len(subjects)>0:
+                return subjects, len(subjects)
+            else:
+                return None, 0
 
         except IndexError as error:
-            return None
+            return None, 0
 
-    def getSubjectStudents(self, codeSubject: str) -> List[int]:
+    def getSubjectStudents(self, codeSubject: str) -> tuple:
         subject: Subject
         students: List[int] = None
         students = [relation['idStudent'] for relation in self._studentsSubjects if codeSubject in [subject.codeSubject for subject in relation['subjects']]]
-        return students
+        if len(students) > 0:
+            return students, len(students)
+        else:
+            return None, 0
 
     def getAllSubjects(self) -> List[Subject]:
-        return self._subjects
+        if len(self._subjects) > 0:
+            return self._subjects, len(self._subjects)
+        else:
+            return None, 0
 
-    def getSubjectByCode(self, codeSubject: str) -> Subject:
+    def getSubjectByCode(self, codeSubject: str) -> tuple:
         subject: Subject = None
         for subjectx in self._subjects:
             if subjectx.codeSubject.upper() == codeSubject.upper():
                 subject = subjectx
-        return subject
+        return subject, 1
 
-    def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
+    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
         try:
             subjects: List[Subject] = None
             subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
-            return subjects
+            if len(subjects) > 0:
+                return subjects, len(subjects)
+            else:
+                return None, 0
 
         except IndexError as error:
-            return None
+            return None, 0

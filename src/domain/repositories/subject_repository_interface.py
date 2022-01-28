@@ -6,21 +6,20 @@ from src.domain.entities.subject import Subject
 class ISubjectRepository(ABC):
 
     @abstractmethod
-    def getStudentSubjects(self, idStudent: int) -> List[Subject]:
+    def getStudentSubjects(self, idStudent: int) -> tuple:
+        pass
+    @abstractmethod
+    def getSubjectStudents(self, codeSubject: str) -> tuple:
         pass
 
     @abstractmethod
-    def getSubjectStudents(self, codeSubject: str) -> List[int]:
+    def getAllSubjects(self) -> tuple:
         pass
 
     @abstractmethod
-    def getAllSubjects(self) -> List[Subject]:
+    def getSubjectByCode(self, codeSubject: str) -> tuple:
         pass
 
     @abstractmethod
-    def getSubjectByCode(self, codeSubject: str) -> Subject:
-        pass
-
-    @abstractmethod
-    def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
+    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
         pass
