@@ -1,5 +1,5 @@
 from typing import List
-from src.domain.errors.errors import UnexpectedError
+from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.entities.subject import Subject
 
@@ -14,12 +14,15 @@ class GetSubjectByCodeUsecase:
             if codeSubject is None:
                 raise Exception('idSubject is None')
 
-            subjects = self._subjectRepository.getSubjectByCode(codeSubject=codeSubject)
+            subject = self._subjectRepository.getSubjectByCode(codeSubject)
 
-            if subjects is None:
-                raise Exception('Nenhuma matéria encontrada.')
+            if subject is None:
+                raise NoItemsFound('')
 
-            return subjects
+            return subject
+
+        except NoItemsFound:
+            raise NoItemsFound('GetAllSubjects')
 
         except Exception as error:
             raise UnexpectedError('GetSubjectById', str(error))

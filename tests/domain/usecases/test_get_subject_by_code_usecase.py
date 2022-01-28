@@ -1,7 +1,7 @@
 import pytest
 
 from src.domain.entities.subject import Subject
-from src.domain.errors.errors import UnexpectedError
+from src.domain.errors.errors import NoItemsFound
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 
@@ -34,5 +34,5 @@ class Test_GetSubjectByCodeUsecase:
 
     def test_get_subject_by_code_error(self):
         getSubjectByCodeUsecase = GetSubjectByCodeUsecase(subjectRepository=SubjectRepositoryMock())
-        with pytest.raises(UnexpectedError):
+        with pytest.raises(NoItemsFound):
             getSubjectByCodeUsecase('ESM504')

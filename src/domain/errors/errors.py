@@ -16,3 +16,8 @@ class EntityError(BaseError):
 class UnexpectedError(BaseError):
     def __init__(self, message: str, cause: str):
         super().__init__(f'Usecase {message} have failed. {cause}')
+
+
+class NoItemsFound(BaseError):
+    def __init__(self, message: str):
+        super().__init__(f'Usecase {message} have failed. No items found')
