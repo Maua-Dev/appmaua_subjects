@@ -22,7 +22,7 @@ class SubjectRepositoryImp(ISubjectRepository):
     def getAllSubjects(self) -> List[Subject]:
         pass
 
-    def getSubjectById(self, codeSubject: str) -> Subject:
+    def getSubjectByCode(self, codeSubject: str) -> Subject:
         pass
 
     def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
