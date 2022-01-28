@@ -1,5 +1,6 @@
 from typing import List
 from src.domain.entities.subject import Subject
+from src.domain.errors.errors import UnexpectedError
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 
 
@@ -88,9 +89,13 @@ class SubjectRepositoryMock(ISubjectRepository):
         ]
 
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
-        subjects: List[Subject] = None
-        subjects = [relation['subjects'] for relation in self._studentsSubjects if relation['idStudent'] == idStudent]
-        return subjects
+        try:
+            subjects: List[Subject] = None
+            subjects = [relation['subjects'] for relation in self._studentsSubjects if relation['idStudent'] == idStudent][0]
+            return subjects
+
+        except KeyError as error:
+            return None
 
     def getSubjectStudents(self, codeSubject: str) -> List[int]:
         subject: Subject
@@ -109,6 +114,10 @@ class SubjectRepositoryMock(ISubjectRepository):
         return subject
 
     def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
-        subjects: List[Subject] = None
-        subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor]
-        return subjects
+        try:
+            subjects: List[Subject] = None
+            subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
+            return subjects
+
+        except KeyError as error:
+            return None
