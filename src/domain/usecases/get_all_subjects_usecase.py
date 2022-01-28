@@ -10,7 +10,12 @@ class GetAllSubjectsUsecase:
     def __call__(self):
         try:
             subjects = self._subjectRepository.getAllSubjects()
+
+            if subjects is None:
+                raise Exception('Nenhuma matéria encontrada.')
+
             return subjects
+
         except Exception as error:
             raise UnexpectedError('GetAllSubjects', str(error))
 

@@ -13,7 +13,13 @@ class GetStudentSubjectsUsecase:
         try:
             if idStudent is None:
                 raise Exception('idStudent is None')
+
             subjects = self._subjectRepository.getStudentSubjects(idStudent=idStudent)
+
+            if subjects is None:
+                raise Exception('Nenhuma matéria encontrada.')
+
             return subjects
+
         except Exception as error:
             raise UnexpectedError('GetStudentSubject', str(error))

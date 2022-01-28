@@ -13,7 +13,13 @@ class GetSubjectByProfessorIdUsecase:
         try:
             if idProfessor is None:
                 raise Exception('idProfessor is None')
+
             subjects = self._subjectRepository.getSubjectByProfessorId(idProfessor=idProfessor)
+
+            if subjects is None:
+                raise Exception('Nenhuma matéria encontrada.')
+
             return subjects
+
         except Exception as error:
             raise UnexpectedError('GetSubjectByProfessorId', str(error))

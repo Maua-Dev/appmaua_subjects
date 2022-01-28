@@ -7,10 +7,12 @@ class BaseError(Exception):
     def message(self):
         return self.__message
 
+
 class EntityError(BaseError):
     def __init__(self, message: str):
         super().__init__(f'Field {message} is not valid.')
 
+
 class UnexpectedError(BaseError):
-    def __init__(self, message: str,cause: str):
-        super().__init__(f'Usecase {message} have a failed. {cause}')
+    def __init__(self, message: str, cause: str):
+        super().__init__(f'Usecase {message} have failed. {cause}')
