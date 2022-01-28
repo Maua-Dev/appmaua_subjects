@@ -11,7 +11,7 @@ class GetAllSubjectsUsecase:
         try:
             subjects = self._subjectRepository.getAllSubjects()
 
-            if subjects is None:
+            if len(subjects) == 0:
                 raise Exception('Nenhuma matéria encontrada.')
 
             return subjects
