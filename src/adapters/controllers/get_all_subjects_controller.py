@@ -1,8 +1,8 @@
 from src.adapters.errors.http_exception import HttpException
-from src.domain.errors.errors import UnexpectedError
+from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
-from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok
+from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
 
 
 class GetStudentSubjectsController:
@@ -18,6 +18,10 @@ class GetStudentSubjectsController:
             subjects = self._getAllSubjectsUsecase()
             response = {"subjects": subjects, "count": len(subjects)}
             return Ok(response)
+
+        except NoItemsFound as e:
+            err = NoContent(e.message)
+            return HttpException(message=err.body, status_code=err.status_code)
 
         except UnexpectedError as e:
             err = InternalServerError(e.message)

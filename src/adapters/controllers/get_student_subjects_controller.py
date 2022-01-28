@@ -1,24 +1,31 @@
 from src.adapters.errors.http_exception import HttpException
-from src.adapters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel, AverageViewModel
-from src.domain.errors.errors import UnexpectedError
-from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
+from src.domain.errors.errors import UnexpectedError, NoItemsFound
+from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
-from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok
-from random import randrange
+from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
+
+
 class GetStudentSubjectsController:
-    def __init__(self, getStudentSubjects: GetStudentSubjectsUsecase,getStudentSubjectsScore:GetStudentSubjectsScoreUsecase) -> None:
-        self._getStudentSubjects = getStudentSubjects
-        self._getStudentSubjectsScore = getStudentSubjectsScore
+    def __init__(self, subjectRepository: ISubjectRepository) -> None:
+        self._getStudentSubjectsUsecase = GetStudentSubjectsUsecase(subjectRepository)
 
-    def __call__(self,req: HttpRequest) -> HttpResponse:
-        if(type(req.query)['idStudent'] == None): return BadRequest('idStudent is null.')
-
+    def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
+            if req.query['idStudent'] is None:
+                return BadRequest('idStudent is null.')
+
             idStudent = req.query['idStudent']
-            subjects = self._getStudentSubjects(idStudent=idStudent)            
-            average = list(map(lambda x: AverageViewModel(media=randrange(0,100,5)/10,materia=x.name),subjects))
-            response = AverageSubjectsViewModel(nomeGraduacao='Engenharia da Computação',ano=2022,medias=average)
+
+            subjects = self._getStudentSubjectsUsecase(idStudent)
+
+            response = {"subjects": subjects, "count": len(subjects)}
+
             return Ok(response)
+
+        except NoItemsFound as e:
+            err = NoContent(e.message)
+            return HttpException(message=err.body, status_code=err.status_code)
+
         except UnexpectedError as e:  
             err = InternalServerError(e.message)
             return HttpException(message=err.body,status_code=err.status_code)
