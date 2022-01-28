@@ -5,7 +5,7 @@ from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
 
 
-class GetStudentSubjectsController:
+class GetAllSubjectsController:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._getAllSubjectsUsecase = GetAllSubjectsUsecase(subjectRepository)
 
