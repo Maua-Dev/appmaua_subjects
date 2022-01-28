@@ -10,7 +10,7 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    def getSubjectStudents(self, idSubject: int) -> List[int]:
+    def getSubjectStudents(self, codeSubject: str) -> List[int]:
         pass
 
     @abstractmethod
@@ -18,7 +18,7 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    def getSubjectById(self, idSubject: int) -> List[Subject]:
+    def getSubjectById(self, codeSubject: str) -> Subject:
         pass
 
     @abstractmethod

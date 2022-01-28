@@ -16,13 +16,13 @@ class SubjectRepositoryImp(ISubjectRepository):
         except Exception as error:                
             raise error
 
-    def getSubjectStudents(self, idSubject: int) -> List[int]:
+    def getSubjectStudents(self, codeSubject: str) -> List[int]:
         pass
 
     def getAllSubjects(self) -> List[Subject]:
         pass
 
-    def getSubjectById(self, idSubject: int) -> List[Subject]:
+    def getSubjectById(self, codeSubject: str) -> Subject:
         pass
 
     def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
