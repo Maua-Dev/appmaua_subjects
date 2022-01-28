@@ -2,7 +2,7 @@ from src.adapters.controllers.get_all_subjects_controller import GetStudentSubje
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 from src.adapters.helpers.http_models import HttpRequest
 
-class Test_GetStudentSubjectsController():
+class Test_GetAllSubjectsController():
 
     getStudentSubjectsController = GetStudentSubjectsController(SubjectRepositoryMock())
     req = HttpRequest(query=None)

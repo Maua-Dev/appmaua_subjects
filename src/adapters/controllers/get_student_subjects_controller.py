@@ -27,4 +27,4 @@ class GetStudentSubjectsController:
 
         except UnexpectedError as e:  
             err = InternalServerError(e.message)
-            return HttpException(message=err.body,status_code=err.status_code)
+            return HttpException(message=err.body, status_code=err.status_code)
