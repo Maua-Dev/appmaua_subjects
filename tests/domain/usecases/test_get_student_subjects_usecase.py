@@ -1,46 +1,7 @@
 import pytest
-from typing import List
-from src.domain.entities.subject import Subject
-from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.domain.errors.errors import UnexpectedError
-
-class SubjectRepositoryMock(ISubjectRepository):
-    def __init__(self) -> None:
-        super().__init__()
-        self._studentsSubjects = [
-            {
-                'idStudent': 1,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'), 
-                    Subject(id=2, codeSubject='ECM502', name='Devops')
-                ]
-            },
-            {
-                'idStudent': 2,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'), 
-                    Subject(id=2, codeSubject='ECM502', name='Devops'),
-                    Subject(id=3, codeSubject='ECM503', name='IA')
-                ]
-            }
-        ]
-
-    def getStudentSubjects(self, idStudent: int) -> List[Subject]:
-        return list(filter(lambda subject: subject['idStudent'] == idStudent,self._studentsSubjects))
-
-    def getSubjectStudents(self, idSubject: int) -> List[int]:
-        pass
-
-    def getAllSubjects(self) -> List[Subject]:
-        pass
-
-    def getSubjectById(self, idSubject: int) -> List[Subject]:
-        pass
-
-    def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
-        pass
-
+from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 
 class Test_GetStudentSubjectsUsecase:
 

@@ -3,7 +3,7 @@ from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 
 
-class StudentSubjectRepositoryMock(ISubjectRepository):
+class SubjectRepositoryMock(ISubjectRepository):
     def __init__(self) -> None:
         super().__init__()
         self._studentsSubjects = [
