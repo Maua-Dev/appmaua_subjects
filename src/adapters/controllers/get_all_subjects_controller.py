@@ -19,9 +19,8 @@ class GetStudentSubjectsController:
             response = {"subjects": subjects, "count": len(subjects)}
             return Ok(response)
 
-        except NoItemsFound as e:
-            err = NoContent(e.message)
-            return HttpException(message=err.body, status_code=err.status_code)
+        except NoItemsFound:
+            return NoContent()
 
         except UnexpectedError as e:
             err = InternalServerError(e.message)
