@@ -14,6 +14,9 @@ class GetSubjectByCodeController:
             if req.query['codeSubject'] is None:
                 return BadRequest('codeSubject is null.')
 
+            if type(req.query['codeSubject']) is not str:
+                return BadRequest('codeSubject must be int.')
+
             codeSubject = req.query['codeSubject']
 
             subject, count = self._getSubjectByCodeUsecase(codeSubject)

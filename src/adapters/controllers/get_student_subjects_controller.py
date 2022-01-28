@@ -14,6 +14,9 @@ class GetStudentSubjectsController:
             if req.query['idStudent'] is None:
                 return BadRequest('idStudent is null.')
 
+            if type(req.query['idStudent']) is not int:
+                return BadRequest('idStudent must be int.')
+
             idStudent = req.query['idStudent']
 
             subjects, count = self._getStudentSubjectsUsecase(idStudent)
