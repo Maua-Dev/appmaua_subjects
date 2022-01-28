@@ -2,7 +2,7 @@ import pytest
 
 from src.domain.entities.subject import Subject
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
-from src.domain.errors.errors import UnexpectedError
+from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 
 
@@ -17,7 +17,7 @@ class Test_GetStudentSubjectsUsecase:
 
     def test_get_student_subjects_empty(self):
         getStudentSubjectsUsecase = GetStudentSubjectsUsecase(subjectRepository=SubjectRepositoryMock())
-        with pytest.raises(UnexpectedError):
+        with pytest.raises(NoItemsFound):
             getStudentSubjectsUsecase(0)
 
     def test_get_student_subjects_error(self):

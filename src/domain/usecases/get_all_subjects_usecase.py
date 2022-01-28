@@ -11,7 +11,7 @@ class GetAllSubjectsUsecase:
         try:
             subjects = self._subjectRepository.getAllSubjects()
 
-            if len(subjects) == 0 or subjects is None:
+            if subjects is None:
                 raise NoItemsFound('')
 
             return subjects

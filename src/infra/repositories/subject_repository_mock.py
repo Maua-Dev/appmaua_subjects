@@ -94,7 +94,7 @@ class SubjectRepositoryMock(ISubjectRepository):
             subjects = [relation['subjects'] for relation in self._studentsSubjects if relation['idStudent'] == idStudent][0]
             return subjects
 
-        except KeyError as error:
+        except IndexError as error:
             return None
 
     def getSubjectStudents(self, codeSubject: str) -> List[int]:
@@ -119,5 +119,5 @@ class SubjectRepositoryMock(ISubjectRepository):
             subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
             return subjects
 
-        except KeyError as error:
+        except IndexError as error:
             return None

@@ -1,6 +1,6 @@
 import pytest
 from src.domain.usecases.get_subject_by_professor_id_usecase import GetSubjectByProfessorIdUsecase
-from src.domain.errors.errors import UnexpectedError
+from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.entities.subject import Subject
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 
@@ -25,7 +25,7 @@ class Test_GetSubjectByProfessorIdUsecase:
 
     def test_get_professor_subjects_empty(self):
         getSubjectByProfessorIdUsecase = GetSubjectByProfessorIdUsecase(subjectRepository=SubjectRepositoryMock())
-        with pytest.raises(UnexpectedError):
+        with pytest.raises(NoItemsFound):
             getSubjectByProfessorIdUsecase(0)
 
     def test_get_professor_subjects_error(self):

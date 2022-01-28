@@ -16,7 +16,7 @@ class GetStudentSubjectsUsecase:
 
             subjects = self._subjectRepository.getStudentSubjects(idStudent)
 
-            if len(subjects) == 0 or subjects is None:
+            if subjects is None:
                 raise NoItemsFound('')
 
             return subjects
