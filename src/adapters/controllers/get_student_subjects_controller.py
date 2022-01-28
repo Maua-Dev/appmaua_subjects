@@ -16,9 +16,9 @@ class GetStudentSubjectsController:
 
             idStudent = req.query['idStudent']
 
-            subjects = self._getStudentSubjectsUsecase(idStudent)
+            subjects, count = self._getStudentSubjectsUsecase(idStudent)
 
-            response = {"subjects": subjects, "count": len(subjects)}
+            response = {"subjects": subjects, "count": count}
 
             return Ok(response)
 

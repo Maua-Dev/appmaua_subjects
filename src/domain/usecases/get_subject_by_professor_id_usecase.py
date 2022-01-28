@@ -9,17 +9,17 @@ class GetSubjectByProfessorIdUsecase:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
 
-    def __call__(self, idProfessor: int) -> List[Subject]:
+    def __call__(self, idProfessor: int) -> tuple:
         try:
             if idProfessor is None:
                 raise Exception('idProfessor is None')
 
-            subjects = self._subjectRepository.getSubjectByProfessorId(idProfessor)
+            subjects, count = self._subjectRepository.getSubjectByProfessorId(idProfessor)
 
             if subjects is None:
                 raise NoItemsFound('')
 
-            return subjects
+            return subjects, count
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')
