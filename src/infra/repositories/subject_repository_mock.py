@@ -103,9 +103,9 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     def getSubjectByCode(self, codeSubject: str) -> Subject:
         subject: Subject = None
-        for subject in self._subjects:
-            if subject.codeSubject.upper() == codeSubject.upper():
-                subject = subject
+        for subjectx in self._subjects:
+            if subjectx.codeSubject.upper() == codeSubject.upper():
+                subject = subjectx
         return subject
 
     def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
