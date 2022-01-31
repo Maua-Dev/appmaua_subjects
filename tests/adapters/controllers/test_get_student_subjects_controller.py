@@ -1,7 +1,7 @@
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.domain.entities.subject import Subject
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
-from src.adapters.helpers.http_models import HttpRequest, NoContent
+from src.adapters.helpers.http_models import HttpRequest, NoContent, BadRequest
 
 
 class Test_GetStudentSubjectsController():
@@ -35,8 +35,16 @@ class Test_GetStudentSubjectsController():
 
     def test_get_student_subject_no_item_found(self):
         getStudentSubjectsController = GetStudentSubjectsController(SubjectRepositoryMock())
-        req = HttpRequest(query={'idStudent': 0})
+        req = HttpRequest(query={'idStudent': 10})
         answer = getStudentSubjectsController(req)
 
         assert type(answer) is NoContent
         assert answer.status_code == 204
+
+    def test_get_student_subject_invalid(self):
+        getStudentSubjectsController = GetStudentSubjectsController(SubjectRepositoryMock())
+        req = HttpRequest(query={'idStudent': 0})
+        answer = getStudentSubjectsController(req)
+
+        assert type(answer) is BadRequest
+        assert answer.status_code == 400
