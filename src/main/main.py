@@ -7,6 +7,7 @@ from src.adapters.helpers.http_models import HttpRequest
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 
 from src.adapters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel
+from src.domain.errors.errors import UnexpectedError
 
 from src.main.helpers.status import status
 from src.main.subjects.module import Modular
@@ -28,7 +29,11 @@ async def internal_exception_handler(request: Request, exc: HttpException):
 
 @app.get("/")
 def getAllSubjects():
-    getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
-    req = HttpRequest(query=None)
-    result = getAllSubjectsController(req)
-    return result
+    try:
+        getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
+        req = HttpRequest(query=None)
+        result = getAllSubjectsController(req)
+        return result.body
+    except UnexpectedError as e:
+        return result
+
