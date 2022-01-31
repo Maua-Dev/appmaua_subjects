@@ -31,4 +31,4 @@ def getAllSubjects():
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
     result = getAllSubjectsController(req)
-    return result.body
+    return result
