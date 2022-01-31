@@ -11,8 +11,8 @@ class GetSubjectByProfessorIdController:
 
     def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
-            if req.query['idProfessor'] is None:
-                return BadRequest('idProfessor is null.')
+            if req.query['idProfessor'] is None or req.query['idProfessor'] == 0:
+                return BadRequest(f"idProfessor is invalid. (idStudent = {req.query['idProfessor']})")
 
             if type(req.query['idProfessor']) is not int:
                 return BadRequest('idProfessor must be int.')
