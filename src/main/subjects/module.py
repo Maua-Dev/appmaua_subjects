@@ -1,11 +1,16 @@
 
 
 from typing import Any
+
+from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
+from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.external.postgres.datasources.postgres_datasource import PostgresDataSource
 from src.infra.repositories.subject_repository_imp import SubjectRepositoryImp
+from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
+
 
 class Modular:
     
@@ -33,10 +38,12 @@ class Modular:
 
 class Module:
     binds = [
+        GetAllSubjectsController,
+        GetAllSubjectsUsecase,
         GetStudentSubjectsController,
         GetStudentSubjectsUsecase,
         GetStudentSubjectsScoreUsecase,
-        SubjectRepositoryImp,
+        SubjectRepositoryMock,
         PostgresDataSource
     ]
 

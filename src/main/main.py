@@ -4,6 +4,7 @@ from fastapi.responses import PlainTextResponse
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.errors.http_exception import HttpException
 from src.adapters.helpers.http_models import HttpRequest
+from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 
 from src.adapters.viewmodels.average_subjects_viewmodel import AverageSubjectsViewModel
 
@@ -25,12 +26,9 @@ app.add_middleware(
 async def internal_exception_handler(request: Request, exc: HttpException):
     return PlainTextResponse(exc.body, status_code=exc.status_code)
 
-@app.get("/Subjects/{idStudent}",response_model=AverageSubjectsViewModel)
-def getStudentSubjectsById(idStudent: int, response: Response):
-    query = {
-        'idStudent': idStudent
-    }
-    getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)    
-    result = getStudentSubjectsController(req=HttpRequest(query=query))    
-    response.status_code = status.get(result.status_code)    
+@app.get("/")
+def getAllSubjects():
+    getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
+    req = HttpRequest(query=None)
+    result = getAllSubjectsController(req)
     return result.body
