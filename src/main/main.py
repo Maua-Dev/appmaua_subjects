@@ -29,11 +29,14 @@ async def internal_exception_handler(request: Request, exc: HttpException):
 
 @app.get("/")
 def getAllSubjects():
-    try:
-        getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
-        req = HttpRequest(query=None)
-        result = getAllSubjectsController(req)
-        return result.body
-    except UnexpectedError as e:
-        return result
+    getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
+    req = HttpRequest(query=None)
+    result = getAllSubjectsController(req)
+    return result
 
+@app.get("/student/{idStudent}")
+def getStudentSubjects(idStudent: int):
+    getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
+    req = HttpRequest(query={'idStudent': idStudent})
+    result = getStudentSubjectsController(req)
+    return result
