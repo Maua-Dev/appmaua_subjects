@@ -5,10 +5,12 @@ from typing import Any
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_usecase_controller import GetSubjectByCodeController
+from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
+from src.domain.usecases.get_subject_by_professor_id_usecase import GetSubjectByProfessorIdUsecase
 from src.external.postgres.datasources.postgres_datasource import PostgresDataSource
 from src.infra.repositories.subject_repository_imp import SubjectRepositoryImp
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
@@ -40,6 +42,8 @@ class Modular:
 
 class Module:
     binds = [
+        GetSubjectByProfessorIdController,
+        GetSubjectByProfessorIdUsecase,
         GetSubjectByCodeUsecase,
         GetSubjectByCodeController,
         GetAllSubjectsController,
