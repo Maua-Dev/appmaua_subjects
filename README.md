@@ -37,7 +37,7 @@ Para subir o container:
 
 
 ### Iniciar server
-    uvicorn src.main:app --reload
+    uvicorn src.main.main:app --reload
 
 ### Rodar testes
     pytest
