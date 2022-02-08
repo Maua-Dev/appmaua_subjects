@@ -25,7 +25,7 @@ app.add_middleware(
 async def internal_exception_handler(request: Request, exc: HttpException):
     return PlainTextResponse(exc.body, status_code=exc.status_code)
 
-@app.get("/Subjects/{idStudent}",response_model=AverageSubjectsViewModel)
+@app.get("/student/{idStudent}",response_model=AverageSubjectsViewModel)
 async def getStudentSubjectsById(idStudent: int, response: Response):
     query = {
         'idStudent': idStudent
