@@ -18,6 +18,7 @@ class ConfigProd(Config):
 
 
 class EnvEnum(Enum):
+    MOCK = 'Mock'
     LOCAL = 'Local'
     DES = 'Development'    
     PROD = 'Production'
@@ -25,6 +26,10 @@ class EnvEnum(Enum):
 
 class Envs:
     appEnv: EnvEnum = EnvEnum(os.getenv('PYTHON_ENV') or 'Local')
+    @staticmethod
+    def IsMock():
+        return Envs.appEnv == EnvEnum.MOCK
+
     @staticmethod
     def IsLocal():
         return Envs.appEnv == EnvEnum.LOCAL

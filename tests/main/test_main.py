@@ -5,13 +5,14 @@ from fastapi.responses import PlainTextResponse
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
-from src.adapters.controllers.get_subject_by_code_usecase_controller import GetSubjectByCodeController
+from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
 from src.adapters.errors.http_exception import HttpException
 from src.adapters.helpers.http_models import HttpRequest
+from src.envs import EnvEnum, Envs
 from src.main.helpers.status import status as st
 from src.main.subjects.module import Modular
-
+Envs.appEnv = EnvEnum.MOCK
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -27,7 +28,7 @@ async def internal_exception_handler(request: Request, exc: HttpException):
 
 
 @app.get("/")
-def getAllSubjects(response: Response):
+def getAllSubjects(response: Response):    
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
     result = getAllSubjectsController(req)
@@ -46,6 +47,7 @@ def getStudentSubjects(idStudent: int, response: Response):
 
 @app.get("/subject/{codeSubject}")
 def getSubjectByCode(codeSubject: str, response: Response):
+    Envs.appEnv = EnvEnum.MOCK
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
     result = getSubjectByCodeController(req)
@@ -102,8 +104,7 @@ def test_read_student_subjects():
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
                                   "status_code": 200,
-                                  "body": {
-                                    "subjects": [
+                                  "body": [
                                       {
                                         "codeSubject": "ECM501",
                                         "name": "Ciencia de dados"
@@ -112,24 +113,19 @@ def test_read_student_subjects():
                                         "codeSubject": "ECM502",
                                         "name": "Devops"
                                       }
-                                    ],
-                                    "count": 2
-                                  }
+                                    ]
                                 }
 
 
-def test_read_subject_by_code():
+def test_read_subject_by_code():    
     response = client.get("/subject/ecm505")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
                                   "status_code": 200,
                                   "body": {
-                                    "subject": {
                                       "codeSubject": "ECM505",
                                       "name": "Banco de dados"
-                                    },
-                                    "count": 1
-                                  }
+                                    }
                                 }
 
 

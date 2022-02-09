@@ -14,12 +14,12 @@ class GetSubjectByCodeUsecase:
             if codeSubject is None:
                 raise Exception('idSubject is None')
 
-            subject, count = self._subjectRepository.getSubjectByCode(codeSubject)
+            subject = self._subjectRepository.getSubjectByCode(codeSubject)
 
             if subject is None:
                 raise NoItemsFound('')
 
-            return subject, count
+            return subject
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')

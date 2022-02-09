@@ -6,8 +6,8 @@ from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpRespon
 
 
 class GetStudentSubjectsController:
-    def __init__(self, subjectRepository: ISubjectRepository) -> None:
-        self._getStudentSubjectsUsecase = GetStudentSubjectsUsecase(subjectRepository)
+    def __init__(self, getStudentSubjectsUsecase: GetStudentSubjectsUsecase) -> None:
+        self._getStudentSubjectsUsecase = getStudentSubjectsUsecase
 
     def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
@@ -19,11 +19,9 @@ class GetStudentSubjectsController:
 
             idStudent = req.query['idStudent']
 
-            subjects, count = self._getStudentSubjectsUsecase(idStudent)
+            subjects = self._getStudentSubjectsUsecase(idStudent)
 
-            response = {"subjects": subjects, "count": count}
-
-            return Ok(response)
+            return Ok(subjects)
 
         except NoItemsFound:
             return NoContent()

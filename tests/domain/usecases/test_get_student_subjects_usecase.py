@@ -10,14 +10,14 @@ class Test_GetStudentSubjectsUsecase:
 
     def test_get_student_subjects_1(self):
         getStudentSubjectsUsecase = GetStudentSubjectsUsecase(subjectRepository=SubjectRepositoryMock())
-        subjects, count = getStudentSubjectsUsecase(1)
+        subjects = getStudentSubjectsUsecase(1)
         assert len(subjects) > 0
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in subjects
         assert Subject(id=2, codeSubject='ECM502', name='Devops') in subjects
 
     def test_get_student_subjects_2(self):
         getStudentSubjectsUsecase = GetStudentSubjectsUsecase(subjectRepository=SubjectRepositoryMock())
-        subjects, count = getStudentSubjectsUsecase(2)
+        subjects = getStudentSubjectsUsecase(2)
         assert len(subjects) > 0
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in subjects
         assert Subject(id=5, codeSubject='ECM505', name='Banco de dados') in subjects

@@ -1,3 +1,4 @@
+from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.infra.datasources.datasource_interface import IDataSource
 
@@ -20,8 +21,11 @@ class SubjectRepositoryImp(ISubjectRepository):
     def getAllSubjects(self) -> tuple:
         pass
 
-    def getSubjectByCode(self, codeSubject: str) -> tuple:
-        pass
-
+    def getSubjectByCode(self, codeSubject: str) -> Subject:
+        try:
+            respose = self._datasource.getSubjectsByCode(codeSubject=codeSubject)
+            return respose.toEntity()
+        except Exception as error:                
+            raise error        
     def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
         pass
