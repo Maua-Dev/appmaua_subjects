@@ -8,6 +8,7 @@ class ISubjectRepository(ABC):
     @abstractmethod
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         pass
+
     @abstractmethod
     def getSubjectStudents(self, codeSubject: str) -> List[int]:
         pass
