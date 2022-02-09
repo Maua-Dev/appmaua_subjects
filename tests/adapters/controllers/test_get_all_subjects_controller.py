@@ -10,8 +10,6 @@ class Test_GetAllSubjectsController:
         req = HttpRequest(query=None)
         answer = getAllSubjectsController(req)
 
-        assert type(answer.body) is dict
-        assert type(answer.body['subjects']) is list
-        assert len(answer.body['subjects']) == 5
-        assert answer.body['count'] == 5
+        assert type(answer.body) is list
+        assert len(answer.body) == 5
         assert answer.status_code == 200

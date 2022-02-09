@@ -101,7 +101,7 @@ class SubjectRepositoryMock(ISubjectRepository):
         except IndexError as error:
             return None
 
-    def getSubjectStudents(self, codeSubject: str) -> List[Subject]:
+    def getSubjectStudents(self, codeSubject: str) -> List[int]:
         subject: Subject
         students: List[int] = None
         students = [relation['idStudent'] for relation in self._studentsSubjects if codeSubject in [subject.codeSubject for subject in relation['subjects']]]
@@ -112,9 +112,9 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     def getAllSubjects(self) -> List[Subject]:
         if len(self._subjects) > 0:
-            return self._subjects, len(self._subjects)
+            return self._subjects
         else:
-            return None, 0
+            return None
 
     def getSubjectByCode(self, codeSubject: str) -> Subject:
         subject: Subject = None
@@ -123,14 +123,14 @@ class SubjectRepositoryMock(ISubjectRepository):
                 subject = subjectx
         return subject
 
-    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
+    def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
         try:
             subjects: List[Subject] = None
             subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
             if len(subjects) > 0:
-                return subjects, len(subjects)
+                return subjects
             else:
-                return None, 0
+                return None
 
         except IndexError as error:
-            return None, 0
+            return None

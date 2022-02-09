@@ -9,11 +9,11 @@ class ISubjectRepository(ABC):
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         pass
     @abstractmethod
-    def getSubjectStudents(self, codeSubject: str) -> tuple:
+    def getSubjectStudents(self, codeSubject: str) -> List[int]:
         pass
 
     @abstractmethod
-    def getAllSubjects(self) -> tuple:
+    def getAllSubjects(self) -> List[Subject]:
         pass
 
     @abstractmethod
@@ -21,5 +21,5 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
+    def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
         pass

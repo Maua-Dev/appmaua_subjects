@@ -71,8 +71,7 @@ def test_read_all_subjects():
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
                                   "status_code": 200,
-                                  "body": {
-                                    "subjects": [
+                                  "body": [
                                       {
                                         "codeSubject": "ECM501",
                                         "name": "Ciencia de dados"
@@ -93,9 +92,7 @@ def test_read_all_subjects():
                                         "codeSubject": "ECM503",
                                         "name": "Controladores"
                                       }
-                                    ],
-                                    "count": 5
-                                  }
+                                    ]
                                 }
 
 
@@ -133,25 +130,21 @@ def test_read_subject_by_professor_id():
     response = client.get("/professor/1")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
-                                  "status_code": 200,
-                                  "body": {
-                                    "subjects": [
-                                      {
-                                        "codeSubject": "ECM501",
-                                        "name": "Ciencia de dados"
-                                      },
-                                      {
-                                        "codeSubject": "ECM502",
-                                        "name": "Devops"
-                                      },
-                                      {
-                                        "codeSubject": "ECM504",
-                                        "name": "IA"
-                                      }
-                                    ],
-                                    "count": 3
-                                  }
-                                }
+                                    'body':   [ {
+                                            "codeSubject": "ECM501",
+                                            "name": "Ciencia de dados"
+                                          },
+                                          {
+                                            "codeSubject": "ECM502",
+                                            "name": "Devops"
+                                          },
+                                          {
+                                            "codeSubject": "ECM504",
+                                            "name": "IA"
+                                          }
+                                        ],
+                                    'status_code': 200
+                            }
 
 
 def test_read_student_subjects_no_content():

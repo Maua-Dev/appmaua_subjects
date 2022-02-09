@@ -11,9 +11,8 @@ class Test_GetSubjectByProfessorIdController:
         req = HttpRequest(query={'idProfessor': 1})
         answer = getSubjectByProfessorIdController(req)
 
-        assert type(answer.body) is dict
-        assert type(answer.body['subjects']) is list
-        assert answer.body['count'] == 3
+        assert type(answer.body) is list
+        assert len(answer.body) == 3
         assert answer.status_code == 200
 
     def test_get_subject_by_professor_id_controller_no_item_found_id_3(self):

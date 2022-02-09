@@ -9,7 +9,7 @@ class Test_GetSubjectByProfessorIdUsecase:
 
     def test_get_professor_subjects_1(self):
         getSubjectByProfessorIdUsecase = GetSubjectByProfessorIdUsecase(subjectRepository=SubjectRepositoryMock())
-        subjects, count = getSubjectByProfessorIdUsecase(1)
+        subjects = getSubjectByProfessorIdUsecase(1)
         assert len(subjects) > 0
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in subjects
         assert Subject(id=2, codeSubject='ECM502', name='Devops') in subjects
@@ -17,7 +17,7 @@ class Test_GetSubjectByProfessorIdUsecase:
 
     def test_get_professor_subjects_2(self):
         getSubjectByProfessorIdUsecase = GetSubjectByProfessorIdUsecase(subjectRepository=SubjectRepositoryMock())
-        subjects, count = getSubjectByProfessorIdUsecase(2)
+        subjects = getSubjectByProfessorIdUsecase(2)
         assert len(subjects) > 0
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in subjects
         assert Subject(id=5, codeSubject='ECM505', name='Banco de dados') in subjects

@@ -9,12 +9,12 @@ class GetAllSubjectsUsecase:
 
     def __call__(self):
         try:
-            subjects, count = self._subjectRepository.getAllSubjects()
+            subjects = self._subjectRepository.getAllSubjects()
 
             if subjects is None:
                 raise NoItemsFound('')
 
-            return subjects, count
+            return subjects
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')
