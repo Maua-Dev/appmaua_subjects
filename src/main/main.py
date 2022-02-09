@@ -33,19 +33,19 @@ def getAllSubjects(response: Response):
 
 
 @app.get("/student/{idStudent}")
-def getStudentSubjects(idStudent: int, response: Response):
+async def getStudentSubjects(idStudent: int, response: Response):
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
-    result = getStudentSubjectsController(req)
+    result = await getStudentSubjectsController(req)
     response.status_code = status.get(result.status_code)
     return result.body
 
 
 @app.get("/subject/{codeSubject}")
-def getSubjectByCode(codeSubject: str, response: Response):
+async def getSubjectByCode(codeSubject: str, response: Response):
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
-    result = getSubjectByCodeController(req)
+    result = await getSubjectByCodeController(req)
     response.status_code = status.get(result.status_code)
     return result.body
 

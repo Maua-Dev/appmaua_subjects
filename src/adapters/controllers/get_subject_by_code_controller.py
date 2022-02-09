@@ -9,7 +9,7 @@ class GetSubjectByCodeController:
     def __init__(self, getSubjectByCodeUsecase: GetSubjectByCodeUsecase) -> None:
         self._getSubjectByCodeUsecase = getSubjectByCodeUsecase
 
-    def __call__(self, req: HttpRequest) -> HttpResponse:
+    async def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
             if req.query['codeSubject'] is None:
                 return BadRequest('codeSubject is null.')
@@ -19,7 +19,7 @@ class GetSubjectByCodeController:
 
             codeSubject = req.query['codeSubject']
 
-            subject = self._getSubjectByCodeUsecase(codeSubject)            
+            subject = await self._getSubjectByCodeUsecase(codeSubject)            
 
             return Ok(subject)
 

@@ -9,12 +9,12 @@ class GetSubjectByCodeUsecase:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
 
-    def __call__(self, codeSubject: str) -> Subject:
+    async def __call__(self, codeSubject: str) -> Subject:
         try:
             if codeSubject is None:
                 raise Exception('idSubject is None')
 
-            subject = self._subjectRepository.getSubjectByCode(codeSubject)
+            subject = await self._subjectRepository.getSubjectByCode(codeSubject=codeSubject)
 
             if subject is None:
                 raise NoItemsFound('')

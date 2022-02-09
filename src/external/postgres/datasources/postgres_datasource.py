@@ -24,10 +24,14 @@ class PostgresDataSource(IDataSource):
             except Exception as e:                              
                 raise Exception(f'DataSource Error. {str(e)}')
         
-    def getSubjectsByCode(self,codeSubject: str) -> SubjectDTO:
-        with DBConnectionHandler() as db:
+    async def getSubjectsByCode(self,codeSubject: str) -> SubjectDTO:
+        async with AsyncDBConnectionHandler().session() as s:
             try:                
-                subjects = db.session.query(SubjectDTO).filter(SubjectDTO.codeSubject == codeSubject).first()
-                return subjects
+                # subjects = db.session.query(SubjectDTO).filter(SubjectDTO.codeSubject == codeSubject).first()
+                query = await s.execute(
+                    select(SubjectDTO).
+                    where(SubjectDTO.codeSubject == codeSubject)
+                )
+                return query.scalars().first()
             except Exception as e:                              
                 raise Exception(f'DataSource Error. {str(e)}')
