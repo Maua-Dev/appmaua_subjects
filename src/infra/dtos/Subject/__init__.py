@@ -1,2 +1,3 @@
 from .student_subject_dto import StudentSubjectDTO
 from .subject_dto import SubjectDTO
+from .professor_subject_dto import ProfessorSubjectDTO

@@ -1,4 +1,4 @@
-from src.adpters.controllers.get_student_subjects_controller import GetStudentSubjectsController
+from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.main.subjects.module import Module,Modular
 
 

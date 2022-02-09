@@ -3,4 +3,4 @@ class GetStudentSubjectsScoreUsecase:
         pass
 
     def __call__(self) -> None:
-        return True;
+        return True

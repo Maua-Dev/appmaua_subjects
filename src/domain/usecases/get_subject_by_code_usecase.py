@@ -4,25 +4,25 @@ from src.domain.repositories.subject_repository_interface import ISubjectReposit
 from src.domain.entities.subject import Subject
 
 
-class GetStudentSubjectsUsecase:
+class GetSubjectByCodeUsecase:
 
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
-    
-    def __call__(self, idStudent: int) -> List[Subject]:
+
+    def __call__(self, codeSubject: str) -> Subject:
         try:
-            if idStudent is None:
-                raise Exception('idStudent is None')
+            if codeSubject is None:
+                raise Exception('idSubject is None')
 
-            subjects = self._subjectRepository.getStudentSubjects(idStudent)
+            subject = self._subjectRepository.getSubjectByCode(codeSubject)
 
-            if subjects is None:
+            if subject is None:
                 raise NoItemsFound('')
 
-            return subjects
+            return subject
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')
 
         except Exception as error:
-            raise UnexpectedError('GetStudentSubject', str(error))
+            raise UnexpectedError('GetSubjectById', str(error))
