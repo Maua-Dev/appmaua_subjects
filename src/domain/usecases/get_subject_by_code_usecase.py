@@ -14,7 +14,7 @@ class GetSubjectByCodeUsecase:
             if codeSubject is None:
                 raise Exception('idSubject is None')
 
-            subject = self._subjectRepository.getSubjectByCode(codeSubject)
+            subject = self._subjectRepository.getSubjectByCode(codeSubject.upper())
 
             if subject is None:
                 raise NoItemsFound('')
