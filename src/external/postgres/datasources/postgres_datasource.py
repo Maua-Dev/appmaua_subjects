@@ -24,3 +24,18 @@ class PostgresDataSource(IDataSource):
                 return subjects
             except Exception as e:                              
                 raise Exception(f'DataSource Error. {str(e)}')
+
+    def getSubjectStudents(self, codeSubject: str) -> List[int]:
+        pass
+
+    def getAllSubjects(self) -> SubjectDTO:
+        with DBConnectionHandler() as db:
+            try:
+                subjects = db.session.query(SubjectDTO).all()
+                return subjects
+            except Exception as e:
+                raise Exception(f'DataSource Error. {str(e)}')
+        pass
+
+    def getSubjectByProfessorId(self, idProfessor: int) -> SubjectDTO:
+        pass

@@ -12,7 +12,7 @@ class SubjectRepositoryImp(ISubjectRepository):
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
             response = self._datasource.getSubjectsByStudent(idStudent=idStudent)    
-            return list(map(lambda x: x.toEntity(),response))
+            return list(map(lambda x: x.toEntity(), response))
         except Exception as error:                
             raise error
 
@@ -20,7 +20,11 @@ class SubjectRepositoryImp(ISubjectRepository):
         pass
 
     def getAllSubjects(self) -> List[Subject]:
-        pass
+        try:
+            response = self._datasource.getAllSubjects()
+            return list(map(lambda x: x.toEntity(), response))
+        except Exception as error:
+            raise error
 
     def getSubjectByCode(self, codeSubject: str) -> Subject:
         try:
