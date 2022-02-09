@@ -14,7 +14,7 @@ class IDataSource(ABC):
         pass
 
     @abstractmethod
-    def getSubjectStudents(self, codeSubject: str) -> List[int]:
+    def getSubjectStudents(self, codeSubject: str) -> SubjectDTO:
         pass
 
     @abstractmethod

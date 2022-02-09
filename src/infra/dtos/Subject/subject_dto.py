@@ -10,9 +10,15 @@ class SubjectDTO(Base):
     codeSubject = Column(String, nullable=False)
     name = Column(String, nullable=False)
     students = relationship('StudentSubjectDTO',
-        cascade="all, delete",
-        passive_deletes=True,
-        backref="Subjects")
+                            cascade="all, delete",
+                            passive_deletes=True,
+                            backref="Subjects")
+    professors = relationship('ProfessorSubjectDTO',
+                              cascade="all, delete",
+                              passive_deletes=True,
+                              backref="Subjects"
+                              )
+
     def toEntity(self) -> Subject:
         return Subject(
             codeSubject=self.codeSubject,
