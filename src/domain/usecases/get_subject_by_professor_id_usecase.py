@@ -4,23 +4,25 @@ from src.domain.repositories.subject_repository_interface import ISubjectReposit
 from src.domain.entities.subject import Subject
 
 
-class GetStudentSubjectsUsecase:
+class GetSubjectByProfessorIdUsecase:
 
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
-    
-    async def __call__(self,idStudent: int) -> List[Subject]:
+
+    def __call__(self, idProfessor: int) -> tuple:
         try:
-            if(idStudent == None): raise Exception('idStudent is None')
-            subjects = await self._subjectRepository.getStudentSubjects(idStudent=idStudent)            
+            if idProfessor is None:
+                raise Exception('idProfessor is None')
+
+            subjects, count = self._subjectRepository.getSubjectByProfessorId(idProfessor)
 
             if subjects is None:
                 raise NoItemsFound('')
 
-            return subjects
+            return subjects, count
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')
 
         except Exception as error:
-            raise UnexpectedError('GetStudentSubject', str(error))
+            raise UnexpectedError('GetSubjectByProfessorId', str(error))

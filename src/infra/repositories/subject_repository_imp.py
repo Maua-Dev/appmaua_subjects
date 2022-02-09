@@ -15,3 +15,18 @@ class SubjectRepositoryImp(ISubjectRepository):
             return list(map(lambda x: x.toEntity(),response))
         except Exception as error:                
             raise error
+
+    def getSubjectStudents(self, codeSubject: str) -> tuple:
+        pass
+
+    def getAllSubjects(self) -> tuple:
+        pass
+
+    async def getSubjectByCode(self, codeSubject: str) -> Subject:
+        try:
+            respose = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
+            return respose.toEntity()
+        except Exception as error:                
+            raise error        
+    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
+        pass
