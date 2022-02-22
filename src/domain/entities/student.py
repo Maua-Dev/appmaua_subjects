@@ -13,7 +13,7 @@ class Student(BaseModel):
     idSubjects: List[int]
     idGradesBySubject: dict #Dict[int:int] ? /// idGrades is unique for each grade?
 
-    @validator('idGradesBySubject')]
+    @validator('idGradesBySubject')
     def idGradesBySubject_is_not_empty(cls, v: dict) -> dict:
         if len(v) == 0:
             raise EntityError('idGradesBySubject')
