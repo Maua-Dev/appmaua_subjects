@@ -11,13 +11,6 @@ class Student(BaseModel):
     name: str
     idDegree: int
     idSubjects: List[int]
-    idGrades: List[int]
-
-    @validator('idGrades')
-    def idGrades_is_not_empty(cls, v: List[int]) -> List[int]:
-        if len(v) == 0:
-            raise EntityError('idGrades')
-        return v
 
     @validator('name')
     def name_is_not_empty(cls,v: str) -> str:

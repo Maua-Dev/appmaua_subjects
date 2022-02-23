@@ -4,18 +4,20 @@ from pydantic.main import BaseModel
 
 from pydantic import validator
 
+from src.domain.entities.grade import Grade
+
 from src.domain.errors.errors import EntityError
 
 
 class Subject(BaseModel):    
     codeSubject: str
     name: str
-    idGrades: List[int]
+    grades: List[Grade]
 
-    @validator('idGrades')
-    def idGrades_is_not_empty(cls, v: List[int]) -> List[int]:
+    @validator('grades')
+    def grades_not_empty(cls, v: List[Grade]) -> List[Grade]:
         if len(v) == 0:
-            raise EntityError('idSubjects')
+            raise EntityError('Grades')
         return v
 
     @validator('codeSubject')
