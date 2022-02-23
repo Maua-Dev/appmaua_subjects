@@ -18,14 +18,7 @@ class GetNumStudensByGrades:
             elif value is None:
                 raise Exception('value is None')
 
-            subject = self._subjectRepository.getSubjectByCode(codeSubject)
-            numStudents = 0
-            for grade in subject.grades:
-                if grade.value == value:
-                    numStudents += 1
-
-            if subject is None:
-                raise NoItemsFound('')
+            numStudents = self._subjectRepository.getNumStudentsByGrades(value, codeSubject)
 
             return numStudents
 
