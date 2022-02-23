@@ -23,3 +23,8 @@ class ISubjectRepository(ABC):
     @abstractmethod
     def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
         pass
+
+    @abstractmethod
+    def getNumStudentsByGrades(self, value: int, codeSubject:str) -> int:
+        pass
+
