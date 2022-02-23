@@ -9,7 +9,7 @@ class GetNumStudensByGrades:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
 
-    def __call__(self, value:int, codeSubject: str) -> int:
+    def __call__(self, value:float, codeSubject: str) -> int:
         try:
             if codeSubject is None and value is None:
                 raise Exception('idSubject and value is None')

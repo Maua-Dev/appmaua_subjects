@@ -149,3 +149,12 @@ class SubjectRepositoryMock(ISubjectRepository):
 
         except IndexError as error:
             return None, 0
+
+    def getNumStudentsByGrades(self, value:float, codeSubject: str) -> int:
+        try:
+            subject = getSubjectByCode(self, codeSubject=codeSubject)
+            numStudents = [grade.value for grade in subject.grades].count(value)
+
+            return numStudents
+        except  IndexError as error:
+            return None
