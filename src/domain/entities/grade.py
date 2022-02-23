@@ -26,7 +26,7 @@ class Grade(BaseModel):
 
     @validator('value')
     def value_is_not_empty(cls, v: float) -> float:
-        if v < 0:
+        if v < 0 or v > 10:
             raise EntityError('Value')
         return v
 
