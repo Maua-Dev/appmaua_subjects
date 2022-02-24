@@ -12,10 +12,10 @@ class GetCountStudentsByScoreUsecase:
         try:
 
             if codeSubject is None:
-                raise Exception('idSubject is None')
+                raise Exception('codeSubject is None')
             if gradeValue is None:
-                raise Exception('value is None')
-            if idEvaluationType not in range(1, 18):
+                raise Exception('gradeValue is None')
+            if idEvaluationType not in range(1, 19):
                 raise Exception('idEvaluationType is invalid')
             if academicYear is None:
                 raise Exception('academicYear is None')
@@ -24,7 +24,7 @@ class GetCountStudentsByScoreUsecase:
             if subject is None:
                 raise Exception('codeSubject is invalid')
 
-            return await self._subjectRepository.getCountStudentsByScore(gradeValue, codeSubject,
+            return await self._subjectRepository.getCountStudentsByScore(gradeValue, codeSubject.upper(),
                                                                                 idEvaluationType, academicYear)
 
         except Exception as error:
