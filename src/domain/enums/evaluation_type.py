@@ -20,3 +20,4 @@ class EvaluationType(Enum):
     T10 = 16
     T11 = 17
     T12 = 18
+    T = 19
