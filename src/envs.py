@@ -6,11 +6,11 @@ class Config():
 class ConfigLocal(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = f'postgresql://postgres:devmaua@{os.getenv("DB") or "localhost"}:5432/Devmaua'
+        self.sqlConnection = f'postgresql+asyncpg://postgres:devmaua@{os.getenv("DB") or "localhost"}:5432/Devmaua'
 class ConfigDes(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = f'postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PW")}@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/{os.getenv("DB_NAME")}'
+        self.sqlConnection = f'postgresql+asyncpg://{os.getenv("DB_USER")}:{os.getenv("DB_PW")}@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/{os.getenv("DB_NAME")}'
 class ConfigProd(Config):
     def __init__(self) -> None:
         super().__init__()

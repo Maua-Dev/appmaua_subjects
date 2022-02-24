@@ -10,7 +10,6 @@ from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsC
 from src.main.subjects.module import Modular
 from src.main.helpers.status import status
 
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -24,32 +23,31 @@ app.add_middleware(
 async def internal_exception_handler(request: Request, exc: HttpException):
     return PlainTextResponse(exc.body, status_code=exc.status_code)
 
-
 @app.get("/")
 def getAllSubjects(response: Response):
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
     result = getAllSubjectsController(req)
     response.status_code = status.get(result.status_code)
-    return result
+    return result.body
 
 
 @app.get("/student/{idStudent}")
-def getStudentSubjects(idStudent: int, response: Response):
+async def getStudentSubjects(idStudent: int, response: Response):
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
-    result = getStudentSubjectsController(req)
+    result = await getStudentSubjectsController(req)
     response.status_code = status.get(result.status_code)
-    return result
+    return result.body
 
 
 @app.get("/subject/{codeSubject}")
-def getSubjectByCode(codeSubject: str, response: Response):
+async def getSubjectByCode(codeSubject: str, response: Response):
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
-    result = getSubjectByCodeController(req)
+    result = await getSubjectByCodeController(req)
     response.status_code = status.get(result.status_code)
-    return result
+    return result.body
 
 
 @app.get("/professor/{idProfessor}")
@@ -58,4 +56,4 @@ def getSubjectByProfessorId(idProfessor: int, response: Response):
     req = HttpRequest(query={'idProfessor': idProfessor})
     result = getSubjectByProfessorIdController(req)
     response.status_code = status.get(result.status_code)
-    return result
+    return result.body
