@@ -12,74 +12,127 @@ class SubjectRepositoryMock(ISubjectRepository):
         super().__init__()
         self._studentsSubjects = [
             {
+                'idSubject': 1,
                 'idStudent': 1,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=2, codeSubject='ECM502', name='Devops')
-                ]
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
             },
             {
+                'idSubject': 2,
+                'idStudent': 1,
+                'codeSubject': 'ECM502',
+                'name': 'Devops'
+            },
+            {
+                'idSubject': 1,
                 'idStudent': 2,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=5, codeSubject='ECM505', name='Banco de dados'),
-                    Subject(id=6, codeSubject='ECM503', name='Controladores')
-                ]
-            }
-            ,
-            {
-                'idStudent': 3,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=6, codeSubject='ECM503', name='Controladores'),
-                    Subject(id=3, codeSubject='ECM504', name='IA')
-                ]
-            }
-            ,
-            {
-                'idStudent': 4,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=2, codeSubject='ECM502', name='Devops'),
-                    Subject(id=5, codeSubject='ECM505', name='Banco de dados')
-                ]
-            }
-            ,
-            {
-                'idStudent': 5,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=2, codeSubject='ECM502', name='Devops'),
-                    Subject(id=3, codeSubject='ECM504', name='IA')
-                ]
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
             },
             {
-                'idStudent': 6,
-                'subjects': []
+                'idSubject': 5,
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'name': 'Banco de dados'
+            },
+            {
+                'idSubject': 6,
+                'idStudent': 2,
+                'codeSubject': 'ECM503',
+                'name': 'Controladores'
+            },
+            {
+                'idSubject': 1,
+                'idStudent': 3,
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
+            },
+            {
+                'idSubject': 6,
+                'idStudent': 3,
+                'codeSubject': 'ECM503',
+                'name': 'Controladores'
+            },
+            {
+                'idSubject': 3,
+                'idStudent': 3,
+                'codeSubject': 'ECM504',
+                'name': 'IA'
+            },
+            {
+                'idSubject': 1,
+                'idStudent': 4,
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
+            },
+            {
+                'idSubject': 2,
+                'idStudent': 4,
+                'codeSubject': 'ECM502',
+                'name': 'Devops'
+            },
+            {
+                'idSubject': 5,
+                'idStudent': 4,
+                'codeSubject': 'ECM505',
+                'name': 'Banco de dados'
+            },
+            {
+                'idSubject': 1,
+                'idStudent': 5,
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
+            },
+            {
+                'idSubject': 2,
+                'idStudent': 5,
+                'codeSubject': 'ECM502',
+                'name': 'Devops'
+            },
+            {
+                'idSubject': 3,
+                'idStudent': 5,
+                'codeSubject': 'ECM504',
+                'name': 'IA'
             }
         ]
 
         self._professorSubjects = [
             {
+                'idSubject': 1,
                 'idProfessor': 1,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=2, codeSubject='ECM502', name='Devops'),
-                    Subject(id=3, codeSubject='ECM504', name='IA')
-                ]
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
             },
             {
-                'idProfessor': 2,
-                'subjects': [
-                    Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-                    Subject(id=5, codeSubject='ECM505', name='Banco de dados'),
-                    Subject(id=6, codeSubject='ECM503', name='Controladores')
-                ]
-            }
-            ,
+                'idSubject': 2,
+                'idProfessor': 1,
+                'codeSubject': 'ECM502',
+                'name': 'Devops'
+            },
             {
-                'idProfessor': 3,
-                'subjects': []
+                'idSubject': 3,
+                'idProfessor': 1,
+                'codeSubject': 'ECM504',
+                'name': 'IA'
+            },
+            {
+                'idSubject': 1,
+                'idProfessor': 2,
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
+            },
+            {
+                'idSubject': 5,
+                'idProfessor': 2,
+                'codeSubject': 'ECM505',
+                'name': 'Banco de dados'
+            },
+            {
+                'idSubject': 6,
+                'idProfessor': 2,
+                'codeSubject': 'ECM503',
+                'name': 'Controladores'
             }
         ]
 
@@ -175,36 +228,27 @@ class SubjectRepositoryMock(ISubjectRepository):
         ]
 
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
-        try:
-            subjects: List[Subject] = None
-            subjects = [relation['subjects'] for relation in self._studentsSubjects
-                        if relation['idStudent'] == idStudent][0]
 
-            if len(subjects) > 0:
-                return subjects
-            else:
-                return None
+        subjects = [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._studentsSubjects
+                    if row['idStudent'] == idStudent]
 
-        except IndexError as error:
-            return None
+        return subjects if len(subjects) > 0 else None
 
     async def getSubjectStudents(self, codeSubject: str) -> List[int]:
-        subject: Subject
-        students: List[int] = None
-        students = [relation['idStudent'] for relation in self._studentsSubjects
-                    if codeSubject in [subject.codeSubject for subject in relation['subjects']]]
-        if len(students) > 0:
-            return students
-        else:
-            return None
+
+        students = [row['idStudent'] for row in self._studentsSubjects
+                    if row['codeSubject'].upper() == codeSubject.upper()]
+
+        return students if len(students) > 0 else None
 
     async def getAllSubjects(self) -> List[Subject]:
-        if len(self._subjects) > 0:
-            return [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._subjects]
-        else:
-            return None
+
+        subjects = [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._subjects]
+
+        return subjects if len(subjects) > 0 else None
 
     async def getSubjectByCode(self, codeSubject: str) -> Subject:
+
         try:
             return [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._subjects
                         if row['codeSubject'] == codeSubject][0]
@@ -212,24 +256,16 @@ class SubjectRepositoryMock(ISubjectRepository):
             return None
 
     async def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
-        try:
-            subjects: List[Subject] = None
-            subjects = [relation['subjects'] for relation in self._professorSubjects
-                        if relation['idProfessor'] == idProfessor][0]
-            if len(subjects) > 0:
-                return subjects
-            else:
-                return None
 
-        except IndexError as error:
-            return None
+        subjects = [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._professorSubjects
+                    if row['idProfessor'] == idProfessor]
+        return subjects if len(subjects) > 0 else None
+
 
     async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, academicYear: int) -> int:
-        try:
-            numStudents = len([row['grade'].value for row in self._grades if row['grade'].value == gradeValue and
-                               row['codeSubject'].upper() == codeSubject.upper() and row['grade'].academicYear == academicYear])
 
-            return numStudents
+        numStudents = len([row['grade'].value for row in self._grades if row['grade'].value == gradeValue and
+                           row['codeSubject'].upper() == codeSubject.upper()
+                           and row['grade'].academicYear == academicYear])
 
-        except IndexError as error:
-            return None
+        return numStudents if numStudents > 0 else None
