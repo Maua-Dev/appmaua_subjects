@@ -299,8 +299,9 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
                                      academicYear: int) -> int:
 
-        return len([row['idStudent'] for row in self._grades if row['value'] == gradeValue and
-                           row['codeSubject'].upper() == codeSubject.upper()
+        return len([row['idStudent'] for row in self._grades
+                           if row['value'] == gradeValue
+                           and row['codeSubject'].upper() == codeSubject.upper()
                            and row['academicYear'] == academicYear
                            and row['idEvaluationType'] == idEvaluationType])
 
