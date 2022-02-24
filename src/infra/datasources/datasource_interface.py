@@ -6,21 +6,25 @@ from src.infra.dtos.Subject.subject_dto import SubjectDTO
 
 class IDataSource(ABC):
     @abstractmethod
-    def getSubjectsByStudent(self,idStudent: int) -> List[SubjectDTO]:
+    async def getSubjectsByStudent(self,idStudent: int) -> List[SubjectDTO]:
         pass
 
     @abstractmethod
-    def getSubjectsByCode(self,codeSubject: str) -> SubjectDTO:
+    async def getSubjectsByCode(self,codeSubject: str) -> SubjectDTO:
         pass
 
     @abstractmethod
-    def getSubjectStudents(self, codeSubject: str) -> SubjectDTO:
+    async def getSubjectStudents(self, codeSubject: str) -> SubjectDTO:
         pass
 
     @abstractmethod
-    def getAllSubjects(self) -> SubjectDTO:
+    async def getAllSubjects(self) -> SubjectDTO:
         pass
 
     @abstractmethod
-    def getSubjectByProfessorId(self, idProfessor: int) -> SubjectDTO:
+    async def getSubjectByProfessorId(self, idProfessor: int) -> SubjectDTO:
+        pass
+
+    @abstractmethod
+    async def getNumStudentsByGrades(self, gradeValue: float, codeSubject: str) -> SubjectDTO:
         pass

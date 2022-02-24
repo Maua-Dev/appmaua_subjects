@@ -91,11 +91,11 @@ class SubjectRepositoryMock(ISubjectRepository):
         ]
 
         self._grades = [
-            Grade(value=6.0, idGrade=1, idStudent=1, codeSubject='ECM501'),
-            Grade(value=6.0, idGrade=2, idStudent=2, codeSubject='ECM501'),
-            Grade(value=6.0, idGrade=3, idStudent=3, codeSubject='ECM501'),
-            Grade(value=3.0, idGrade=4, idStudent=4, codeSubject='ECM501'),
-            Grade(value=9.5, idGrade=5, idStudent=5, codeSubject='ECM501')
+            Grade(value=6.0, idGrade=1, idStudent=1, codeSubject='ECM501', academicYear=2022),
+            Grade(value=6.0, idGrade=2, idStudent=2, codeSubject='ECM501', academicYear=2022),
+            Grade(value=6.0, idGrade=3, idStudent=3, codeSubject='ECM501', academicYear=2022),
+            Grade(value=3.0, idGrade=4, idStudent=4, codeSubject='ECM501', academicYear=2022),
+            Grade(value=9.5, idGrade=5, idStudent=5, codeSubject='ECM501', academicYear=2022)
         ]
 
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:

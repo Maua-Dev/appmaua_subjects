@@ -60,3 +60,6 @@ class PostgresDataSource(IDataSource):
                 return subjects
             except Exception as e:
                 raise Exception(f'DataSource Error. {str(e)}')
+
+    async def getNumStudentsByGrades(self, gradeValue: float, codeSubject: str) -> SubjectDTO:
+        pass
