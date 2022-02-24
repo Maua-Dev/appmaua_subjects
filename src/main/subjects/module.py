@@ -3,10 +3,12 @@
 from typing import Any
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
+from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
+from src.domain.usecases.get_count_students_by_score_usecase import GetCountStudentsByScoreUsecase
 from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
@@ -55,7 +57,9 @@ class Module:
         GetStudentSubjectsUsecase,
         GetStudentSubjectsScoreUsecase,
         SubjectRepositoryMock if Envs.IsMock() else SubjectRepositoryImp,        
-        PostgresDataSource
+        PostgresDataSource,
+        GetCountStudentsByScoreController,
+        GetCountStudentsByScoreUsecase
     ]
 
 
