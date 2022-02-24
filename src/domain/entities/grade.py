@@ -8,6 +8,7 @@ class Grade(BaseModel):
     idGrade: int
     academicYear: int
     evaluationType: EvaluationType
+    weight: float
 
     @validator('academicYear')
     def acdemicYear_is_valid(cls, v: int) -> int:
