@@ -43,7 +43,6 @@ async def getStudentSubjects(idStudent: int, response: Response):
 
 @app.get("/subject/{codeSubject}")
 async def getSubjectByCode(codeSubject: str, response: Response):
-    Envs.appEnv = EnvEnum.MOCK
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
     result = await getSubjectByCodeController(req)
