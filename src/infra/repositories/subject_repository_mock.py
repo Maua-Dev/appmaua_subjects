@@ -199,7 +199,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idGrade': 5,
                 'idStudent': 1,
                 'codeSubject': 'ECM501',
-                'value': 7.0,
+                'value': -1,
                 'academicYear': 2022,
                 'idEvaluationType': 2
             },
@@ -247,7 +247,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idGrade': 11,
                 'idStudent': 2,
                 'codeSubject': 'ECM505',
-                'value': 4.5,
+                'value': -2,
                 'academicYear': 2022,
                 'idEvaluationType': 7
             },

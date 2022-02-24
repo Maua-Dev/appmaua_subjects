@@ -17,7 +17,9 @@ class Score(BaseModel):
 
     @validator('value')
     def value_is_not_empty(cls, v: float) -> float:
-        if v < 0 or v > 10:
+        # -2 = NE
+        # -1 = Zerado por Cola
+        if v < -2 or (-2 < v < -1) or (-1 < v < 0) or v > 10:
             raise EntityError('Value')
         return v
 
