@@ -83,26 +83,21 @@ class SubjectRepositoryMock(ISubjectRepository):
         ]
 
         self._subjects = [
-            Subject(id=1, codeSubject='ECM501', name='Ciencia de dados', grades=[Grade(value=6.0,idGrade=1,idStudent=1,codeSubject='ECM501'),
-                                                                                 Grade(value=6.0,idGrade=2,idStudent=2,codeSubject='ECM501'),
-                                                                                 Grade(value=6.0,idGrade=3,idStudent=3,codeSubject='ECM501'),
-                                                                                 Grade(value=3.0,idGrade=4,idStudent=4,codeSubject='ECM501'),
-                                                                                 Grade(value=9.5,idGrade=5,idStudent=5,codeSubject='ECM501')])),
-            Subject(id=2, codeSubject='ECM502', name='Devops', grades=[Grade(value=6.0, idGrade=1, idStudent=1, codeSubject='ECM502'),
-                                                                       Grade(value=10.0, idGrade=2, idStudent=4, codeSubject='ECM502'),
-                                                                       Grade(value=1.5, idGrade=3, idStudent=5, codeSubject='ECM502')])),
-            Subject(id=3, codeSubject='ECM504', name='IA', grades=[Grade(value=4.0, idGrade=1, idStudent=3, codeSubject='ECM504'),
-                                                                   Grade(value=6.0, idGrade=2, idStudent=5, codeSubject='ECM504')]),
-            Subject(id=5, codeSubject='ECM505', name='Banco de dados', grades=[Grade(value=2.0, idGrade=1, idStudent=2, codeSubject='ECM505'),
-                                                                               Grade(value=1.0, idGrade=2, idStudent=4, codeSubject='ECM505')]),
-            Subject(id=6, codeSubject='ECM503', name='Controladores', grades=[Grade(value=10.0, idGrade=1, idStudent=3, codeSubject='ECM503'),
-                                                                              Grade(value=1.0, idGrade=2, idStudent=2, codeSubject='ECM503')])
+            Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
+            Subject(id=2, codeSubject='ECM502', name='Devops'),
+            Subject(id=3, codeSubject='ECM504', name='IA'),
+            Subject(id=5, codeSubject='ECM505', name='Banco de dados'),
+            Subject(id=6, codeSubject='ECM503', name='Controladores')
         ]
 
-    value: float
-    idGrade: int
-    idStudent: int
-    codeSubject: str
+        self._grades = [
+            Grade(value=6.0, idGrade=1, idStudent=1, codeSubject='ECM501'),
+            Grade(value=6.0, idGrade=2, idStudent=2, codeSubject='ECM501'),
+            Grade(value=6.0, idGrade=3, idStudent=3, codeSubject='ECM501'),
+            Grade(value=3.0, idGrade=4, idStudent=4, codeSubject='ECM501'),
+            Grade(value=9.5, idGrade=5, idStudent=5, codeSubject='ECM501')
+        ]
+
     def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
             subjects: List[Subject] = None
@@ -129,7 +124,7 @@ class SubjectRepositoryMock(ISubjectRepository):
         if len(self._subjects) > 0:
             return self._subjects, len(self._subjects)
         else:
-            return None, 0
+            return None
 
     def getSubjectByCode(self, codeSubject: str) -> Subject:
         subject: Subject = None
@@ -143,18 +138,18 @@ class SubjectRepositoryMock(ISubjectRepository):
             subjects: List[Subject] = None
             subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
             if len(subjects) > 0:
-                return subjects, len(subjects)
+                return subjects
             else:
-                return None, 0
+                return None
 
         except IndexError as error:
-            return None, 0
+            return None
 
-    def getNumStudentsByGrades(self, value:float, codeSubject: str) -> int:
+    def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str) -> int:
         try:
-            subject = getSubjectByCode(self, codeSubject=codeSubject)
-            numStudents = [grade.value for grade in subject.grades].count(value)
+            numStudents = len([grade.value for grade in self._grades if grade.value == gradeValue and grade.codeSubject.upper() == codeSubject.upper()])
 
             return numStudents
-        except  IndexError as error:
+
+        except IndexError as error:
             return None
