@@ -1,5 +1,4 @@
 from pydantic import validator, BaseModel
-
 from src.domain.errors.errors import EntityError
 
 
@@ -8,6 +7,13 @@ class Grade(BaseModel):
     idGrade: int
     idStudent: int
     codeSubject: str
+    academicYear: int
+
+    @validator('academicYear')
+    def acdemicYear_is_valid(cls, v: int) -> int:
+        if v < 1960:
+            raise EntityError('academicYear')
+        return v
 
     @validator('idStudent')
     def idStudent_is_not_empty(cls, v: int) -> int:
