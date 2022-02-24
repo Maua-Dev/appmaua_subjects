@@ -8,7 +8,7 @@ class Degree(BaseModel):
     name: str
     subjects: List[str]  # codeSubject
     duration: int
-    idDegree: int
+    codeDegree: str
 
     @validator('name')
     def name_is_not_empty(cls, v: str) -> str:
@@ -28,8 +28,8 @@ class Degree(BaseModel):
             raise EntityError('Subjects')
         return v
 
-    @validator('idDegree')
-    def idDegree_is_not_empty(cls, v: int) -> int:
-        if v == 0:
-            raise EntityError('idDegree')
-        return v
+    @validator('codeDegree')
+    def codeDegree_is_not_empty(cls, v: str) -> str:
+        if len(v) == 0:
+            raise EntityError('codeDegree')
+        return v.upper()
