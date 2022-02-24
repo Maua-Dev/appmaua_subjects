@@ -14,7 +14,7 @@ class GetSubjectByCodeUsecase:
             if codeSubject is None:
                 raise Exception('idSubject is None')
 
-            subject = await self._subjectRepository.getSubjectByCode(codeSubject=codeSubject)
+            subject = await self._subjectRepository.getSubjectByCode(codeSubject=codeSubject.upper())
 
             if subject is None:
                 raise NoItemsFound('')
