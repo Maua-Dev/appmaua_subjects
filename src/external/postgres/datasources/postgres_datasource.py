@@ -17,16 +17,15 @@ class PostgresDataSource(IDataSource):
                     select(SubjectDTO).
                     join(SubjectDTO.students).
                     where(StudentSubjectDTO.idStudent == idStudent)
-                )   
-                # subjects = db.session.query(SubjectDTO).join('students').filter(StudentSubjectDTO.idStudent == idStudent).all()                
+                )
+
                 return query.scalars().all()
             except Exception as e:                              
                 raise Exception(f'DataSource Error. {str(e)}')
         
     async def getSubjectsByCode(self,codeSubject: str) -> SubjectDTO:
         async with AsyncDBConnectionHandler().session() as s:
-            try:                
-                # subjects = db.session.query(SubjectDTO).filter(SubjectDTO.codeSubject == codeSubject).first()
+            try:
                 query = await s.execute(
                     select(SubjectDTO).
                     where(SubjectDTO.codeSubject == codeSubject)
@@ -35,31 +34,46 @@ class PostgresDataSource(IDataSource):
             except Exception as e:                              
                 raise Exception(f'DataSource Error. {str(e)}')
 
-    def getSubjectStudents(self, codeSubject: str) -> SubjectDTO:
-        with DBConnectionHandler() as db:
+    async def getSubjectStudents(self, codeSubject: str) -> SubjectDTO:
+        async with AsyncDBConnectionHandler().session() as s:
             try:
-                subjects = db.session.query(SubjectDTO).filter(SubjectDTO.codeSubject == codeSubject).first()
-                return subjects
+                query = await s.execute(
+                    select(SubjectDTO).
+                    where(SubjectDTO.codeSubject == codeSubject)
+                )
+
+                return query.scalars.first()
+
             except Exception as e:
                 raise Exception(f'DataSource Error. {str(e)}')
         pass
 
-    def getAllSubjects(self) -> SubjectDTO:
-        with DBConnectionHandler() as db:
+    async def getAllSubjects(self) -> SubjectDTO:
+        async with AsyncDBConnectionHandler().session() as s:
             try:
-                subjects = db.session.query(SubjectDTO).all()
-                return subjects
+                query = await s.execute(
+                    select(SubjectDTO)
+                )
+
+                return query.scalars.all()
+
             except Exception as e:
                 raise Exception(f'DataSource Error. {str(e)}')
         pass
 
-    def getSubjectByProfessorId(self, idProfessor: int) -> SubjectDTO:
-        with DBConnectionHandler() as db:
+    async def getSubjectByProfessorId(self, idProfessor: int) -> SubjectDTO:
+        async with AsyncDBConnectionHandler().session() as s:
             try:
-                subjects = db.session.query(SubjectDTO).join('professors').filter(ProfessorSubjectDTO.idProfessor == idProfessor).all()
-                return subjects
+                query = await s.execute(
+                    select(SubjectDTO).
+                    join(SubjectDTO.professors).
+                    where(ProfessorSubjectDTO.idProfessor == idProfessor)
+                )
+
+                return query.scalars.all()
+
             except Exception as e:
                 raise Exception(f'DataSource Error. {str(e)}')
 
     async def getNumStudentsByGrades(self, gradeValue: float, codeSubject: str) -> SubjectDTO:
-        pass
+        return None
