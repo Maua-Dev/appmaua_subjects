@@ -25,6 +25,6 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    async def getNumStudentsByGrades(self, gradeValue: float, codeSubject:str) -> int:
+    async def getNumStudentsByGrades(self, gradeValue: float, codeSubject:str, academicYear: int) -> int:
         pass
 

@@ -101,7 +101,8 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
             subjects: List[Subject] = None
-            subjects = [relation['subjects'] for relation in self._studentsSubjects if relation['idStudent'] == idStudent][0]
+            subjects = [relation['subjects'] for relation in self._studentsSubjects
+                        if relation['idStudent'] == idStudent][0]
 
             if len(subjects) > 0:
                 return subjects
@@ -114,7 +115,8 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getSubjectStudents(self, codeSubject: str) -> List[int]:
         subject: Subject
         students: List[int] = None
-        students = [relation['idStudent'] for relation in self._studentsSubjects if codeSubject in [subject.codeSubject for subject in relation['subjects']]]
+        students = [relation['idStudent'] for relation in self._studentsSubjects
+                    if codeSubject in [subject.codeSubject for subject in relation['subjects']]]
         if len(students) > 0:
             return students
         else:
@@ -136,7 +138,8 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
         try:
             subjects: List[Subject] = None
-            subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
+            subjects = [relation['subjects'] for relation in self._professorSubjects
+                        if relation['idProfessor'] == idProfessor][0]
             if len(subjects) > 0:
                 return subjects
             else:
@@ -145,9 +148,10 @@ class SubjectRepositoryMock(ISubjectRepository):
         except IndexError as error:
             return None
 
-    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str) -> int:
+    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, academicYear: int) -> int:
         try:
-            numStudents = len([grade.value for grade in self._grades if grade.value == gradeValue and grade.codeSubject.upper() == codeSubject.upper()])
+            numStudents = len([grade.value for grade in self._grades if grade.value == gradeValue and
+                               grade.codeSubject.upper() == codeSubject.upper() and grade.academicYear == academicYear])
 
             return numStudents
 
