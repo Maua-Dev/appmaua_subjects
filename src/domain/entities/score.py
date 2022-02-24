@@ -10,7 +10,7 @@ class Score(BaseModel):
     weight: float
 
     @validator('academicYear')
-    def acdemicYear_is_valid(cls, v: int) -> int:
+    def academicYear_is_valid(cls, v: int) -> int:
         if v < 1960:
             raise EntityError('academicYear')
         return v
