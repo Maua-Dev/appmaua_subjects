@@ -9,13 +9,13 @@ class GetAllSubjectsController:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._getAllSubjectsUsecase = GetAllSubjectsUsecase(subjectRepository)
 
-    def __call__(self, req: HttpRequest) -> HttpResponse:
+    async def __call__(self, req: HttpRequest) -> HttpResponse:
 
         if req.query is not None:
             return BadRequest('No parameters allowed.')
 
         try:
-            subjects = self._getAllSubjectsUsecase()
+            subjects = await self._getAllSubjectsUsecase()
 
             return Ok(subjects)
 

@@ -98,7 +98,7 @@ class SubjectRepositoryMock(ISubjectRepository):
             Grade(value=9.5, idGrade=5, idStudent=5, codeSubject='ECM501')
         ]
 
-    def getStudentSubjects(self, idStudent: int) -> List[Subject]:
+    async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
             subjects: List[Subject] = None
             subjects = [relation['subjects'] for relation in self._studentsSubjects if relation['idStudent'] == idStudent][0]
@@ -111,7 +111,7 @@ class SubjectRepositoryMock(ISubjectRepository):
         except IndexError as error:
             return None
 
-    def getSubjectStudents(self, codeSubject: str) -> List[Subject]:
+    async def getSubjectStudents(self, codeSubject: str) -> List[int]:
         subject: Subject
         students: List[int] = None
         students = [relation['idStudent'] for relation in self._studentsSubjects if codeSubject in [subject.codeSubject for subject in relation['subjects']]]
@@ -120,20 +120,20 @@ class SubjectRepositoryMock(ISubjectRepository):
         else:
             return None
 
-    def getAllSubjects(self) -> List[Subject]:
+    async def getAllSubjects(self) -> List[Subject]:
         if len(self._subjects) > 0:
-            return self._subjects, len(self._subjects)
+            return self._subjects
         else:
             return None
 
-    def getSubjectByCode(self, codeSubject: str) -> Subject:
+    async def getSubjectByCode(self, codeSubject: str) -> Subject:
         subject: Subject = None
         for subjectx in self._subjects:
             if subjectx.codeSubject.upper() == codeSubject.upper():
                 subject = subjectx
         return subject
 
-    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
+    async def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
         try:
             subjects: List[Subject] = None
             subjects = [relation['subjects'] for relation in self._professorSubjects if relation['idProfessor'] == idProfessor][0]
@@ -145,7 +145,7 @@ class SubjectRepositoryMock(ISubjectRepository):
         except IndexError as error:
             return None
 
-    def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str) -> int:
+    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str) -> int:
         try:
             numStudents = len([grade.value for grade in self._grades if grade.value == gradeValue and grade.codeSubject.upper() == codeSubject.upper()])
 

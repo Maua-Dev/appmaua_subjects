@@ -8,7 +8,7 @@ from src.adapters.errors.http_exception import HttpException
 from src.adapters.helpers.http_models import HttpRequest
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.main.subjects.module import Modular
-from src.main.helpers.status import status
+from src.main.helpers.status import status as st
 
 app = FastAPI()
 app.add_middleware(
@@ -24,12 +24,12 @@ async def internal_exception_handler(request: Request, exc: HttpException):
     return PlainTextResponse(exc.body, status_code=exc.status_code)
 
 @app.get("/")
-def getAllSubjects(response: Response):
+async def getAllSubjects(response: Response):
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
-    result = getAllSubjectsController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    result = await getAllSubjectsController(req)
+    response.status_code = st.get(result.status_code)
+    return result
 
 
 @app.get("/student/{idStudent}")
@@ -37,23 +37,24 @@ async def getStudentSubjects(idStudent: int, response: Response):
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
     result = await getStudentSubjectsController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    response.status_code = st.get(result.status_code)
+    return result
 
 
 @app.get("/subject/{codeSubject}")
 async def getSubjectByCode(codeSubject: str, response: Response):
+    Envs.appEnv = EnvEnum.MOCK
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
     result = await getSubjectByCodeController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    response.status_code = st.get(result.status_code)
+    return result
 
 
 @app.get("/professor/{idProfessor}")
-def getSubjectByProfessorId(idProfessor: int, response: Response):
+async def getSubjectByProfessorId(idProfessor: int, response: Response):
     getSubjectByProfessorIdController = Modular.getInject(GetSubjectByProfessorIdController)
     req = HttpRequest(query={'idProfessor': idProfessor})
-    result = getSubjectByProfessorIdController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    result = await getSubjectByProfessorIdController(req)
+    response.status_code = st.get(result.status_code)
+    return result

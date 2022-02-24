@@ -9,11 +9,11 @@ class ISubjectRepository(ABC):
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:    
         pass
     @abstractmethod
-    def getSubjectStudents(self, codeSubject: str) -> tuple:
+    async def getSubjectStudents(self, codeSubject: str) -> tuple:
         pass
 
     @abstractmethod
-    def getAllSubjects(self) -> tuple:
+    async def getAllSubjects(self) -> tuple:
         pass
 
     @abstractmethod
@@ -21,10 +21,10 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
+    async def getSubjectByProfessorId(self, idProfessor: int) -> tuple:
         pass
 
     @abstractmethod
-    def getNumStudentsByGrades(self, gradeValue: float, codeSubject:str) -> int:
+    async def getNumStudentsByGrades(self, gradeValue: float, codeSubject:str) -> int:
         pass
 

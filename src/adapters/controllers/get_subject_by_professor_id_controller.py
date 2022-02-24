@@ -9,7 +9,7 @@ class GetSubjectByProfessorIdController:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._getSubjectByProfessorIdUsecase = GetSubjectByProfessorIdUsecase(subjectRepository)
 
-    def __call__(self, req: HttpRequest) -> HttpResponse:
+    async def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
             if req.query['idProfessor'] is None or req.query['idProfessor'] == 0:
                 return BadRequest(f"idProfessor is invalid. (idStudent = {req.query['idProfessor']})")
@@ -19,7 +19,7 @@ class GetSubjectByProfessorIdController:
 
             idProfessor = req.query['idProfessor']
 
-            subjects = self._getSubjectByProfessorIdUsecase(idProfessor)
+            subjects = await self._getSubjectByProfessorIdUsecase(idProfessor)
 
             return Ok(subjects)
 

@@ -7,7 +7,7 @@ class GetNumStudensByGrades:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
 
-    def __call__(self, gradeValue: float, codeSubject: str) -> int:
+    async def __call__(self, gradeValue: float, codeSubject: str) -> int:
         try:
             if codeSubject is None and gradeValue is None:
                 raise Exception('idSubject and value is None')
@@ -16,7 +16,7 @@ class GetNumStudensByGrades:
             elif gradeValue is None:
                 raise Exception('value is None')
 
-            numStudents = self._subjectRepository.getNumStudentsByGrades(gradeValue, codeSubject)
+            numStudents = await self._subjectRepository.getNumStudentsByGrades(gradeValue, codeSubject)
 
             return numStudents
 

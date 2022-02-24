@@ -28,38 +28,38 @@ async def internal_exception_handler(request: Request, exc: HttpException):
 
 
 @app.get("/")
-def getAllSubjects(response: Response):    
+async def getAllSubjects(response: Response):
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
-    result = getAllSubjectsController(req)
+    result = await getAllSubjectsController(req)
     response.status_code = st.get(result.status_code)
     return result
 
 
 @app.get("/student/{idStudent}")
-def getStudentSubjects(idStudent: int, response: Response):
+async def getStudentSubjects(idStudent: int, response: Response):
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
-    result = getStudentSubjectsController(req)
+    result = await getStudentSubjectsController(req)
     response.status_code = st.get(result.status_code)
     return result
 
 
 @app.get("/subject/{codeSubject}")
-def getSubjectByCode(codeSubject: str, response: Response):
+async def getSubjectByCode(codeSubject: str, response: Response):
     Envs.appEnv = EnvEnum.MOCK
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
-    result = getSubjectByCodeController(req)
+    result = await getSubjectByCodeController(req)
     response.status_code = st.get(result.status_code)
     return result
 
 
 @app.get("/professor/{idProfessor}")
-def getSubjectByProfessorId(idProfessor: int, response: Response):
+async def getSubjectByProfessorId(idProfessor: int, response: Response):
     getSubjectByProfessorIdController = Modular.getInject(GetSubjectByProfessorIdController)
     req = HttpRequest(query={'idProfessor': idProfessor})
-    result = getSubjectByProfessorIdController(req)
+    result = await getSubjectByProfessorIdController(req)
     response.status_code = st.get(result.status_code)
     return result
 
@@ -114,7 +114,7 @@ def test_read_student_subjects():
                                 }
 
 
-def test_read_subject_by_code():    
+def test_read_subject_by_code():
     response = client.get("/subject/ecm505")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
