@@ -5,7 +5,6 @@ from src.domain.enums.evaluation_type import EvaluationType
 
 class Grade(BaseModel):
     value: float
-    idGrade: int
     academicYear: int
     evaluationType: EvaluationType
     weight: float
