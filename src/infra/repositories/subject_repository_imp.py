@@ -11,35 +11,35 @@ class SubjectRepositoryImp(ISubjectRepository):
     
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
-            response = self._datasource.getSubjectsByStudent(idStudent=idStudent)
+            response = await self._datasource.getSubjectsByStudent(idStudent=idStudent)
             return list(map(lambda x: x.toEntity(), response))
         except Exception as error:
             raise error
 
     async def getSubjectStudents(self, codeSubject: str) -> List[int]:
         try:
-            response = self._datasource.getSubjectStudents(codeSubject=codeSubject)
+            response = await self._datasource.getSubjectStudents(codeSubject=codeSubject)
             return list(map(lambda x: x.students, response))
         except Exception as error:
             raise error
 
     async def getAllSubjects(self) -> List[Subject]:
         try:
-            response = self._datasource.getAllSubjects()
+            response = await self._datasource.getAllSubjects()
             return list(map(lambda x: x.toEntity(), response))
         except Exception as error:
             raise error
 
     async def getSubjectByCode(self, codeSubject: str) -> Subject:
         try:
-            respose = self._datasource.getSubjectsByCode(codeSubject=codeSubject)
+            respose = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
             return respose.toEntity()
         except Exception as error:
             raise error
 
     async def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
         try:
-            response = self._datasource.getSubjectByProfessorId(idProfessor=idProfessor)
+            response = await self._datasource.getSubjectByProfessorId(idProfessor=idProfessor)
             return list(map(lambda x: x.toEntity(), response))
         except Exception as error:
             raise error
