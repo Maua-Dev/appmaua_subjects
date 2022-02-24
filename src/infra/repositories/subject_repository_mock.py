@@ -1,10 +1,7 @@
 from typing import List
 
-from src.domain.entities.grade import Grade
 from src.domain.entities.subject import Subject
-from src.domain.errors.errors import UnexpectedError
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
-from src.domain.enums.evaluation_type import EvaluationType
 
 
 class SubjectRepositoryMock(ISubjectRepository):
@@ -299,10 +296,12 @@ class SubjectRepositoryMock(ISubjectRepository):
         return subjects if len(subjects) > 0 else None
 
 
-    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, academicYear: int) -> int:
+    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
+                                     academicYear: int) -> int:
 
         numStudents = len([row['idStudent'] for row in self._grades if row['value'] == gradeValue and
                            row['codeSubject'].upper() == codeSubject.upper()
-                           and row['academicYear'] == academicYear])
+                           and row['academicYear'] == academicYear
+                           and row['idEvaluationType'] == idEvaluationType])
 
         return numStudents if numStudents > 0 else None

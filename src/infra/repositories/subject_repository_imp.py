@@ -44,5 +44,6 @@ class SubjectRepositoryImp(ISubjectRepository):
         except Exception as error:
             raise error
 
-    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, academicYear: int) -> int:
+    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
+                                     academicYear: int) -> int:
         pass
