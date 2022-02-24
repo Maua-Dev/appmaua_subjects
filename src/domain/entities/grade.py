@@ -21,6 +21,12 @@ class Grade(BaseModel):
             raise EntityError('Value')
         return v
 
+    @validator('weight')
+    def value_is_not_empty(cls, v: float) -> float:
+        if v <= 0:
+            raise EntityError('weight')
+        return v
+
 
 
 
