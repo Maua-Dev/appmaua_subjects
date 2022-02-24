@@ -1,9 +1,4 @@
-from typing import List
-
 from pydantic import validator, BaseModel
-
-from src.domain.entities.grade import Grade
-
 from src.domain.errors.errors import EntityError
 
 

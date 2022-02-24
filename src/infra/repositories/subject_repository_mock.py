@@ -296,7 +296,7 @@ class SubjectRepositoryMock(ISubjectRepository):
         return subjects if len(subjects) > 0 else None
 
 
-    async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
+    async def getNumStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
                                      academicYear: int) -> int:
 
         numStudents = len([row['idStudent'] for row in self._grades if row['value'] == gradeValue and

@@ -3,7 +3,7 @@ from src.domain.errors.errors import EntityError
 from src.domain.enums.evaluation_type import EvaluationType
 
 
-class Grade(BaseModel):
+class Score(BaseModel):
     value: float
     academicYear: int
     evaluationType: EvaluationType

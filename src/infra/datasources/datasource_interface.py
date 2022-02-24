@@ -26,5 +26,6 @@ class IDataSource(ABC):
         pass
 
     @abstractmethod
-    async def getNumStudentsByGrades(self, gradeValue: float, codeSubject: str) -> SubjectDTO:
+    async def getNumStudentsByScore(self, gradeValue: float, codeSubject:str, evaluationType: int,
+                                     academicYear: int) -> SubjectDTO:
         pass
