@@ -84,11 +84,31 @@ class SubjectRepositoryMock(ISubjectRepository):
         ]
 
         self._subjects = [
-            Subject(id=1, codeSubject='ECM501', name='Ciencia de dados'),
-            Subject(id=2, codeSubject='ECM502', name='Devops'),
-            Subject(id=3, codeSubject='ECM504', name='IA'),
-            Subject(id=5, codeSubject='ECM505', name='Banco de dados'),
-            Subject(id=6, codeSubject='ECM503', name='Controladores')
+            {
+                'id': 1,
+                'codeSubject': 'ECM501',
+                'name': 'Ciencia de dados'
+            },
+            {
+                'id': 2,
+                'codeSubject': 'ECM502',
+                'name': 'Devops'
+            },
+            {
+                'id': 3,
+                'codeSubject': 'ECM504',
+                'name': 'IA'
+            },
+            {
+                'id': 4,
+                'codeSubject': 'ECM505',
+                'name': 'Banco de dados'
+            },
+            {
+                'id': 6,
+                'codeSubject': 'ECM503',
+                'name': 'Controladores'
+            }
         ]
 
         self._grades = [
@@ -180,16 +200,16 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     async def getAllSubjects(self) -> List[Subject]:
         if len(self._subjects) > 0:
-            return self._subjects
+            return [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._subjects]
         else:
             return None
 
     async def getSubjectByCode(self, codeSubject: str) -> Subject:
-        subject: Subject = None
-        for subjectx in self._subjects:
-            if subjectx.codeSubject.upper() == codeSubject.upper():
-                subject = subjectx
-        return subject
+        try:
+            return [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._subjects
+                        if row['codeSubject'] == codeSubject][0]
+        except IndexError as error:
+            return None
 
     async def getSubjectByProfessorId(self, idProfessor: int) -> List[Subject]:
         try:
