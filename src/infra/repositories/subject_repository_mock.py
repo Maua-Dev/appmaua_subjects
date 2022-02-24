@@ -166,64 +166,101 @@ class SubjectRepositoryMock(ISubjectRepository):
 
         self._grades = [
             {
+                'idGrade': 1,
                 'idStudent': 1,
                 'codeSubject': 'ECM505',
-                'grade': Grade(value=6.0, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P1)
+                'value': 6.0,
+                'academicYear': 2022,
+                'idEvaluationType': 1
+
             },
             {
+                'idGrade': 2,
                 'idStudent': 1,
                 'codeSubject': 'ECM505',
-                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.PS1)
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 5
             },
             {
+                'idGrade': 3,
                 'idStudent': 1,
                 'codeSubject': 'ECM505',
-                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T1)
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 7
             },
             {
-                'idStudent': 1,
-                'codeSubject': 'ECM501',
-                'grades': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P1)
-            },
-            {
-                'idStudent': 1,
-                'codeSubject': 'ECM501',
-                'grade': Grade(value=7.0, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P2)
-            },
-            {
-                'idStudent': 1,
-                'codeSubject': 'ECM501',
-                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.PS1)
-            },
-            {
+                'idGrade': 4,
                 'idStudent': 1,
                 'codeSubject': 'ECM501',
-                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T1)
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 1
             },
             {
-                'idStudent': 2,
-                'codeSubject': 'ECM505',
-                'grades': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P1)
+                'idGrade': 5,
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'value': 7.0,
+                'academicYear': 2022,
+                'idEvaluationType': 2
             },
             {
-                'idStudent': 2,
-                'codeSubject': 'ECM505',
-                'grades': Grade(value=7.0, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P2)
+                'idGrade': 6,
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 5
             },
             {
-                'idStudent': 2,
-                'codeSubject': 'ECM505',
-                'grades': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.PS1)
+                'idGrade': 7,
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 7
             },
             {
+                'idGrade': 8,
                 'idStudent': 2,
                 'codeSubject': 'ECM505',
-                'grades': Grade(value=4.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T1)
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 1
             },
             {
+                'idGrade': 9,
                 'idStudent': 2,
                 'codeSubject': 'ECM505',
-                'grades': Grade(value=8.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T2)
+                'value': 7.0,
+                'academicYear': 2022,
+                'idEvaluationType': 2
+            },
+            {
+                'idGrade': 10,
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'value': 9.5,
+                'academicYear': 2022,
+                'idEvaluationType': 5
+            },
+            {
+                'idGrade': 11,
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'value': 4.5,
+                'academicYear': 2022,
+                'idEvaluationType': 7
+            },
+            {
+                'idGrade': 12,
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'value': 8.5,
+                'academicYear': 2022,
+                'idEvaluationType': 8
             }
         ]
 
@@ -264,8 +301,8 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, academicYear: int) -> int:
 
-        numStudents = len([row['grade'].value for row in self._grades if row['grade'].value == gradeValue and
+        numStudents = len([row['idStudent'] for row in self._grades if row['value'] == gradeValue and
                            row['codeSubject'].upper() == codeSubject.upper()
-                           and row['grade'].academicYear == academicYear])
+                           and row['academicYear'] == academicYear])
 
         return numStudents if numStudents > 0 else None

@@ -21,11 +21,6 @@ class Grade(BaseModel):
             raise EntityError('Value')
         return v
 
-    @validator('idGrade')
-    def idGrade_is_not_empty(cls, v: int) -> int:
-        if v == 0:
-            raise EntityError('idGrade')
-        return v
 
 
 
