@@ -13,8 +13,9 @@ class SubjectDTO(Base):
         cascade="all, delete",
         passive_deletes=True,
         backref="Subjects")
-        def toEntity(self) -> Subject:
+
+    def toEntity(self) -> Subject:
         return Subject(
-            codeSubject=self.codeSubject,
-            name=self.name
-        )
+                codeSubject=self.codeSubject,
+                name=self.name
+            )
