@@ -9,10 +9,10 @@ class Grade(BaseModel):
     idStudent: int
     codeSubject: str
 
-    @validator('idSubjects')
+    @validator('idStudent')
     def idStudent_is_not_empty(cls, v: int) -> int:
         if v == 0:
-            raise EntityError('idSubjects')
+            raise EntityError('idStudent')
         return v
 
     @validator('codeSubject')
