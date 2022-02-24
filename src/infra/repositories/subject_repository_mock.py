@@ -4,6 +4,7 @@ from src.domain.entities.grade import Grade
 from src.domain.entities.subject import Subject
 from src.domain.errors.errors import UnexpectedError
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
+from src.domain.enums.evaluation_type import EvaluationType
 
 
 class SubjectRepositoryMock(ISubjectRepository):
@@ -91,11 +92,66 @@ class SubjectRepositoryMock(ISubjectRepository):
         ]
 
         self._grades = [
-            Grade(value=6.0, idGrade=1, idStudent=1, codeSubject='ECM501', academicYear=2022),
-            Grade(value=6.0, idGrade=2, idStudent=2, codeSubject='ECM501', academicYear=2022),
-            Grade(value=6.0, idGrade=3, idStudent=3, codeSubject='ECM501', academicYear=2022),
-            Grade(value=3.0, idGrade=4, idStudent=4, codeSubject='ECM501', academicYear=2022),
-            Grade(value=9.5, idGrade=5, idStudent=5, codeSubject='ECM501', academicYear=2022)
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'grade': Grade(value=6.0, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P1)
+            },
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.PS1)
+            },
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T1)
+            },
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'grades': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P1)
+            },
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'grade': Grade(value=7.0, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P2)
+            },
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.PS1)
+            },
+            {
+                'idStudent': 1,
+                'codeSubject': 'ECM501',
+                'grade': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T1)
+            },
+            {
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'grades': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P1)
+            },
+            {
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'grades': Grade(value=7.0, idGrade=5, academicYear=2022, evaluationType=EvaluationType.P2)
+            },
+            {
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'grades': Grade(value=9.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.PS1)
+            },
+            {
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'grades': Grade(value=4.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T1)
+            },
+            {
+                'idStudent': 2,
+                'codeSubject': 'ECM505',
+                'grades': Grade(value=8.5, idGrade=5, academicYear=2022, evaluationType=EvaluationType.T2)
+            }
         ]
 
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
@@ -150,8 +206,8 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     async def getNumStudentsByGrades(self, gradeValue:float, codeSubject: str, academicYear: int) -> int:
         try:
-            numStudents = len([grade.value for grade in self._grades if grade.value == gradeValue and
-                               grade.codeSubject.upper() == codeSubject.upper() and grade.academicYear == academicYear])
+            numStudents = len([row['grade'].value for row in self._grades if row['grade'].value == gradeValue and
+                               row['codeSubject'].upper() == codeSubject.upper() and row['grade'].academicYear == academicYear])
 
             return numStudents
 

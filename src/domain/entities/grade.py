@@ -1,6 +1,6 @@
 from pydantic import validator, BaseModel
 from src.domain.errors.errors import EntityError
-from ..enums.evaluation_type import EvaluationType
+from src.domain.enums.evaluation_type import EvaluationType
 
 
 class Grade(BaseModel):
