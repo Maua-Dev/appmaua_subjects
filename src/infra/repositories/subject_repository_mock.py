@@ -166,7 +166,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idGrade': 1,
                 'idStudent': 1,
                 'codeSubject': 'ECM505',
-                'value': 6.0,
+                'value': 9.5,
                 'academicYear': 2022,
                 'idEvaluationType': 1
 
@@ -285,7 +285,7 @@ class SubjectRepositoryMock(ISubjectRepository):
 
         try:
             return [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._subjects
-                        if row['codeSubject'] == codeSubject][0]
+                        if row['codeSubject'].upper() == codeSubject.upper()][0]
         except IndexError as error:
             return None
 
@@ -299,9 +299,9 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
                                      academicYear: int) -> int:
 
-        numStudents = len([row['idStudent'] for row in self._grades if row['value'] == gradeValue and
+        return len([row['idStudent'] for row in self._grades if row['value'] == gradeValue and
                            row['codeSubject'].upper() == codeSubject.upper()
                            and row['academicYear'] == academicYear
                            and row['idEvaluationType'] == idEvaluationType])
 
-        return numStudents if numStudents > 0 else None
+

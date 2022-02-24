@@ -2,7 +2,7 @@ from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 
 
-class GetCountStudentsByScore:
+class GetCountStudentsByScoreUsecase:
 
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
@@ -20,13 +20,12 @@ class GetCountStudentsByScore:
             if academicYear is None:
                 raise Exception('academicYear is None')
 
-            numStudents = await self._subjectRepository.getCountStudentsByScore(gradeValue, codeSubject,
+            subject = await self._subjectRepository.getSubjectByCode(codeSubject.upper())
+            if subject is None:
+                raise Exception('codeSubject is invalid')
+
+            return await self._subjectRepository.getCountStudentsByScore(gradeValue, codeSubject,
                                                                                 idEvaluationType, academicYear)
-
-            return numStudents
-
-        except NoItemsFound:
-            raise NoItemsFound('GetCountStudentsByScore')
 
         except Exception as error:
             raise UnexpectedError('GetCountStudentsByScore', str(error))
