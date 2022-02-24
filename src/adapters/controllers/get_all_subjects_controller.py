@@ -15,9 +15,9 @@ class GetAllSubjectsController:
             return BadRequest('No parameters allowed.')
 
         try:
-            subjects, count = self._getAllSubjectsUsecase()
-            response = {"subjects": subjects, "count": count}
-            return Ok(response)
+            subjects = self._getAllSubjectsUsecase()
+
+            return Ok(subjects)
 
         except NoItemsFound:
             return NoContent()

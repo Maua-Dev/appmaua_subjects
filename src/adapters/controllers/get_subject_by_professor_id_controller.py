@@ -19,11 +19,9 @@ class GetSubjectByProfessorIdController:
 
             idProfessor = req.query['idProfessor']
 
-            subjects, count = self._getSubjectByProfessorIdUsecase(idProfessor)
+            subjects = self._getSubjectByProfessorIdUsecase(idProfessor)
 
-            response = {"subjects": subjects, "count": count}
-
-            return Ok(response)
+            return Ok(subjects)
 
         except NoItemsFound:
             return NoContent()

@@ -14,12 +14,12 @@ class GetSubjectByProfessorIdUsecase:
             if idProfessor is None:
                 raise Exception('idProfessor is None')
 
-            subjects, count = self._subjectRepository.getSubjectByProfessorId(idProfessor)
+            subjects = self._subjectRepository.getSubjectByProfessorId(idProfessor)
 
             if subjects is None:
                 raise NoItemsFound('')
 
-            return subjects, count
+            return subjects
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')

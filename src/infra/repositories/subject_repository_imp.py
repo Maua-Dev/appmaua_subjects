@@ -1,4 +1,3 @@
-from typing import List
 from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.infra.datasources.datasource_interface import IDataSource
@@ -9,9 +8,9 @@ class SubjectRepositoryImp(ISubjectRepository):
         super().__init__()
         self._datasource = datasource
     
-    async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
+    def getStudentSubjects(self, idStudent: int) -> tuple:
         try:
-            response = await self._datasource.getSubjectsByStudent(idStudent=idStudent)    
+            response = self._datasource.getSubjectsByStudent(idStudent=idStudent)    
             return list(map(lambda x: x.toEntity(),response))
         except Exception as error:                
             raise error
@@ -22,9 +21,9 @@ class SubjectRepositoryImp(ISubjectRepository):
     def getAllSubjects(self) -> tuple:
         pass
 
-    async def getSubjectByCode(self, codeSubject: str) -> Subject:
+    def getSubjectByCode(self, codeSubject: str) -> Subject:
         try:
-            respose = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
+            respose = self._datasource.getSubjectsByCode(codeSubject=codeSubject)
             return respose.toEntity()
         except Exception as error:                
             raise error        

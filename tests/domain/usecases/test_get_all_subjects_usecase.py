@@ -8,7 +8,7 @@ class Test_GetAllSubjectsUsecase:
 
     def test_get_all_subjects(self):
         getAllSubjectsUsecase = GetAllSubjectsUsecase(subjectRepository=SubjectRepositoryMock())
-        subjects, count = getAllSubjectsUsecase()
+        subjects = getAllSubjectsUsecase()
         assert len(subjects) > 0
         assert len(subjects) == 5
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in subjects
