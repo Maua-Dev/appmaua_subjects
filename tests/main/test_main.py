@@ -1,9 +1,11 @@
+import pytest
 from fastapi.testclient import TestClient
 from fastapi import status, FastAPI, Request, Response
 from starlette.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
+from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
@@ -63,8 +65,120 @@ async def getSubjectByProfessorId(idProfessor: int, response: Response):
     response.status_code = st.get(result.status_code)
     return result
 
+@app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}")
+async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, response: Response):
+    getCountStudentsByScoreController = Modular.getInject(GetCountStudentsByScoreController)
+    req = HttpRequest(query={'codeSubject': codeSubject,
+                             'idEvaluationType': idEvaluationType,
+                             'academicYear': academicYear})
+    result = await getCountStudentsByScoreController(req)
+    response.status_code = st.get(result.status_code)
+    return result
+
 client = TestClient(app)
 
+def test_real_bar_chart_data():
+    response = client.get("/estatistica/ecm505/1/2022")
+    assert response.status_code == status.HTTP_200_OK
+    assert response.json() == {
+                                  "status_code": 200,
+                                  "body": {
+                                    "bars": [
+                                      {
+                                        "score": -2.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": -1.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 0.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 0.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 1.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 1.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 2.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 2.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 3.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 3.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 4.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 4.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 5.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 5.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 6.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 6.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 7.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 7.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 8.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 8.5,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 9.0,
+                                        "studentCount": 0
+                                      },
+                                      {
+                                        "score": 9.5,
+                                        "studentCount": 2
+                                      },
+                                      {
+                                        "score": 10.0,
+                                        "studentCount": 0
+                                      }
+                                    ]
+                                  }
+                                }
 
 def test_read_all_subjects():
     response = client.get("/")
