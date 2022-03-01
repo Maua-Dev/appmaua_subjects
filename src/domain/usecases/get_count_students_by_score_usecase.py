@@ -1,3 +1,4 @@
+from src.domain.enums.evaluation_type import EvaluationType
 from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 
@@ -13,10 +14,15 @@ class GetCountStudentsByScoreUsecase:
 
             if codeSubject is None:
                 raise Exception('codeSubject is None')
+
             if gradeValue is None:
                 raise Exception('gradeValue is None')
-            if idEvaluationType not in range(1, 19):
+
+            try:
+                evalType = EvaluationType(idEvaluationType)
+            except Exception:
                 raise Exception('idEvaluationType is invalid')
+
             if academicYear is None:
                 raise Exception('academicYear is None')
 
