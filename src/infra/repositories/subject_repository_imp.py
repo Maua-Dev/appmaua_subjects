@@ -47,3 +47,6 @@ class SubjectRepositoryImp(ISubjectRepository):
     async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
                                      academicYear: int) -> int:
         return None
+
+    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int, idEvaluationType: int):
+        return None

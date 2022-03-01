@@ -29,3 +29,7 @@ class ISubjectRepository(ABC):
                                      academicYear: int) -> int:
         pass
 
+    @abstractmethod
+    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int, idEvaluationType: int):
+        pass
+
