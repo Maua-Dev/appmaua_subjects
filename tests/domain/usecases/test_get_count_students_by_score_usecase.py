@@ -35,17 +35,17 @@ class Test_GetCountStudentsByScoreUsecase:
     async def test_get_count_student_by_score_error_2(self):
         getCountStudentsByScoreUsecase = GetCountStudentsByScoreUsecase(subjectRepository=SubjectRepositoryMock())
         with pytest.raises(UnexpectedError):
-            await getCountStudentsByScoreUsecase(-1.5, 'a505', 2, 2022)
+            await getCountStudentsByScoreUsecase(-1.5, 'ecm505', 2, 2022)
 
     @pytest.mark.asyncio
     async def test_get_count_student_by_score_error_3(self):
         getCountStudentsByScoreUsecase = GetCountStudentsByScoreUsecase(subjectRepository=SubjectRepositoryMock())
         with pytest.raises(UnexpectedError):
-            await getCountStudentsByScoreUsecase(9.5, 'a505', 20, 2022)
+            await getCountStudentsByScoreUsecase(9.5, 'ecm505', 50, 2022)
 
     @pytest.mark.asyncio
     async def test_get_count_student_by_score_error_4(self):
         getCountStudentsByScoreUsecase = GetCountStudentsByScoreUsecase(subjectRepository=SubjectRepositoryMock())
         with pytest.raises(UnexpectedError):
-            await getCountStudentsByScoreUsecase(9.5, 'a505', 2, 1950)
+            await getCountStudentsByScoreUsecase(9.5, 'ecm505', 2, None)
 
