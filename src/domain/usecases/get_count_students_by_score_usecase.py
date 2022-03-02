@@ -18,6 +18,9 @@ class GetCountStudentsByScoreUsecase:
             if gradeValue is None:
                 raise Exception('gradeValue is None')
 
+            if gradeValue != -2 and gradeValue != -1 and 0 > gradeValue or gradeValue > 10:
+                raise Exception('gradeValue is invalid')
+
             try:
                 evalType = EvaluationType(idEvaluationType)
             except Exception:
