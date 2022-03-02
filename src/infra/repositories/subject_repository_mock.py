@@ -513,7 +513,7 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
 
         try:
-            return [row['quantity'] for row in self._evalWeight
+            return [row['weight'] for row in self._evalWeight
                     if row['codeSubject'].upper() == codeSubject.upper()
                     and row['academicYear'] == academicYear
                     and row['idEvaluationType'] == idEvaluationType][0]
