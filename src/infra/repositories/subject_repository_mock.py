@@ -261,48 +261,62 @@ class SubjectRepositoryMock(ISubjectRepository):
             }
         ]
 
-        self._evalQuantity = [
+        self._evalData = [
             {
                 'id': 1,
                 'idEvaluationType': 20,
                 'codeSubject': 'ECM505',
                 'quantity': 2,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 2,
                 'idEvaluationType': 19,
                 'codeSubject': 'ECM505',
                 'quantity': 4,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 3,
                 'idEvaluationType': 20,
                 'codeSubject': 'ECM501',
                 'quantity': 1,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 4,
                 'idEvaluationType': 19,
                 'codeSubject': 'ECM501',
                 'quantity': 4,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 5,
                 'idEvaluationType': 21,
                 'codeSubject': 'ECM505',
                 'quantity': 1,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': 1
             },
             {
                 'id': 6,
                 'idEvaluationType': 21,
+                'codeSubject': 'ECM505',
+                'quantity': 1,
+                'academicYear': 2022,
+                'replaces': 7
+            },
+            {
+                'id': 7,
+                'idEvaluationType': 21,
                 'codeSubject': 'ECM501',
                 'quantity': 1,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': 1
             },
         ]
 
@@ -459,7 +473,7 @@ class SubjectRepositoryMock(ISubjectRepository):
     async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
 
         try:
-            return [row['quantity'] for row in self._evalQuantity
+            return [row['quantity'] for row in self._evalData
                  if row['codeSubject'].upper() == codeSubject.upper()
                  and row['academicYear'] == academicYear
                  and row['idEvaluationType'] == idEvaluationType][0]
