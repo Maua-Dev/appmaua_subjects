@@ -11,9 +11,9 @@ class Test_GetStudentSubjectScoreUsecase:
 
     @pytest.mark.asyncio
     async def test_get_score_1(self):
-        score = await self._getStudentSubjectScoreUsecase('ecm505', 2, 2022, 2)
+        score = await self._getStudentSubjectScoreUsecase('ecm505', 2, 2022, 1)
 
-        assert score == 7.0
+        assert score == 9.5
         # {
         # 'idGrade': 9,
         # 'idStudent': 2,
