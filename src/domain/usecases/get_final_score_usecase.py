@@ -97,7 +97,7 @@ class GetFinalScoreUsecase:
             # Calculo da media de provas
             aux = 0
             for i in range(len(testScores)):
-                if testScores[i] is not None and partialTestWeights[i] is not None:
+                if testScores[i] is not None:
                     aux += testScores[i]*partialTestWeights[i]
                 else:
                     isPartialScore = True
