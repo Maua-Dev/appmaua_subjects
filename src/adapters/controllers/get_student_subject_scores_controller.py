@@ -59,7 +59,7 @@ class GetStudentSubjectScoreController:
                 # tests[n] = P(n+1)
 
             for j in range(7, workQnt + 7):
-                works.append(ScoreModel(idEvalType=i,
+                works.append(ScoreModel(idEvalType=j,
                                         value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
                                                                                         idStudent,
                                                                                         academicYear,
@@ -68,7 +68,7 @@ class GetStudentSubjectScoreController:
                 # works[n] = T(n+1)
 
             for k in range(5, subQnt + 5):
-                subs.append(ScoreModel(idEvalType=i,
+                subs.append(ScoreModel(idEvalType=k,
                                         value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
                                                                                         idStudent,
                                                                                         academicYear,

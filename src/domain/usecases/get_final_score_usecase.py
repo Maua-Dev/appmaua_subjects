@@ -65,7 +65,7 @@ class GetFinalScoreUsecase:
                     testToReplace = await self._subjectRepository.getWichScoreToReplace(codeSubject.upper(),
                                                                                         academicYear,
                                                                                         score+5)
-                    if testToReplace is not None:
+                    if testToReplace is not None and testScores[testToReplace-1] < subScores[score]:
                         testScores[testToReplace-1] = subScores[score]
 
             partialTestWeights = []

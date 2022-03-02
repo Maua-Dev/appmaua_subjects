@@ -207,7 +207,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idGrade': 6,
                 'idStudent': 1,
                 'codeSubject': 'ECM501',
-                'value': 9.5,
+                'value': 10,
                 'academicYear': 2022,
                 'idEvaluationType': 5
             },
