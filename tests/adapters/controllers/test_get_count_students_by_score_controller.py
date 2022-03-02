@@ -10,7 +10,7 @@ from typing import List
 class Test_GetCountStudentsByScoreController:
 
     @pytest.mark.asyncio
-    async def test_get_all_subjects_controller(self):
+    async def test_get_count_students_by_score_controller(self):
 
         getCountStudentsByScoreController = GetCountStudentsByScoreController(GetCountStudentsByScoreUsecase(SubjectRepositoryMock()))
         req = HttpRequest(query={'codeSubject': 'ecm505',
