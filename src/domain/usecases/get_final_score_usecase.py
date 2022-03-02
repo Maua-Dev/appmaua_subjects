@@ -62,12 +62,14 @@ class GetFinalScoreUsecase:
             # avalia existencia de notas sub p substituir provas
             for score in range(len(subScores)):
                 if subScores[score] is not None:
-                    testToReplace = await self._subjectRepository.getWichScoreToReplace(codeSubject.upper(),
+                    testsToReplace = await self._subjectRepository.getWichScoreToReplace(codeSubject.upper(),
                                                                                         academicYear,
                                                                                         score+5)
-                    if ((testToReplace is not None) and (testScores[testToReplace-1] < subScores[score])
-                            and (testScores[testToReplace-1] != -1)):
-                        testScores[testToReplace-1] = subScores[score]
+                    if testsToReplace is not None:
+                        for test in testsToReplace:
+                            if ((testScores[test-1] < subScores[score])
+                                    and (testScores[test-1] != -1)):
+                                testScores[test-1] = subScores[score]
 
             partialTestWeights = []
             partialWorkWeights = []

@@ -61,6 +61,6 @@ class SubjectRepositoryImp(ISubjectRepository):
 
         return None
 
-    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
 
         return None

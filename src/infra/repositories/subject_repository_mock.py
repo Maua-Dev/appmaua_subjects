@@ -231,7 +231,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idGrade': 9,
                 'idStudent': 2,
                 'codeSubject': 'ECM505',
-                'value': 7.0,
+                'value': -2,
                 'academicYear': 2022,
                 'idEvaluationType': 2
             },
@@ -258,6 +258,38 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'value': 8.5,
                 'academicYear': 2022,
                 'idEvaluationType': 8
+            },
+            {
+                'idGrade': 13,
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'value': 8.5,
+                'academicYear': 2022,
+                'idEvaluationType': 2
+            },
+            {
+                'idGrade': 14,
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'value': 7,
+                'academicYear': 2022,
+                'idEvaluationType': 8
+            },
+            {
+                'idGrade': 14,
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'value': 7,
+                'academicYear': 2022,
+                'idEvaluationType': 9
+            },
+            {
+                'idGrade': 14,
+                'idStudent': 1,
+                'codeSubject': 'ECM505',
+                'value': 9,
+                'academicYear': 2022,
+                'idEvaluationType': 10
             }
         ]
 
@@ -299,13 +331,6 @@ class SubjectRepositoryMock(ISubjectRepository):
             },
             {
                 'id': 6,
-                'idEvaluationType': 21,
-                'codeSubject': 'ECM505',
-                'quantity': 1,
-                'academicYear': 2022
-            },
-            {
-                'id': 7,
                 'idEvaluationType': 21,
                 'codeSubject': 'ECM501',
                 'quantity': 1,
@@ -436,9 +461,9 @@ class SubjectRepositoryMock(ISubjectRepository):
             },
             {
                 'id': 15,
-                'idEvaluationType': 6,
+                'idEvaluationType': 5,
                 'codeSubject': 'ECM505',
-                'weight': 1,
+                'weight': 2,
                 'academicYear': 2022,
                 'replaces': 2
             }
@@ -520,14 +545,12 @@ class SubjectRepositoryMock(ISubjectRepository):
         except IndexError:
             return 0
 
-    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
 
-        try:
-            return [row['replaces'] for row in self._evalWeight
+        toReplace = [row['replaces'] for row in self._evalWeight
                     if row['codeSubject'].upper() == codeSubject.upper()
                     and row['academicYear'] == academicYear
-                    and row['idEvaluationType'] == idEvaluationType][0]
-        except IndexError:
-            return 0
+                    and row['idEvaluationType'] == idEvaluationType]
+        return toReplace if len(toReplace) > 0 else None
 
 

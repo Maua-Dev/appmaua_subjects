@@ -43,5 +43,5 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
         pass
