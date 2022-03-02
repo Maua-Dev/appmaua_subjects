@@ -447,7 +447,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'id': 14,
                 'idEvaluationType': 5,
                 'codeSubject': 'ECM501',
-                'weight': 1,
+                'weight': None,
                 'academicYear': 2022,
                 'replaces': 1
             },
@@ -455,7 +455,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'id': 15,
                 'idEvaluationType': 5,
                 'codeSubject': 'ECM505',
-                'weight': 1,
+                'weight': None,
                 'academicYear': 2022,
                 'replaces': 1
             },
@@ -463,7 +463,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'id': 15,
                 'idEvaluationType': 5,
                 'codeSubject': 'ECM505',
-                'weight': 2,
+                'weight': None,
                 'academicYear': 2022,
                 'replaces': 2
             }
