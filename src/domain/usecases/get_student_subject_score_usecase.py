@@ -7,7 +7,7 @@ class GetStudentSubjectScoreUsecase:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
 
-    async def __call__(self, codeSubject: str, idStudent: int, academicYear: int, idEvaluationType: int) -> int:
+    async def __call__(self, codeSubject: str, idStudent: int, academicYear: int, idEvaluationType: int) -> float:
         try:
 
             if codeSubject is None:
@@ -32,4 +32,4 @@ class GetStudentSubjectScoreUsecase:
                                                                            idEvaluationType)
 
         except Exception as error:
-            raise UnexpectedError('GetCountStudentsByScore', str(error))
+            raise UnexpectedError('GetStudentSubjectScoreUsecase', str(error))

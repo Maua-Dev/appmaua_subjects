@@ -29,4 +29,4 @@ class GetSubjectEvaluationQuantityUsecase:
                                                                      idEvaluationType)
 
         except Exception as error:
-            raise UnexpectedError('GetCountStudentsByScore', str(error))
+            raise UnexpectedError('GetSubjectEvaluationQuantityUsecase', str(error))

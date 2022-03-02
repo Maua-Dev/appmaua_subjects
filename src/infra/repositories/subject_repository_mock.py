@@ -489,7 +489,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                    and row['idEvaluationType'] == idEvaluationType])
 
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
-                                        idEvaluationType: int):
+                                        idEvaluationType: int) -> float:
 
         try:
             return [row['value'] for row in self._grades
