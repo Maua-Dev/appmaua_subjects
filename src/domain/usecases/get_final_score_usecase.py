@@ -65,7 +65,8 @@ class GetFinalScoreUsecase:
                     testToReplace = await self._subjectRepository.getWichScoreToReplace(codeSubject.upper(),
                                                                                         academicYear,
                                                                                         score+5)
-                    if testToReplace is not None and testScores[testToReplace-1] < subScores[score]:
+                    if ((testToReplace is not None) and (testScores[testToReplace-1] < subScores[score])
+                            and (testScores[testToReplace-1] != -1)):
                         testScores[testToReplace-1] = subScores[score]
 
             partialTestWeights = []
@@ -97,7 +98,7 @@ class GetFinalScoreUsecase:
             # Calculo da media de provas
             aux = 0
             for i in range(len(testScores)):
-                if testScores[i] is not None:
+                if testScores[i] is not None and testScores[i] >= 0:
                     aux += testScores[i]*partialTestWeights[i]
                 else:
                     isPartialScore = True
@@ -106,7 +107,7 @@ class GetFinalScoreUsecase:
             # Calculo da media de trabalho
             aux = 0
             for i in range(len(workScores)):
-                if workScores[i] is not None and partialWorkWeights[i] is not None:
+                if workScores[i] is not None and workScores[i] >= 0:
                     aux += workScores[i] * partialWorkWeights[i]
                 else:
                     isPartialScore = True
