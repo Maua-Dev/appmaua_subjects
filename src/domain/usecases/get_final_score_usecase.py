@@ -115,6 +115,6 @@ class GetFinalScoreUsecase:
 
             finalAverage = (testAverage*finalTestWeight + workAverage*finalWorkWeight)/(finalTestWeight +
                                                                                         finalWorkWeight)
-            return finalAverage, isPartialScore
+            return round(finalAverage, 1), isPartialScore
         except Exception as error:
             raise UnexpectedError('GetFinalScoreUsecase', str(error))
