@@ -22,7 +22,7 @@ class GetSubjectByCodeUsecase:
             return subject
 
         except NoItemsFound:
-            raise NoItemsFound('GetAllSubjects')
+            raise NoItemsFound('GetSubjectByCodeUsecase')
 
         except Exception as error:
-            raise UnexpectedError('GetSubjectById', str(error))
+            raise UnexpectedError('GetSubjectByCodeUsecase', str(error))
