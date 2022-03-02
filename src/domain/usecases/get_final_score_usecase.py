@@ -114,6 +114,8 @@ class GetFinalScoreUsecase:
 
             finalAverage = (testAverage * finalTestWeight + workAverage * finalWorkWeight) / (finalTestWeight +
                                                                                               finalWorkWeight)
-            return round(finalAverage, 1), isPartialScore
+
+            # Retorna nota truncada e se é parcial
+            return float(str(finalAverage)[:str(finalAverage).index('.')+2]), isPartialScore
         except Exception as error:
             raise UnexpectedError('GetFinalScoreUsecase', str(error))
