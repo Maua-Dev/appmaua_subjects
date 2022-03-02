@@ -6,6 +6,7 @@ from fastapi.responses import PlainTextResponse
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
+from src.adapters.controllers.get_student_subject_scores_controller import GetStudentSubjectScoreController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
@@ -72,6 +73,17 @@ async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, acade
                              'idEvaluationType': idEvaluationType,
                              'academicYear': academicYear})
     result = await getCountStudentsByScoreController(req)
+    response.status_code = st.get(result.status_code)
+    return result
+
+@app.get("/notas/{idStudent}/{codeSubject}/{academicYear}")
+async def getCountStudentsByScore(codeSubject: str, idStudent: int, academicYear: int, response: Response):
+
+    getStudentSubjectScoreController = Modular.getInject(GetStudentSubjectScoreController)
+    req = HttpRequest(query={'codeSubject': codeSubject,
+                             'idStudent': idStudent,
+                             'academicYear': academicYear})
+    result = await getStudentSubjectScoreController(req)
     response.status_code = st.get(result.status_code)
     return result
 
