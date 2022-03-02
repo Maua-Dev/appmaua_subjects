@@ -30,6 +30,14 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int, idEvaluationType: int):
+    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
+                                        idEvaluationType: int) -> float:
         pass
 
+    @abstractmethod
+    async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+        pass

@@ -48,5 +48,15 @@ class SubjectRepositoryImp(ISubjectRepository):
                                      academicYear: int) -> int:
         return None
 
-    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int, idEvaluationType: int):
+    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
+                                        idEvaluationType: int) -> float:
+
+        return None
+
+    async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+
+        return None
+
+    async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+
         return None

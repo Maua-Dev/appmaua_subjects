@@ -197,11 +197,11 @@ class SubjectRepositoryMock(ISubjectRepository):
             },
             {
                 'idGrade': 5,
-                'idStudent': 1,
+                'idStudent': 4,
                 'codeSubject': 'ECM501',
                 'value': -1,
                 'academicYear': 2022,
-                'idEvaluationType': 2
+                'idEvaluationType': 1
             },
             {
                 'idGrade': 6,
@@ -261,6 +261,117 @@ class SubjectRepositoryMock(ISubjectRepository):
             }
         ]
 
+        self._evalQuantity = [
+            {
+                'id': 1,
+                'idEvaluationType': 20,
+                'codeSubject': 'ECM505',
+                'quantity': 2,
+                'academicYear': 2022
+            },
+            {
+                'id': 2,
+                'idEvaluationType': 19,
+                'codeSubject': 'ECM505',
+                'quantity': 4,
+                'academicYear': 2022
+            },
+            {
+                'id': 3,
+                'idEvaluationType': 20,
+                'codeSubject': 'ECM501',
+                'quantity': 1,
+                'academicYear': 2022
+            },
+            {
+                'id': 4,
+                'idEvaluationType': 19,
+                'codeSubject': 'ECM501',
+                'quantity': 4,
+                'academicYear': 2022
+            },
+            {
+                'id': 5,
+                'idEvaluationType': 21,
+                'codeSubject': 'ECM505',
+                'quantity': 1,
+                'academicYear': 2022
+            },
+            {
+                'id': 6,
+                'idEvaluationType': 21,
+                'codeSubject': 'ECM501',
+                'quantity': 1,
+                'academicYear': 2022
+            },
+        ]
+
+        self._evalWeight = [
+            {
+                'id': 1,
+                'idEvaluationType': 1,
+                'codeSubject': 'ECM505',
+                'weight': 4,
+                'academicYear': 2022
+            },
+            {
+                'id': 2,
+                'idEvaluationType': 2,
+                'codeSubject': 'ECM505',
+                'weight': 6,
+                'academicYear': 2022
+            },
+            {
+                'id': 3,
+                'idEvaluationType': 7,
+                'codeSubject': 'ECM505',
+                'weight': 1,
+                'academicYear': 2022
+            },
+            {
+                'id': 4,
+                'idEvaluationType': 8,
+                'codeSubject': 'ECM505',
+                'weight': 1,
+                'academicYear': 2022
+            },
+            {
+                'id': 5,
+                'idEvaluationType': 9,
+                'codeSubject': 'ECM505',
+                'weight': 2,
+                'academicYear': 2022
+            },
+            {
+                'id': 6,
+                'idEvaluationType': 10,
+                'codeSubject': 'ECM505',
+                'weight': 2,
+                'academicYear': 2022
+            },
+            {
+                'id': 7,
+                'idEvaluationType': 1,
+                'codeSubject': 'ECM501',
+                'weight': 1,
+                'academicYear': 2022
+            },
+            {
+                'id': 8,
+                'idEvaluationType': 7,
+                'codeSubject': 'ECM501',
+                'weight': 2,
+                'academicYear': 2022
+            },
+            {
+                'id': 9,
+                'idEvaluationType': 8,
+                'codeSubject': 'ECM501',
+                'weight': 3,
+                'academicYear': 2022
+            }
+        ]
+
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
 
         subjects = [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._studentsSubjects
@@ -317,5 +428,24 @@ class SubjectRepositoryMock(ISubjectRepository):
         except IndexError as error:
             return None
 
+    async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+
+        try:
+            return [row['quantity'] for row in self._evalQuantity
+                 if row['codeSubject'].upper() == codeSubject.upper()
+                 and row['academicYear'] == academicYear
+                 and row['idEvaluationType'] == idEvaluationType][0]
+        except IndexError:
+            return 0
+
+    async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+
+        try:
+            return [row['quantity'] for row in self._evalWeight
+                 if row['codeSubject'].upper() == codeSubject.upper()
+                 and row['academicYear'] == academicYear
+                 and row['idEvaluationType'] == idEvaluationType][0]
+        except IndexError:
+            return 0
 
 
