@@ -13,9 +13,7 @@ class GetSubjectEvaluationQuantityUsecase:
             if codeSubject is None:
                 raise Exception('codeSubject is None')
 
-            try:
-                evalType = EvaluationType(idEvaluationType)
-            except Exception:
+            if idEvaluationType not in (19, 20, 21):            # Apenas podem ser contados trabalhos, provas e subs
                 raise Exception('idEvaluationType is invalid')
 
             if academicYear is None:
