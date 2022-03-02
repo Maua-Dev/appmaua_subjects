@@ -4,6 +4,7 @@ from fastapi.responses import PlainTextResponse
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
+from src.adapters.controllers.get_student_subject_scores_controller import GetStudentSubjectScoreController
 from src.adapters.errors.http_exception import HttpException
 from src.adapters.helpers.http_models import HttpRequest
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
@@ -22,10 +23,12 @@ app.add_middleware(
 
 @app.exception_handler(HttpException)
 async def internal_exception_handler(request: Request, exc: HttpException):
+
     return PlainTextResponse(exc.body, status_code=exc.status_code)
 
 @app.get("/")
 async def getAllSubjects(response: Response):
+
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
     result = await getAllSubjectsController(req)
@@ -35,6 +38,7 @@ async def getAllSubjects(response: Response):
 
 @app.get("/student/{idStudent}")
 async def getStudentSubjects(idStudent: int, response: Response):
+
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
     result = await getStudentSubjectsController(req)
@@ -44,15 +48,16 @@ async def getStudentSubjects(idStudent: int, response: Response):
 
 @app.get("/subject/{codeSubject}")
 async def getSubjectByCode(codeSubject: str, response: Response):
+
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
     result = await getSubjectByCodeController(req)
     response.status_code = st.get(result.status_code)
     return result
 
-
 @app.get("/professor/{idProfessor}")
 async def getSubjectByProfessorId(idProfessor: int, response: Response):
+
     getSubjectByProfessorIdController = Modular.getInject(GetSubjectByProfessorIdController)
     req = HttpRequest(query={'idProfessor': idProfessor})
     result = await getSubjectByProfessorIdController(req)
@@ -61,6 +66,7 @@ async def getSubjectByProfessorId(idProfessor: int, response: Response):
 
 @app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}")
 async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, response: Response):
+
     getCountStudentsByScoreController = Modular.getInject(GetCountStudentsByScoreController)
     req = HttpRequest(query={'codeSubject': codeSubject,
                              'idEvaluationType': idEvaluationType,
@@ -69,3 +75,13 @@ async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, acade
     response.status_code = st.get(result.status_code)
     return result
 
+@app.get("/notas/{idStudent}/{codeSubject}/{academicYear}")
+async def getCountStudentsByScore(codeSubject: str, idStudent: int, academicYear: int, response: Response):
+
+    getStudentSubjectScoreController = Modular.getInject(GetStudentSubjectScoreController)
+    req = HttpRequest(query={'codeSubject': codeSubject,
+                             'idStudent': idStudent,
+                             'academicYear': academicYear})
+    result = await getStudentSubjectScoreController(req)
+    response.status_code = st.get(result.status_code)
+    return result
