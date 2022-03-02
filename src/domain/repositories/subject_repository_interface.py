@@ -41,3 +41,7 @@ class ISubjectRepository(ABC):
     @abstractmethod
     async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
         pass
+
+    @abstractmethod
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+        pass

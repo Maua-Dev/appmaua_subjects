@@ -60,3 +60,7 @@ class SubjectRepositoryImp(ISubjectRepository):
     async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
 
         return None
+
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+
+        return None

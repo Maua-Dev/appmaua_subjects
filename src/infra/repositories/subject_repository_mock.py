@@ -267,56 +267,49 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idEvaluationType': 20,
                 'codeSubject': 'ECM505',
                 'quantity': 2,
-                'academicYear': 2022,
-                'replaces': None
+                'academicYear': 2022
             },
             {
                 'id': 2,
                 'idEvaluationType': 19,
                 'codeSubject': 'ECM505',
                 'quantity': 4,
-                'academicYear': 2022,
-                'replaces': None
+                'academicYear': 2022
             },
             {
                 'id': 3,
                 'idEvaluationType': 20,
                 'codeSubject': 'ECM501',
                 'quantity': 1,
-                'academicYear': 2022,
-                'replaces': None
+                'academicYear': 2022
             },
             {
                 'id': 4,
                 'idEvaluationType': 19,
                 'codeSubject': 'ECM501',
                 'quantity': 4,
-                'academicYear': 2022,
-                'replaces': None
+                'academicYear': 2022
             },
             {
                 'id': 5,
                 'idEvaluationType': 21,
                 'codeSubject': 'ECM505',
                 'quantity': 1,
-                'academicYear': 2022,
-                'replaces': 1
+                'academicYear': 2022
             },
             {
                 'id': 6,
                 'idEvaluationType': 21,
                 'codeSubject': 'ECM505',
                 'quantity': 1,
-                'academicYear': 2022,
-                'replaces': 7
+                'academicYear': 2022
             },
             {
                 'id': 7,
                 'idEvaluationType': 21,
                 'codeSubject': 'ECM501',
                 'quantity': 1,
-                'academicYear': 2022,
-                'replaces': 1
+                'academicYear': 2022
             },
         ]
 
@@ -326,91 +319,128 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idEvaluationType': 1,
                 'codeSubject': 'ECM505',
                 'weight': 4,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 2,
                 'idEvaluationType': 2,
                 'codeSubject': 'ECM505',
                 'weight': 6,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 3,
                 'idEvaluationType': 7,
                 'codeSubject': 'ECM505',
                 'weight': 1,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 4,
                 'idEvaluationType': 8,
                 'codeSubject': 'ECM505',
                 'weight': 1,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 5,
                 'idEvaluationType': 9,
                 'codeSubject': 'ECM505',
                 'weight': 2,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 6,
                 'idEvaluationType': 10,
                 'codeSubject': 'ECM505',
                 'weight': 2,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 7,
                 'idEvaluationType': 1,
                 'codeSubject': 'ECM501',
                 'weight': 1,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 8,
                 'idEvaluationType': 7,
                 'codeSubject': 'ECM501',
                 'weight': 2,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 9,
                 'idEvaluationType': 8,
                 'codeSubject': 'ECM501',
                 'weight': 3,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 10,
                 'idEvaluationType': 20,
                 'codeSubject': 'ECM505',
                 'weight': 6,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 11,
                 'idEvaluationType': 19,
                 'codeSubject': 'ECM505',
                 'weight': 4,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 12,
                 'idEvaluationType': 20,
                 'codeSubject': 'ECM501',
                 'weight': 5,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
             },
             {
                 'id': 13,
                 'idEvaluationType': 19,
                 'codeSubject': 'ECM501',
                 'weight': 5,
-                'academicYear': 2022
+                'academicYear': 2022,
+                'replaces': None
+            },
+            {
+                'id': 14,
+                'idEvaluationType': 5,
+                'codeSubject': 'ECM501',
+                'weight': 1,
+                'academicYear': 2022,
+                'replaces': 1
+            },
+            {
+                'id': 15,
+                'idEvaluationType': 5,
+                'codeSubject': 'ECM505',
+                'weight': 1,
+                'academicYear': 2022,
+                'replaces': 1
+            },
+            {
+                'id': 15,
+                'idEvaluationType': 6,
+                'codeSubject': 'ECM505',
+                'weight': 1,
+                'academicYear': 2022,
+                'replaces': 2
             }
         ]
 
@@ -453,20 +483,20 @@ class SubjectRepositoryMock(ISubjectRepository):
                                      academicYear: int) -> int:
 
         return len([row['idStudent'] for row in self._grades
-                           if row['value'] == gradeValue
-                           and row['codeSubject'].upper() == codeSubject.upper()
-                           and row['academicYear'] == academicYear
-                           and row['idEvaluationType'] == idEvaluationType])
+                   if row['value'] == gradeValue
+                   and row['codeSubject'].upper() == codeSubject.upper()
+                   and row['academicYear'] == academicYear
+                   and row['idEvaluationType'] == idEvaluationType])
 
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int):
 
         try:
             return [row['value'] for row in self._grades
-                if row['codeSubject'].upper() == codeSubject.upper()
-                and row['academicYear'] == academicYear
-                and row['idEvaluationType'] == idEvaluationType
-                and row['idStudent'] == idStudent][0]
+                    if row['codeSubject'].upper() == codeSubject.upper()
+                    and row['academicYear'] == academicYear
+                    and row['idEvaluationType'] == idEvaluationType
+                    and row['idStudent'] == idStudent][0]
         except IndexError as error:
             return None
 
@@ -474,9 +504,9 @@ class SubjectRepositoryMock(ISubjectRepository):
 
         try:
             return [row['quantity'] for row in self._evalData
-                 if row['codeSubject'].upper() == codeSubject.upper()
-                 and row['academicYear'] == academicYear
-                 and row['idEvaluationType'] == idEvaluationType][0]
+                    if row['codeSubject'].upper() == codeSubject.upper()
+                    and row['academicYear'] == academicYear
+                    and row['idEvaluationType'] == idEvaluationType][0]
         except IndexError:
             return 0
 
@@ -484,9 +514,19 @@ class SubjectRepositoryMock(ISubjectRepository):
 
         try:
             return [row['quantity'] for row in self._evalWeight
-                 if row['codeSubject'].upper() == codeSubject.upper()
-                 and row['academicYear'] == academicYear
-                 and row['idEvaluationType'] == idEvaluationType][0]
+                    if row['codeSubject'].upper() == codeSubject.upper()
+                    and row['academicYear'] == academicYear
+                    and row['idEvaluationType'] == idEvaluationType][0]
+        except IndexError:
+            return 0
+
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+
+        try:
+            return [row['replaces'] for row in self._evalWeight
+                    if row['codeSubject'].upper() == codeSubject.upper()
+                    and row['academicYear'] == academicYear
+                    and row['idEvaluationType'] == idEvaluationType][0]
         except IndexError:
             return 0
 
