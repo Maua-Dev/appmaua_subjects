@@ -21,3 +21,5 @@ class EvaluationType(Enum):
     T11 = 17
     T12 = 18
     T = 19
+    P = 20
+    PS = 21
