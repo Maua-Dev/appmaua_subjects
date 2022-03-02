@@ -29,17 +29,17 @@ class Test_GetSubjectEvaluationQuantityUsecase:
         assert qnt == 1
 
     @pytest.mark.asyncio
-    async def test_get_subj_psub_qnt_1(self):
+    async def test_get_subj_eval_qnt_error_1(self):
 
         with pytest.raises(UnexpectedError):
             await self._getSubjectEvaluationQuantityUsecase('acm505', 2022, 20)
 
     @pytest.mark.asyncio
-    async def test_get_subj_psub_qnt_2(self):
+    async def test_get_subj_eval_qnt_error_2(self):
         with pytest.raises(UnexpectedError):
             await self._getSubjectEvaluationQuantityUsecase('ecm505', None, 20)
 
     @pytest.mark.asyncio
-    async def test_get_subj_psub_qnt_3(self):
+    async def test_get_subj_eval_qnt_error_3(self):
         with pytest.raises(UnexpectedError):
             await self._getSubjectEvaluationQuantityUsecase('ecm505', 2022, 2)
