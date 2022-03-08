@@ -15,7 +15,7 @@ class GetSubjectByCodeController:
                 return BadRequest('codeSubject is null.')
 
             if type(req.query['codeSubject']) is not str:
-                return BadRequest('codeSubject must be int.')
+                return BadRequest('codeSubject must be str.')
 
             codeSubject = req.query['codeSubject']
 
