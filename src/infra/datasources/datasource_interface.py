@@ -29,3 +29,20 @@ class IDataSource(ABC):
     async def getCountStudentsByScore(self, gradeValue: float, codeSubject:str, idEvaluationType: int,
                                      academicYear: int) -> SubjectDTO:
         pass
+
+    @abstractmethod
+    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
+                                        idEvaluationType: int) -> float:
+        pass
+
+    @abstractmethod
+    async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
+        pass
