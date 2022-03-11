@@ -32,8 +32,8 @@ class SubjectRepositoryImp(ISubjectRepository):
 
     async def getSubjectByCode(self, codeSubject: str) -> Subject:
         try:
-            respose = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
-            return respose.toEntity()
+            response = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
+            return response
         except Exception as error:
             raise error
 
@@ -46,7 +46,12 @@ class SubjectRepositoryImp(ISubjectRepository):
 
     async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
                                      academicYear: int) -> int:
-        return None
+        try:
+            response = await self._datasource.getCountStudentsByScore(gradeValue=gradeValue, codeSubject=codeSubject,
+                                                                      idEvaluationType=idEvaluationType, academicYear= academicYear)
+            return len(list(map(lambda x: x, response)))
+        except Exception as error:
+            raise error
 
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int) -> float:
