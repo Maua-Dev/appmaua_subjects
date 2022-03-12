@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from src.infra.dtos.Subject.subject_dto import SubjectDTO
+from src.infra.dtos.Subject import *
 
 
 class IDataSource(ABC):
@@ -27,22 +27,22 @@ class IDataSource(ABC):
 
     @abstractmethod
     async def getCountStudentsByScore(self, gradeValue: float, codeSubject:str, idEvaluationType: int,
-                                     academicYear: int) -> SubjectDTO:
+                                     academicYear: int) -> StudentScoresDTO:
         pass
 
     @abstractmethod
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
-                                        idEvaluationType: int) -> float:
+                                        idEvaluationType: int) -> StudentScoresDTO:
         pass
 
     @abstractmethod
-    async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+    async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> EvalDataDTO:
         pass
 
     @abstractmethod
-    async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
+    async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> EvalWeightDTO:
         pass
 
     @abstractmethod
-    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
+    async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> EvalWeightDTO:
         pass
