@@ -7,3 +7,9 @@ class EvalTypeDTO(Base):
 
     id = Column(Integer, primary_key=True)
     evalType = Column(String(50), nullable=False)
+
+    def getId(self) -> int:
+        return self.id
+
+    def getEvalType(self) -> str:
+        return self.evalType

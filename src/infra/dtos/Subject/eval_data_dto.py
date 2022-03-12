@@ -10,3 +10,18 @@ class EvalDataDTO(Base):
     codeSubject = Column(String(5), nullable=False)
     quantity = Column(Integer, nullable=False)
     academicYear = Column(Integer, nullable=False)
+
+    def getId(self) -> int:
+        return self.id
+
+    def getIdEvaluationType(self) -> int:
+        return self.idEvaluationType
+
+    def getCodeSubject(self) -> str:
+        return self.codeSubject
+
+    def getQuantity(self) -> int:
+        return self.quantity
+
+    def getAcademicYear(self) -> int:
+        return self.academicYear

@@ -8,3 +8,12 @@ class ProfessorSubjectDTO(Base):
     id = Column(Integer, primary_key=True)
     idProfessor = Column(Integer, nullable=False)
     idSubject = Column(Integer, ForeignKey('Subjects.id'))
+
+    def getId(self) -> int:
+        return self.id
+
+    def getIdProfessor(self) -> int:
+        return self.idProfessor
+
+    def getIdSubject(self) -> int:
+        return self.idSubject

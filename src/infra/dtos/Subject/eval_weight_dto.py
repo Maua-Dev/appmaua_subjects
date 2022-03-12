@@ -12,3 +12,20 @@ class EvalWeightDTO(Base):
     academicYear = Column(Integer, nullable=False)
     replaces = Column(Integer, nullable=True)
 
+    def getId(self) -> int:
+        return self.id
+
+    def getIdEvaluationType(self) -> int:
+        return self.idEvaluationType
+
+    def getCodeSubject(self) -> str:
+        return self.codeSubject
+
+    def getWeight(self) -> int:
+        return self.weight
+
+    def getAcademicYear(self) -> int:
+        return self.academicYear
+
+    def getReplaces(self) -> int:
+        return self.replaces

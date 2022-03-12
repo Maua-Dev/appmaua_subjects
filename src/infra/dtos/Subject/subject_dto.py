@@ -24,3 +24,12 @@ class SubjectDTO(Base):
             codeSubject=self.codeSubject,
             name=self.name
         )
+
+    def getId(self) -> int:
+        return self.id
+
+    def getCodeSubject(self) -> str:
+        return self.codeSubject
+
+    def getName(self) -> str:
+        return self.name

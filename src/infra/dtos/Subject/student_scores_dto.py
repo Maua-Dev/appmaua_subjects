@@ -13,3 +13,21 @@ class StudentScoresDTO(Base):
     value = Column(Float, nullable=True)
     academicYear = Column(Integer, nullable=False)
     idEvaluationType = Column(Integer, nullable=False)
+
+    def getId(self) -> int:
+        return self.id
+
+    def getIdStudent(self) -> int:
+        return self.idStudent
+
+    def getCodeSubject(self) -> str:
+        return self.codeSubject
+
+    def getValue(self) -> float:
+        return self.value
+
+    def getAcademicYear(self) -> int:
+        return self.academicYear
+
+    def getIdEvaluationType(self) -> int:
+        return self.idEvaluationType
