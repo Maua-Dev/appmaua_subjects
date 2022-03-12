@@ -33,7 +33,7 @@ class SubjectRepositoryImp(ISubjectRepository):
     async def getSubjectByCode(self, codeSubject: str) -> Subject:
         try:
             response = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
-            return response
+            return response.toEntity()
         except Exception as error:
             raise error
 
@@ -50,7 +50,7 @@ class SubjectRepositoryImp(ISubjectRepository):
             response = await self._datasource.getCountStudentsByScore(gradeValue=gradeValue, codeSubject=codeSubject,
                                                                       idEvaluationType=idEvaluationType,
                                                                       academicYear=academicYear)
-            return len(list(map(lambda x: x.getStudentId(), response)))
+            return len(list(map(lambda x: x.getIdStudent(), response)))
         except Exception as error:
             raise error
 
@@ -61,7 +61,7 @@ class SubjectRepositoryImp(ISubjectRepository):
             response = await self._datasource.getSubjectScoreByEvalType(idStudent=idStudent, codeSubject=codeSubject,
                                                                         idEvaluationType=idEvaluationType,
                                                                         academicYear=academicYear)
-            return list(map(lambda x: x.getScore(), response))[0].value
+            return response.getValue()
         except Exception as error:
             raise error
 
@@ -71,26 +71,26 @@ class SubjectRepositoryImp(ISubjectRepository):
             response = await self._datasource.getEvalQuantityByType(codeSubject=codeSubject,
                                                                     idEvaluationType=idEvaluationType,
                                                                     academicYear=academicYear)
-            return list(map(lambda x: x.getQuantity(), response))[0]
+            return response.getQuantity()
         except Exception as error:
             raise error
 
     async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
 
         try:
-            response = await self._datasource.getEvalQuantityByType(codeSubject=codeSubject,
-                                                                    idEvaluationType=idEvaluationType,
-                                                                    academicYear=academicYear)
-            return list(map(lambda x: x.getWeight(), response))[0]
+            response = await self._datasource.getEvalWeightByType(codeSubject=codeSubject,
+                                                                  idEvaluationType=idEvaluationType,
+                                                                  academicYear=academicYear)
+            return response.getWeight()
         except Exception as error:
             raise error
 
     async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
 
         try:
-            response = await self._datasource.getEvalQuantityByType(codeSubject=codeSubject,
+            response = await self._datasource.getWichScoreToReplace(codeSubject=codeSubject,
                                                                     idEvaluationType=idEvaluationType,
                                                                     academicYear=academicYear)
-            return list(map(lambda x: x.getReplaces(), response))[0]
+            return list(map(lambda x: x.getReplaces(), response))
         except Exception as error:
             raise error
