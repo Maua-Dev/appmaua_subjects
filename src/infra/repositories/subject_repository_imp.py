@@ -5,10 +5,10 @@ from typing import List
 
 
 class SubjectRepositoryImp(ISubjectRepository):
-    def __init__(self,datasource: IDataSource) -> None:
+    def __init__(self, datasource: IDataSource) -> None:
         super().__init__()
         self._datasource = datasource
-    
+
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
         try:
             response = await self._datasource.getSubjectsByStudent(idStudent=idStudent)
@@ -44,28 +44,53 @@ class SubjectRepositoryImp(ISubjectRepository):
         except Exception as error:
             raise error
 
-    async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
-                                     academicYear: int) -> int:
+    async def getCountStudentsByScore(self, gradeValue: float, codeSubject: str, idEvaluationType: int,
+                                      academicYear: int) -> int:
         try:
             response = await self._datasource.getCountStudentsByScore(gradeValue=gradeValue, codeSubject=codeSubject,
-                                                                      idEvaluationType=idEvaluationType, academicYear= academicYear)
-            return len(list(map(lambda x: x, response)))
+                                                                      idEvaluationType=idEvaluationType,
+                                                                      academicYear=academicYear)
+            return len(list(map(lambda x: x.getStudentId(), response)))
         except Exception as error:
             raise error
 
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int) -> float:
 
-        return None
+        try:
+            response = await self._datasource.getSubjectScoreByEvalType(idStudent=idStudent, codeSubject=codeSubject,
+                                                                        idEvaluationType=idEvaluationType,
+                                                                        academicYear=academicYear)
+            return list(map(lambda x: x.getScore(), response))[0].value
+        except Exception as error:
+            raise error
 
     async def getEvalQuantityByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
 
-        return None
+        try:
+            response = await self._datasource.getEvalQuantityByType(codeSubject=codeSubject,
+                                                                    idEvaluationType=idEvaluationType,
+                                                                    academicYear=academicYear)
+            return list(map(lambda x: x.getQuantity(), response))[0]
+        except Exception as error:
+            raise error
 
     async def getEvalWeightByType(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> int:
 
-        return None
+        try:
+            response = await self._datasource.getEvalQuantityByType(codeSubject=codeSubject,
+                                                                    idEvaluationType=idEvaluationType,
+                                                                    academicYear=academicYear)
+            return list(map(lambda x: x.getWeight(), response))[0]
+        except Exception as error:
+            raise error
 
     async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
 
-        return None
+        try:
+            response = await self._datasource.getEvalQuantityByType(codeSubject=codeSubject,
+                                                                    idEvaluationType=idEvaluationType,
+                                                                    academicYear=academicYear)
+            return list(map(lambda x: x.getReplaces(), response))[0]
+        except Exception as error:
+            raise error
