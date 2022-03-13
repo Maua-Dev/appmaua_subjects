@@ -28,11 +28,12 @@ app.add_middleware(
 
 @app.exception_handler(HttpException)
 async def internal_exception_handler(request: Request, exc: HttpException):
-    return PlainTextResponse(exc.body, status_code=exc.status_code)
 
+    return PlainTextResponse(exc.body, status_code=exc.status_code)
 
 @app.get("/")
 async def getAllSubjects(response: Response):
+
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
     result = await getAllSubjectsController(req)
@@ -42,6 +43,7 @@ async def getAllSubjects(response: Response):
 
 @app.get("/student/{idStudent}")
 async def getStudentSubjects(idStudent: int, response: Response):
+
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
     result = await getStudentSubjectsController(req)
@@ -51,24 +53,25 @@ async def getStudentSubjects(idStudent: int, response: Response):
 
 @app.get("/subject/{codeSubject}")
 async def getSubjectByCode(codeSubject: str, response: Response):
+
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
     result = await getSubjectByCodeController(req)
     response.status_code = st.get(result.status_code)
     return result
 
-
 @app.get("/professor/{idProfessor}")
 async def getSubjectByProfessorId(idProfessor: int, response: Response):
+
     getSubjectByProfessorIdController = Modular.getInject(GetSubjectByProfessorIdController)
     req = HttpRequest(query={'idProfessor': idProfessor})
     result = await getSubjectByProfessorIdController(req)
     response.status_code = st.get(result.status_code)
     return result
 
-
 @app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}")
 async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, response: Response):
+
     getCountStudentsByScoreController = Modular.getInject(GetCountStudentsByScoreController)
     req = HttpRequest(query={'codeSubject': codeSubject,
                              'idEvaluationType': idEvaluationType,
@@ -77,9 +80,9 @@ async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, acade
     response.status_code = st.get(result.status_code)
     return result
 
-
 @app.get("/notas/{idStudent}/{codeSubject}/{academicYear}")
 async def getCountStudentsByScore(codeSubject: str, idStudent: int, academicYear: int, response: Response):
+
     getStudentSubjectScoreController = Modular.getInject(GetStudentSubjectScoreController)
     req = HttpRequest(query={'codeSubject': codeSubject,
                              'idStudent': idStudent,
@@ -325,25 +328,25 @@ def test_read_subject_by_professor_id():
 
 
 def test_read_student_subjects_no_content():
-    response = client.get("/student/10")
-    assert response.status_code == status.HTTP_204_NO_CONTENT
+    response = client.get("/student/1000000000000000000000")
+    assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 def test_read_subject_by_code_no_content():
     response = client.get("/subject/ecm5050")
-    assert response.status_code == status.HTTP_204_NO_CONTENT
+    assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 def test_read_subject_by_professor_id_no_content():
     response = client.get("/professor/10")
-    assert response.status_code == status.HTTP_204_NO_CONTENT
+    assert response.status_code == status.HTTP_404_NOT_FOUND
 
 
 def test_read_student_subjects_bad_request():
-    response = client.get("/student/0")
+    response = client.get("/student/-5")
     assert response.status_code == status.HTTP_400_BAD_REQUEST
 
 
 def test_read_subject_by_professor_id_bad_request():
-    response = client.get("/professor/0")
+    response = client.get("/professor/-5")
     assert response.status_code == status.HTTP_400_BAD_REQUEST

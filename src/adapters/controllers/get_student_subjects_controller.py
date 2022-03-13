@@ -11,7 +11,7 @@ class GetStudentSubjectsController:
 
     async def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
-            if req.query['idStudent'] is None or req.query['idStudent'] == 0:
+            if req.query['idStudent'] is None or req.query['idStudent'] <= 0:
                 return BadRequest(f"idStudent is invalid. (idStudent = {req.query['idStudent']})")
 
             if type(req.query['idStudent']) is not int:
