@@ -13,6 +13,8 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getSubjectsByStudent(idStudent=idStudent)
             return list(map(lambda x: x.toEntity(), response))
+        except AttributeError:
+            return None
         except Exception as error:
             raise error
 
@@ -20,6 +22,8 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getSubjectStudents(codeSubject=codeSubject)
             return list(map(lambda x: x.students, response))
+        except AttributeError:
+            return None
         except Exception as error:
             raise error
 
@@ -27,6 +31,8 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getAllSubjects()
             return list(map(lambda x: x.toEntity(), response))
+        except AttributeError:
+            return None
         except Exception as error:
             raise error
 
@@ -34,6 +40,8 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getSubjectsByCode(codeSubject=codeSubject)
             return response.toEntity()
+        except AttributeError:
+            return None # Arrumar retorno
         except Exception as error:
             raise error
 
@@ -41,6 +49,8 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getSubjectByProfessorId(idProfessor=idProfessor)
             return list(map(lambda x: x.toEntity(), response))
+        except AttributeError:
+            return None
         except Exception as error:
             raise error
 
@@ -51,6 +61,8 @@ class SubjectRepositoryImp(ISubjectRepository):
                                                                       idEvaluationType=idEvaluationType,
                                                                       academicYear=academicYear)
             return len(list(map(lambda x: x.getIdStudent(), response)))
+        except AttributeError:
+            return 0
         except Exception as error:
             raise error
 
@@ -62,6 +74,8 @@ class SubjectRepositoryImp(ISubjectRepository):
                                                                         idEvaluationType=idEvaluationType,
                                                                         academicYear=academicYear)
             return response.getValue()
+        except AttributeError:
+            return None
         except Exception as error:
             raise error
 
@@ -72,6 +86,8 @@ class SubjectRepositoryImp(ISubjectRepository):
                                                                     idEvaluationType=idEvaluationType,
                                                                     academicYear=academicYear)
             return response.getQuantity()
+        except AttributeError:
+            return 0
         except Exception as error:
             raise error
 
@@ -82,6 +98,8 @@ class SubjectRepositoryImp(ISubjectRepository):
                                                                   idEvaluationType=idEvaluationType,
                                                                   academicYear=academicYear)
             return response.getWeight()
+        except AttributeError:
+            return 0
         except Exception as error:
             raise error
 
@@ -92,5 +110,7 @@ class SubjectRepositoryImp(ISubjectRepository):
                                                                     idEvaluationType=idEvaluationType,
                                                                     academicYear=academicYear)
             return list(map(lambda x: x.getReplaces(), response))
+        except AttributeError:
+            return None
         except Exception as error:
             raise error
