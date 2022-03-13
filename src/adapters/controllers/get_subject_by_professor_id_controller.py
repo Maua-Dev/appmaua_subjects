@@ -2,7 +2,7 @@ from src.adapters.errors.http_exception import HttpException
 from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.usecases.get_subject_by_professor_id_usecase import GetSubjectByProfessorIdUsecase
-from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
+from src.adapters.helpers.http_models import *
 
 
 class GetSubjectByProfessorIdController:
@@ -23,8 +23,8 @@ class GetSubjectByProfessorIdController:
 
             return Ok(subjects)
 
-        except NoItemsFound:
-            return NoContent()
+        except NoItemsFound as e:
+            return NotFound('(GetSubjectByProfessorIdController) No subject found -> ' + e.message)
 
         except UnexpectedError as e:
             err = InternalServerError(e.message)

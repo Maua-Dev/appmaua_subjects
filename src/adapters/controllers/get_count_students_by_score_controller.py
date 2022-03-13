@@ -1,7 +1,7 @@
 from src.adapters.errors.http_exception import HttpException
 from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.usecases.get_count_students_by_score_usecase import GetCountStudentsByScoreUsecase
-from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
+from src.adapters.helpers.http_models import *
 from src.adapters.viewmodels.bar_chart import *
 
 
@@ -39,8 +39,8 @@ class GetCountStudentsByScoreController:
 
             return Ok(BarChart(bars=bars))
 
-        except NoItemsFound:
-            return NoContent()
+        except NoItemsFound as e:
+            return NotFound('(GetCountStudentsByScoreController) No students found for grade -> ' + e.message)
 
         except UnexpectedError as e:
             err = InternalServerError(e.message)

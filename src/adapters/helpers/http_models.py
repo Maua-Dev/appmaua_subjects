@@ -21,7 +21,10 @@ class HttpResponse:
 
 class Ok(HttpResponse):
     def __init__(self, body: Any) -> None:
-        super().__init__(200, body)        
+        super().__init__(200, body)
+class NotFound(HttpResponse):
+    def __init__(self, body: Any) -> None:
+        super().__init__(404, body)
 class Create(HttpResponse):
     def __init__(self) -> None:
         super().__init__(201, None)

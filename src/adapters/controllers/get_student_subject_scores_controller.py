@@ -3,7 +3,7 @@ from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.usecases.get_final_score_usecase import GetFinalScoreUsecase
 from src.domain.usecases.get_student_subject_score_usecase import GetStudentSubjectScoreUsecase
 from src.domain.usecases.get_subject_evaluation_quantity_usecase import GetSubjectEvaluationQuantityUsecase
-from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
+from src.adapters.helpers.http_models import *
 from src.adapters.viewmodels.subject_scores import *
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
 from src.domain.entities.subject import Subject
@@ -83,8 +83,8 @@ class GetStudentSubjectScoreController:
                                     works=works,
                                     subs=subs))
 
-        except NoItemsFound:
-            return NoContent()
+        except NoItemsFound as e:
+            return NotFound('(GetStudentSubjectScoreController) No score found -> ' + e.message)
 
         except UnexpectedError as e:
             err = InternalServerError(e.message)
