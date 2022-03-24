@@ -33,22 +33,10 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'name': 'Banco de dados'
             },
             {
-                'idSubject': 6,
-                'idStudent': 2,
-                'codeSubject': 'ECM503',
-                'name': 'Controladores'
-            },
-            {
                 'idSubject': 1,
                 'idStudent': 3,
                 'codeSubject': 'ECM501',
                 'name': 'Ciencia de dados'
-            },
-            {
-                'idSubject': 6,
-                'idStudent': 3,
-                'codeSubject': 'ECM503',
-                'name': 'Controladores'
             },
             {
                 'idSubject': 3,
@@ -124,12 +112,6 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idProfessor': 2,
                 'codeSubject': 'ECM505',
                 'name': 'Banco de dados'
-            },
-            {
-                'idSubject': 6,
-                'idProfessor': 2,
-                'codeSubject': 'ECM503',
-                'name': 'Controladores'
             }
         ]
 

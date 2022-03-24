@@ -23,10 +23,9 @@ class Test_GetStudentSubjectsController():
         getStudentSubjectsController = GetStudentSubjectsController(getStudentSubjectsUsecase=GetStudentSubjectsUsecase(subjectRepository=SubjectRepositoryMock()))
         req = HttpRequest(query={'idStudent': 2})
         answer = await getStudentSubjectsController(req)
-        assert len(answer.body) == 3
+        assert len(answer.body) == 2
         assert Subject(codeSubject='ECM501', name='Ciencia de dados') in answer.body
         assert Subject(codeSubject='ECM505', name='Banco de dados') in answer.body
-        assert Subject(codeSubject='ECM503', name='Controladores') in answer.body
         assert answer.status_code == 200
 
     @pytest.mark.asyncio
