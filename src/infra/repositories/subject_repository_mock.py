@@ -155,7 +155,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'name': 'Banco de dados'
             },
             {
-                'id': 6,
+                'id': 5,
                 'codeSubject': 'ECM503',
                 'name': 'Controladores'
             }
