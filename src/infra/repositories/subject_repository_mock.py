@@ -258,7 +258,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idEvaluationType': 8
             },
             {
-                'idGrade': 14,
+                'idGrade': 15,
                 'idStudent': 1,
                 'codeSubject': 'ECM505',
                 'value': 7,
@@ -266,7 +266,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'idEvaluationType': 9
             },
             {
-                'idGrade': 14,
+                'idGrade': 16,
                 'idStudent': 1,
                 'codeSubject': 'ECM505',
                 'value': 9,
