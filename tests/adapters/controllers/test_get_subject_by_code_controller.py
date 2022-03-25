@@ -2,7 +2,7 @@ import pytest
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
-from src.adapters.helpers.http_models import HttpRequest, NoContent, BadRequest
+from src.adapters.helpers.http_models import *
 from src.domain.entities.subject import Subject
 
 class Test_GetSubjectByCodeController:
@@ -22,8 +22,8 @@ class Test_GetSubjectByCodeController:
         req = HttpRequest(query={'codeSubject': 'esm505'})
         answer = await getSubjectByCodeController(req)
 
-        assert type(answer) is NoContent
-        assert answer.status_code == 204
+        assert type(answer) is NotFound
+        assert answer.status_code == 404
 
     @pytest.mark.asyncio
     async def test_get_subject_by_code_controller_error(self):

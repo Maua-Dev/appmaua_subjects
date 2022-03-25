@@ -3,14 +3,20 @@
 from typing import Any
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
+from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
+from src.adapters.controllers.get_student_subject_scores_controller import GetStudentSubjectScoreController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
-from src.domain.usecases.get_student_subjects_score_usecase import GetStudentSubjectsScoreUsecase
+from src.domain.usecases.get_count_students_by_score_usecase import GetCountStudentsByScoreUsecase
+from src.domain.usecases.get_final_score_usecase import GetFinalScoreUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
 from src.domain.usecases.get_subject_by_professor_id_usecase import GetSubjectByProfessorIdUsecase
+from src.domain.usecases.get_student_subject_score_usecase import GetStudentSubjectScoreUsecase
+from src.domain.usecases.get_subject_evaluation_quantity_usecase import GetSubjectEvaluationQuantityUsecase
+from src.domain.usecases.get_subject_evaluation_weight_usecase import GetSubjectEvaluationWeightUsecase
 from src.envs import Envs
 from src.external.postgres.datasources.postgres_datasource import PostgresDataSource
 from src.infra.repositories.subject_repository_imp import SubjectRepositoryImp
@@ -39,24 +45,29 @@ class Modular:
         return None;
 
 
-
 class Module:
     
     @staticmethod
     def getBinds():
         return [
-        GetSubjectByProfessorIdController,
-        GetSubjectByProfessorIdUsecase,
-        GetSubjectByCodeUsecase,
-        GetSubjectByCodeController,
-        GetAllSubjectsController,
-        GetAllSubjectsUsecase,
-        GetStudentSubjectsController,
-        GetStudentSubjectsUsecase,
-        GetStudentSubjectsScoreUsecase,
-        SubjectRepositoryMock if Envs.IsMock() else SubjectRepositoryImp,        
-        PostgresDataSource
-    ]
+            GetSubjectByProfessorIdController,
+            GetSubjectByProfessorIdUsecase,
+            GetSubjectByCodeUsecase,
+            GetSubjectByCodeController,
+            GetAllSubjectsController,
+            GetAllSubjectsUsecase,
+            GetStudentSubjectsController,
+            GetStudentSubjectsUsecase,
+            SubjectRepositoryMock if Envs.IsMock() else SubjectRepositoryImp,
+            PostgresDataSource,
+            GetCountStudentsByScoreController,
+            GetCountStudentsByScoreUsecase,
+            GetStudentSubjectScoreUsecase,
+            GetStudentSubjectScoreController,
+            GetFinalScoreUsecase,
+            GetSubjectEvaluationQuantityUsecase,
+            GetSubjectEvaluationWeightUsecase
+        ]
 
 
 

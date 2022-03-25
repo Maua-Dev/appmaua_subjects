@@ -1,9 +1,4 @@
-from typing import Optional, List
-
-from pydantic.main import BaseModel
-
-from pydantic import validator
-
+from pydantic import validator, BaseModel
 from src.domain.errors.errors import EntityError
 
 

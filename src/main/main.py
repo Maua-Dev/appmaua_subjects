@@ -4,11 +4,13 @@ from fastapi.responses import PlainTextResponse
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
+from src.adapters.controllers.get_student_subject_scores_controller import GetStudentSubjectScoreController
 from src.adapters.errors.http_exception import HttpException
 from src.adapters.helpers.http_models import HttpRequest
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.main.subjects.module import Modular
-from src.main.helpers.status import status
+from src.main.helpers.status import status as st
+from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
 
 app = FastAPI()
 app.add_middleware(
@@ -21,39 +23,65 @@ app.add_middleware(
 
 @app.exception_handler(HttpException)
 async def internal_exception_handler(request: Request, exc: HttpException):
+
     return PlainTextResponse(exc.body, status_code=exc.status_code)
 
 @app.get("/")
-def getAllSubjects(response: Response):
+async def getAllSubjects(response: Response):
+
     getAllSubjectsController = Modular.getInject(GetAllSubjectsController)
     req = HttpRequest(query=None)
-    result = getAllSubjectsController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    result = await getAllSubjectsController(req)
+    response.status_code = st.get(result.status_code)
+    return result
 
 
 @app.get("/student/{idStudent}")
 async def getStudentSubjects(idStudent: int, response: Response):
+
     getStudentSubjectsController = Modular.getInject(GetStudentSubjectsController)
     req = HttpRequest(query={'idStudent': idStudent})
     result = await getStudentSubjectsController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    response.status_code = st.get(result.status_code)
+    return result
 
 
 @app.get("/subject/{codeSubject}")
 async def getSubjectByCode(codeSubject: str, response: Response):
+
     getSubjectByCodeController = Modular.getInject(GetSubjectByCodeController)
     req = HttpRequest(query={'codeSubject': codeSubject})
     result = await getSubjectByCodeController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
-
+    response.status_code = st.get(result.status_code)
+    return result
 
 @app.get("/professor/{idProfessor}")
-def getSubjectByProfessorId(idProfessor: int, response: Response):
+async def getSubjectByProfessorId(idProfessor: int, response: Response):
+
     getSubjectByProfessorIdController = Modular.getInject(GetSubjectByProfessorIdController)
     req = HttpRequest(query={'idProfessor': idProfessor})
-    result = getSubjectByProfessorIdController(req)
-    response.status_code = status.get(result.status_code)
-    return result.body
+    result = await getSubjectByProfessorIdController(req)
+    response.status_code = st.get(result.status_code)
+    return result
+
+@app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}")
+async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, response: Response):
+
+    getCountStudentsByScoreController = Modular.getInject(GetCountStudentsByScoreController)
+    req = HttpRequest(query={'codeSubject': codeSubject,
+                             'idEvaluationType': idEvaluationType,
+                             'academicYear': academicYear})
+    result = await getCountStudentsByScoreController(req)
+    response.status_code = st.get(result.status_code)
+    return result
+
+@app.get("/notas/{idStudent}/{codeSubject}/{academicYear}")
+async def getCountStudentsByScore(codeSubject: str, idStudent: int, academicYear: int, response: Response):
+
+    getStudentSubjectScoreController = Modular.getInject(GetStudentSubjectScoreController)
+    req = HttpRequest(query={'codeSubject': codeSubject,
+                             'idStudent': idStudent,
+                             'academicYear': academicYear})
+    result = await getStudentSubjectScoreController(req)
+    response.status_code = st.get(result.status_code)
+    return result

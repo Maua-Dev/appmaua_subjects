@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import List
 
 from pydantic.main import BaseModel
 
@@ -9,23 +9,25 @@ from src.domain.errors.errors import EntityError
 
 class Student(BaseModel):
     name: str
-    idDegree: int
-    idSubjects: List[int]
+    codeDegree: str
+    subjects: List[str]
 
     @validator('name')
-    def name_is_not_empty(cls,v: str)-> str:
+    def name_is_not_empty(cls,v: str) -> str:
         if len(v) == 0:
             raise EntityError('Name')
         return v.title()
 
-    @validator('idDegree')
-    def idDegree_is_not_empty(cls, v: int) -> int:
-        if v == 0:
-            raise EntityError('idDegree')
-        return v
-
-    @validator('idSubjects')
-    def idSubjects_is_not_empty(cls, v: List[int]) -> List[int]:
+    @validator('codeDegree')
+    def codeDegree_is_not_empty(cls, v: str) -> str:
         if len(v) == 0:
-            raise EntityError('idSubjects')
+            raise EntityError('codeDegree')
+        return v.upper()
+
+    @validator('subjects')
+    def subjects_is_valid(cls, v: List[str]) -> List[str]:
+        for i in v:
+            i = i.upper()
+            if len(i) == 0:
+                raise EntityError('subjects')
         return v

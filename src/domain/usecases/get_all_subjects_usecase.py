@@ -7,14 +7,14 @@ class GetAllSubjectsUsecase:
     def __init__(self, subjectRepository: ISubjectRepository):
         self._subjectRepository = subjectRepository
 
-    def __call__(self):
+    async def __call__(self):
         try:
-            subjects, count = self._subjectRepository.getAllSubjects()
+            subjects = await self._subjectRepository.getAllSubjects()
 
             if subjects is None:
                 raise NoItemsFound('')
 
-            return subjects, count
+            return subjects
 
         except NoItemsFound:
             raise NoItemsFound('GetAllSubjects')

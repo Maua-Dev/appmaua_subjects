@@ -2,7 +2,7 @@ from src.adapters.errors.http_exception import HttpException
 from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
-from src.adapters.helpers.http_models import BadRequest, HttpRequest, HttpResponse, InternalServerError, Ok, NoContent
+from src.adapters.helpers.http_models import *
 
 
 class GetSubjectByCodeController:
@@ -15,7 +15,7 @@ class GetSubjectByCodeController:
                 return BadRequest('codeSubject is null.')
 
             if type(req.query['codeSubject']) is not str:
-                return BadRequest('codeSubject must be int.')
+                return BadRequest('codeSubject must be str.')
 
             codeSubject = req.query['codeSubject']
 
@@ -23,8 +23,8 @@ class GetSubjectByCodeController:
 
             return Ok(subject)
 
-        except NoItemsFound:
-            return NoContent()
+        except NoItemsFound as e:
+            return NotFound('(GetSubjectByCodeController) No subject found -> ' + e.message)
 
         except UnexpectedError as e:
             err = InternalServerError(e.message)

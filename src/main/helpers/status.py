@@ -6,5 +6,6 @@ status = {
     201: status.HTTP_201_CREATED,
     204: status.HTTP_204_NO_CONTENT,
     400: status.HTTP_400_BAD_REQUEST,
-    500: status.HTTP_500_INTERNAL_SERVER_ERROR
+    500: status.HTTP_500_INTERNAL_SERVER_ERROR,
+    404: status.HTTP_404_NOT_FOUND
 }

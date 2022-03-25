@@ -6,21 +6,21 @@ from src.domain.errors.errors import EntityError
 class Test_Student():
 
     def test_create_valid_student(self):
-        student = Student(name='Joao do teste', idDegree=1, idSubjects=[1,2,3,4,5])
+        student = Student(name='Joao do teste', codeDegree="ENGCOMP", subjects=['ECM505', 'ECM501'])
         assert len(student.name) > 0
         assert student.name == 'Joao Do Teste'
-        assert len(student.idSubjects) > 0
-        assert len(student.idSubjects) == 5
-        assert student.idDegree == 1
+        assert len(student.subjects) > 0
+        assert len(student.subjects) == 2
+        assert student.codeDegree == "ENGCOMP"
 
     def test_create_invalid_student1(self):
         with pytest.raises(EntityError):
-            Student(name='', idDegree=1, idSubjects=[1,2,3,4,5])
+            Student(name='', codeDegree="ENGCOMP", subjects=['ECM505', 'ECM501'])
 
     def test_create_invalid_student2(self):
         with pytest.raises(EntityError):
-            Student(name='Joao do teste', idDegree=0, idSubjects=[1,2,3,4,5])
+            Student(name='Joao do teste', codeDegree="", subjects=['ECM505', 'ECM501'])
 
     def test_create_invalid_student3(self):
         with pytest.raises(EntityError):
-            Student(name='Joao do teste', idDegree=1, idSubjects=[])
+            Student(name='Joao do teste', codeDegree="ENGCOMP", subjects=[''])
