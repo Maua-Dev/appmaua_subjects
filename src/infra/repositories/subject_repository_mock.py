@@ -553,4 +553,8 @@ class SubjectRepositoryMock(ISubjectRepository):
                     and row['idEvaluationType'] == idEvaluationType]
         return toReplace if len(toReplace) > 0 else None
 
+    async def getCountStudentsBySubject(self, idSubject:int) -> int:
+
+        return  len([subject['idStudent'] for subject in self._studentsSubjects if (subject['idSubject'] == idSubject)])
+
 
