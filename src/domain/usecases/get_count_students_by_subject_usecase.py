@@ -14,7 +14,6 @@ class GetCountStudentsBySubjectUsecase:
             if idSubject is None:
                 raise Exception('idSubject is None')
             if type(idSubject) is not int:
-
                 raise Exception('idSubject must be an int')
 
             return await self._subjectRepository.getCountStudentsBySubject(idSubject)
