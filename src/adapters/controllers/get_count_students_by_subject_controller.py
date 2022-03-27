@@ -5,7 +5,7 @@ from src.adapters.helpers.http_models import *
 from src.adapters.viewmodels.bar_chart import *
 
 
-class GetCountStudentsByScoreController:
+class GetCountStudentsBySubjectController:
     def __init__(self, getCountStudentsBySubjectUsecase: GetCountStudentsBySubjectUsecase) -> None:
         self.getCountStudentsBySubjectUsecase = getCountStudentsBySubjectUsecase
     async def __call__(self, req: HttpRequest) -> HttpResponse:
