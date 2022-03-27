@@ -468,6 +468,68 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'replaces': 2
             }
         ]
+        self._studentsCourse = [
+            {
+                'idCourse':1,
+                'courseName':'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent':1
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 2
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 3
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 4
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 5
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 6
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 7
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 8
+            },
+            {
+                'idCourse': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'courseYear': 3,
+                'idStudent': 9
+            },
+            {
+                'idCourse': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'courseYear': 3,
+                'idStudent': 10
+            }
+        ]
 
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
 
@@ -553,9 +615,11 @@ class SubjectRepositoryMock(ISubjectRepository):
                     and row['idEvaluationType'] == idEvaluationType]
         return toReplace if len(toReplace) > 0 else None
 
-    async def getCountStudentsBySubject(self, idSubject:int) -> int:
+    async def getCountStudentsByCourse(self, idCourse:int, courseYear:int) -> int:
         try:
-          return len([subject['idStudent'] for subject in self._studentsSubjects if (subject['idSubject'] == idSubject)])
+          return len([course['idStudent'] for course in self._studentsCourse
+                      if course['idCourse'] == idCourse
+                      and course['courseYear'] == courseYear])
 
         except IndexError as error:
           return None
