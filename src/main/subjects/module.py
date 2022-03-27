@@ -4,7 +4,6 @@ from typing import Any
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
-from src.adapters.controllers.get_count_students_by_subject_controller import GetCountStudentsBySubjectController
 from src.adapters.controllers.get_student_subject_scores_controller import GetStudentSubjectScoreController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
@@ -69,8 +68,7 @@ class Module:
             GetFinalScoreUsecase,
             GetSubjectEvaluationQuantityUsecase,
             GetSubjectEvaluationWeightUsecase,
-            GetCountStudentsBySubjectUsecase,
-            GetCountStudentsBySubjectController
+            GetCountStudentsBySubjectUsecase
         ]
 
 
