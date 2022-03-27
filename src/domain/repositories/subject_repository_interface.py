@@ -47,5 +47,5 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    async def getCountStudentBySubject(self, idSubject: int) -> int:
+    async def getCountStudentsBySubject(self, idSubject: int) -> int:
         pass
