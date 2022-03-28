@@ -688,12 +688,10 @@ class SubjectRepositoryMock(ISubjectRepository):
 
 
 
-    async def getStudentCourse(self, idStudent: int) -> Tuple[int, int]:
+    async def getStudentCourseId(self, idStudent: int) -> int:
         try:
-            return Tuple[
-                [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent][0],
-                [row['courseYear'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
-            ]
+            return [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
+
 
         except IndexError as error:
             return None

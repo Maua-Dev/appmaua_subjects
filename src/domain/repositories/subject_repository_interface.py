@@ -30,7 +30,7 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
+    async def getStudentSubjectScore(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int) -> float:
         pass
 
@@ -46,10 +46,11 @@ class ISubjectRepository(ABC):
     async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
         pass
 
+
     @abstractmethod
     async def getCountStudentsByCourse(self, idCourse: int, courseYear: int) -> int:
         pass
 
     @abstractmethod
-    async def getStudentCourse(self, idStudent: int) -> Tuple[int, int]:
+    async def getStudentCourseId(self, idStudent: int) -> int:
         pass
