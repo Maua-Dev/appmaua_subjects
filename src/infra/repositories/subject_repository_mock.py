@@ -688,10 +688,4 @@ class SubjectRepositoryMock(ISubjectRepository):
 
 
 
-    async def getStudentCourseId(self, idStudent: int) -> int:
-        try:
-            return [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
 
-
-        except IndexError as error:
-            return None

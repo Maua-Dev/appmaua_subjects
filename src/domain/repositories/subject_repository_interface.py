@@ -30,7 +30,7 @@ class ISubjectRepository(ABC):
         pass
 
     @abstractmethod
-    async def getStudentSubjectScore(self, codeSubject: str, idStudent: int, academicYear: int,
+    async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int) -> float:
         pass
 
@@ -51,6 +51,3 @@ class ISubjectRepository(ABC):
     async def getCountStudentsByCourse(self, idCourse: int, courseYear: int) -> int:
         pass
 
-    @abstractmethod
-    async def getStudentCourseId(self, idStudent: int) -> int:
-        pass
