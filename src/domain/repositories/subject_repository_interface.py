@@ -51,3 +51,6 @@ class ISubjectRepository(ABC):
     async def getCountStudentsByCourse(self, idCourse: int, courseYear: int) -> int:
         pass
 
+    @abstractmethod
+    async def getStudentCourseId(self, idStudent: int) -> int:
+        pass
