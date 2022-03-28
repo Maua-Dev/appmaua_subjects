@@ -21,7 +21,7 @@ class Test_GetStudentCourseIdUsecase:
 
 
     @pytest.mark.asyncio
-    async def test_get_professor_subjects_error(self):
+    async def ttest_get_student_course_id_error(self):
         getStudentCourseIdUsecase = GetStudentCourseIdUsecase(subjectRepository=SubjectRepositoryMock())
         with pytest.raises(UnexpectedError):
             await getStudentCourseIdUsecase(None)
