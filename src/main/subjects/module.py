@@ -12,6 +12,7 @@ from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.domain.usecases.get_count_students_by_score_usecase import GetCountStudentsByScoreUsecase
 from src.domain.usecases.get_count_students_by_course_usecase import GetCountStudentsByCourseUsecase
 from src.domain.usecases.get_final_score_usecase import GetFinalScoreUsecase
+from src.domain.usecases.get_student_course_usecase import GetStudentCourseUsecase
 from src.domain.usecases.get_student_subjects_usecase import GetStudentSubjectsUsecase
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
 from src.domain.usecases.get_subject_by_professor_id_usecase import GetSubjectByProfessorIdUsecase
@@ -68,7 +69,8 @@ class Module:
             GetFinalScoreUsecase,
             GetSubjectEvaluationQuantityUsecase,
             GetSubjectEvaluationWeightUsecase,
-            GetCountStudentsByCourseUsecase
+            GetCountStudentsByCourseUsecase,
+            GetStudentCourseUsecase
         ]
 
 

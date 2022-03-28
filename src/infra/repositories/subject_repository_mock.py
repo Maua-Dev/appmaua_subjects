@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
@@ -468,7 +468,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'replaces': 2
             }
         ]
-        self._studentsCourse = [
+        self._studentsCourseCount = [
             {
                 'idCourse':1,
                 'courseName':'Engenharia de Computação',
@@ -531,6 +531,68 @@ class SubjectRepositoryMock(ISubjectRepository):
             }
         ]
 
+        self._studentsCourse = [
+            {
+                'idCourse': 1,
+                'courseName':'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 1
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 2
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 3
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 4
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 5
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 6
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 7
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 8
+            },
+            {
+                'idCourse': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'courseYear': 3,
+                'idStudent': 9
+            },
+            {
+                'idCourse': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'courseYear': 3,
+                'idStudent': 10
+            }
+        ]
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
 
         subjects = [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._studentsSubjects
@@ -617,7 +679,7 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     async def getCountStudentsByCourse(self, idCourse:int, courseYear:int) -> int:
         try:
-          return len([course['idStudent'] for course in self._studentsCourse
+          return len([course['idStudent'] for course in self._studentsCourseCount
                       if course['idCourse'] == idCourse
                       and course['courseYear'] == courseYear])
 
@@ -625,3 +687,13 @@ class SubjectRepositoryMock(ISubjectRepository):
           return None
 
 
+
+    async def getStudentCourse(self, idStudent: int) -> Tuple[int, int]:
+        try:
+            return Tuple[
+                [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent][0],
+                [row['courseYear'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
+            ]
+
+        except IndexError as error:
+            return None

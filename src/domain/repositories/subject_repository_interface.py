@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Tuple
 from src.domain.entities.subject import Subject
 
 
@@ -48,4 +48,8 @@ class ISubjectRepository(ABC):
 
     @abstractmethod
     async def getCountStudentsByCourse(self, idCourse: int, courseYear: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getStudentCourse(self, idStudent: int) -> Tuple[int, int]:
         pass
