@@ -69,9 +69,8 @@ class Module:
             GetFinalScoreUsecase,
             GetSubjectEvaluationQuantityUsecase,
             GetSubjectEvaluationWeightUsecase,
-            GetCountStudentsByCourseUsecase,
-            GetStudentCourseUsecase
-        ]
+            GetCountStudentsByCourseUsecase]
+       # ]
 
 
 
