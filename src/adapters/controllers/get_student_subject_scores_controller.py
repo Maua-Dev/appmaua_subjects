@@ -7,23 +7,26 @@ from src.adapters.helpers.http_models import *
 from src.adapters.viewmodels.subject_scores import *
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
 from src.domain.entities.subject import Subject
-
+from src.domain.usecases.get_subject_evaluation_weight_usecase import GetSubjectEvaluationWeightUsecase
+from src.domain.enums.evaluation_type import EvaluationType
 
 class GetStudentSubjectScoreController:
     def __init__(self,
                  getStudentSubjectScoreUsecase: GetStudentSubjectScoreUsecase,
                  getSubjectByCodeUsecase: GetSubjectByCodeUsecase,
                  getFinalScoreUsecase: GetFinalScoreUsecase,
-                 getSubjectEvaluationQuantityUsecase: GetSubjectEvaluationQuantityUsecase) -> None:
+                 getSubjectEvaluationQuantityUsecase: GetSubjectEvaluationQuantityUsecase,
+                 getSubjectEvaluationWeightUsecase: GetSubjectEvaluationWeightUsecase) -> None:
 
         self._getStudentSubjectScoreUsecase = getStudentSubjectScoreUsecase
         self._getSubjectByCodeUsecase = getSubjectByCodeUsecase
         self._getFinalScoreUsecase = getFinalScoreUsecase
         self._getSubjectEvaluationQuantityUsecase = getSubjectEvaluationQuantityUsecase
+        self._getSubjectEvaluationWeightUsecase = getSubjectEvaluationWeightUsecase
 
     async def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
-            if req.query['codeSubject'] is None :
+            if req.query['codeSubject'] is None:
                 return BadRequest(f"codeSubject is invalid. (codeSubject = None)")
 
             if req.query['academicYear'] is None:
@@ -48,40 +51,66 @@ class GetStudentSubjectScoreController:
             tests = []
             works = []
             subs = []
+            weights = []
 
             for i in range(1, testQnt + 1):
                 tests.append(ScoreModel(idEvalType=i,
+                                        evalName=EvaluationType(i).name,
                                         value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
                                                                                         idStudent,
                                                                                         academicYear,
                                                                                         i)))
+                weights.append(WeightModel(idEvalType=i,
+                                           evalName=EvaluationType(i).name,
+                                           weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                                                                                                academicYear,
+                                                                                                i)))
                 # index da lista define a prova
                 # tests[n] = P(n+1)
 
             for j in range(7, workQnt + 7):
                 works.append(ScoreModel(idEvalType=j,
+                                        evalName=EvaluationType(j).name,
                                         value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
                                                                                         idStudent,
                                                                                         academicYear,
                                                                                         j)))
+                weights.append(WeightModel(idEvalType=j,
+                                           evalName=EvaluationType(j).name,
+                                           weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                                                                                                academicYear,
+                                                                                                j)))
                 # index da lista define o trabalho
                 # works[n] = T(n+1)
 
             for k in range(5, subQnt + 5):
                 subs.append(ScoreModel(idEvalType=k,
-                                        value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
-                                                                                        idStudent,
-                                                                                        academicYear,
-                                                                                        k)))
+                                       evalName=EvaluationType(k).name,
+                                       value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
+                                                                                       idStudent,
+                                                                                       academicYear,
+                                                                                       k)))
                 # index da lista define a sub
                 # subScores[n] = PS(n+1)
+
+            weights.append(WeightModel(idEvalType=19,
+                                       evalName=EvaluationType(19).name,
+                                       weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                                                                                            academicYear,
+                                                                                            19)))
+            weights.append(WeightModel(idEvalType=20,
+                                       evalName=EvaluationType(20).name,
+                                       weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                                                                                            academicYear,
+                                                                                            20)))
 
             return Ok(SubjectScores(name=name,
                                     finalScore=finalScore,
                                     isPartialScore=isPartialScore,
-                                    tests=tests,
-                                    works=works,
-                                    subs=subs))
+                                    weights=weights,
+                                    testScores=tests,
+                                    workScores=works,
+                                    subScores=subs))
 
         except NoItemsFound as e:
             return NotFound('(GetStudentSubjectScoreController) No score found -> ' + e.message)

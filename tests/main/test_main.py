@@ -99,49 +99,98 @@ def test_read_scores():
     response = client.get("/notas/1/ecm505/2022")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
-        "status_code": 200,
-        "body": {
-            "name": "Banco de dados",
-            "finalScore": 8.9,
-            "isPartialScore": False,
-            "tests": [
-                {
-                    "idEvalType": 1,
-                    "value": 9.5
-                },
-                {
-                    "idEvalType": 2,
-                    "value": 8.5
-                }
-            ],
-            "works": [
-                {
-                    "idEvalType": 7,
-                    "value": 9.5
-                },
-                {
-                    "idEvalType": 8,
-                    "value": 7.0
-                },
-                {
-                    "idEvalType": 9,
-                    "value": 7.0
-                },
-                {
-                    "idEvalType": 10,
-                    "value": 9.0
-                }
-            ],
-            "subs": [
-                {
-                    "idEvalType": 5,
-                    "value": 9.5
-                }
-            ]
-        }
-    }
+  "status_code": 200,
+  "body": {
+    "name": "Banco de dados",
+    "finalScore": 8.9,
+    "isPartialScore": False,
+    "weights": [
+      {
+        "idEvalType": 1,
+        "evalName": "P1",
+        "weight": 4
+      },
+      {
+        "idEvalType": 2,
+        "evalName": "P2",
+        "weight": 6
+      },
+      {
+        "idEvalType": 7,
+        "evalName": "T1",
+        "weight": 1
+      },
+      {
+        "idEvalType": 8,
+        "evalName": "T2",
+        "weight": 1
+      },
+      {
+        "idEvalType": 9,
+        "evalName": "T3",
+        "weight": 2
+      },
+      {
+        "idEvalType": 10,
+        "evalName": "T4",
+        "weight": 2
+      },
+      {
+        "idEvalType": 19,
+        "evalName": "T",
+        "weight": 4
+      },
+      {
+        "idEvalType": 20,
+        "evalName": "P",
+        "weight": 6
+      }
+    ],
+    "testScores": [
+      {
+        "idEvalType": 1,
+        "evalName": "P1",
+        "value": 9.5
+      },
+      {
+        "idEvalType": 2,
+        "evalName": "P2",
+        "value": 8.5
+      }
+    ],
+    "workScores": [
+      {
+        "idEvalType": 7,
+        "evalName": "T1",
+        "value": 9.5
+      },
+      {
+        "idEvalType": 8,
+        "evalName": "T2",
+        "value": 7.0
+      },
+      {
+        "idEvalType": 9,
+        "evalName": "T3",
+        "value": 7.0
+      },
+      {
+        "idEvalType": 10,
+        "evalName": "T4",
+        "value": 9.0
+      }
+    ],
+    "subScores": [
+      {
+        "idEvalType": 5,
+        "evalName": "PS1",
+        "value": 9.5
+      }
+    ]
+  }
+}
 
-
+"""
 def test_read_bar_chart_data():
     response = client.get("/estatistica/ecm505/1/2022")
     assert response.status_code == status.HTTP_200_OK
@@ -243,7 +292,7 @@ def test_read_bar_chart_data():
                 }
             ]
         }
-    }
+    }"""
 
 
 def test_read_all_subjects():
