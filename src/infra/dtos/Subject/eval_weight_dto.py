@@ -8,7 +8,7 @@ class EvalWeightDTO(Base):
     id = Column(Integer, primary_key=True)
     idEvaluationType = Column(Integer, nullable=False)
     codeSubject = Column(String(5), nullable=False)
-    weight = Column(Integer, nullable=False)
+    weight = Column(Integer, nullable=True)
     academicYear = Column(Integer, nullable=False)
     replaces = Column(Integer, nullable=True)
 

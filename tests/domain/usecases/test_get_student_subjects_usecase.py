@@ -24,7 +24,6 @@ class Test_GetStudentSubjectsUsecase:
         assert len(subjects) > 0
         assert Subject(id=1, codeSubject='ECM501', name='Ciencia de dados') in subjects
         assert Subject(id=5, codeSubject='ECM505', name='Banco de dados') in subjects
-        assert Subject(id=6, codeSubject='ECM503', name='Controladores') in subjects
 
 
     @pytest.mark.asyncio
