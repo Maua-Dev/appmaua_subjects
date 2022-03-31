@@ -114,3 +114,12 @@ class SubjectRepositoryImp(ISubjectRepository):
             return None
         except Exception as error:
             raise error
+
+    async def getCountStudentsByCourse(self, idCourse: int, courseYear: int) -> int:
+        pass
+
+    async def getStudentCourseId(self, idStudent: int) -> int:
+        pass
+
+    async def getStudentCourseYear(self, idStudent: int) -> int:
+        pass

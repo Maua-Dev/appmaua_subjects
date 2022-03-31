@@ -37,7 +37,8 @@ class GetCountStudentsByScoreController:
                                                                                                        academicYear)))
                 i += 0.5 # incremento
 
-            return Ok(BarChart(bars=bars))
+            return Ok(BarChart(bars=bars,
+                               curseStudentCount=0))
 
         except NoItemsFound as e:
             return NotFound('(GetCountStudentsByScoreController) No students found for grade -> ' + e.message)
