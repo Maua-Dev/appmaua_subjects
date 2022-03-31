@@ -10,6 +10,7 @@ from src.domain.entities.subject import Subject
 from src.domain.usecases.get_subject_evaluation_weight_usecase import GetSubjectEvaluationWeightUsecase
 from src.domain.enums.evaluation_type import EvaluationType
 
+
 class GetStudentSubjectScoreController:
     def __init__(self,
                  getStudentSubjectScoreUsecase: GetStudentSubjectScoreUsecase,
@@ -48,61 +49,47 @@ class GetStudentSubjectScoreController:
             testQnt = await self._getSubjectEvaluationQuantityUsecase(codeSubject, academicYear, 20)
             subQnt = await self._getSubjectEvaluationQuantityUsecase(codeSubject, academicYear, 21)
 
-            tests = []
-            works = []
-            subs = []
-            weights = []
+            tests = {}
+            works = {}
+            subs = {}
+            weights = {}
 
             for i in range(1, testQnt + 1):
-                tests.append(ScoreModel(idEvalType=i,
-                                        evalName=EvaluationType(i).name,
-                                        value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
-                                                                                        idStudent,
-                                                                                        academicYear,
-                                                                                        i)))
-                weights.append(WeightModel(idEvalType=i,
-                                           evalName=EvaluationType(i).name,
-                                           weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                tests[EvaluationType(i).name] = await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
+                                                                                          idStudent,
+                                                                                          academicYear,
+                                                                                          i)
+                weights[EvaluationType(i).name] = await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
                                                                                                 academicYear,
-                                                                                                i)))
+                                                                                                i)
                 # index da lista define a prova
                 # tests[n] = P(n+1)
 
             for j in range(7, workQnt + 7):
-                works.append(ScoreModel(idEvalType=j,
-                                        evalName=EvaluationType(j).name,
-                                        value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
-                                                                                        idStudent,
-                                                                                        academicYear,
-                                                                                        j)))
-                weights.append(WeightModel(idEvalType=j,
-                                           evalName=EvaluationType(j).name,
-                                           weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                works[EvaluationType(j).name] = await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
+                                                                                          idStudent,
+                                                                                          academicYear,
+                                                                                          j)
+                weights[EvaluationType(j).name] = await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
                                                                                                 academicYear,
-                                                                                                j)))
+                                                                                                j)
                 # index da lista define o trabalho
                 # works[n] = T(n+1)
 
             for k in range(5, subQnt + 5):
-                subs.append(ScoreModel(idEvalType=k,
-                                       evalName=EvaluationType(k).name,
-                                       value=await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
-                                                                                       idStudent,
-                                                                                       academicYear,
-                                                                                       k)))
+                subs[EvaluationType(k).name] = await self._getStudentSubjectScoreUsecase(codeSubject.upper(),
+                                                                                         idStudent,
+                                                                                         academicYear,
+                                                                                         k)
                 # index da lista define a sub
                 # subScores[n] = PS(n+1)
 
-            weights.append(WeightModel(idEvalType=19,
-                                       evalName=EvaluationType(19).name,
-                                       weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
-                                                                                            academicYear,
-                                                                                            19)))
-            weights.append(WeightModel(idEvalType=20,
-                                       evalName=EvaluationType(20).name,
-                                       weight=await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
-                                                                                            academicYear,
-                                                                                            20)))
+            weights[EvaluationType(19).name] = await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                                                                                             academicYear,
+                                                                                             19)
+            weights[EvaluationType(20).name] = await self._getSubjectEvaluationWeightUsecase(codeSubject.upper(),
+                                                                                             academicYear,
+                                                                                             20)
 
             return Ok(SubjectScores(name=name,
                                     finalScore=finalScore,

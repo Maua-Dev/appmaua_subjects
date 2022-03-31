@@ -29,13 +29,13 @@ class Test_GetStudentSubjectScoreController:
 
         body: SubjectScores = answer.body
 
-        assert type(body.testScores) is list
+        assert type(body.testScores) is dict
         assert len(body.testScores) == 2
 
-        assert type(body.workScores) is list
+        assert type(body.workScores) is dict
         assert len(body.workScores) == 4
 
-        assert type(body.subScores) is list
+        assert type(body.subScores) is dict
         assert len(body.subScores) == 1
 
         assert body.name == "Banco de dados"
@@ -62,13 +62,13 @@ class Test_GetStudentSubjectScoreController:
 
         body: SubjectScores = answer.body
 
-        assert type(body.testScores) is list
+        assert type(body.testScores) is dict
         assert len(body.testScores) == 1
 
-        assert type(body.workScores) is list
+        assert type(body.workScores) is dict
         assert len(body.workScores) == 4
 
-        assert type(body.subScores) is list
+        assert type(body.subScores) is dict
         assert len(body.subScores) == 1
 
         assert body.name == "Ciencia de dados"
