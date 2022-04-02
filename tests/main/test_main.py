@@ -5,7 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
-from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
+from src.adapters.controllers.get_score_statistics_controller import GetScoreStatisticsController
 from src.adapters.controllers.get_student_subject_scores_controller import GetStudentSubjectScoreController
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
@@ -69,13 +69,15 @@ async def getSubjectByProfessorId(idProfessor: int, response: Response):
     response.status_code = st.get(result.status_code)
     return result
 
-@app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}")
-async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, response: Response):
+@app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}/{idStudent}")
+async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, idStudent: int,
+                                  response: Response):
 
-    getCountStudentsByScoreController = Modular.getInject(GetCountStudentsByScoreController)
+    getCountStudentsByScoreController = Modular.getInject(GetScoreStatisticsController)
     req = HttpRequest(query={'codeSubject': codeSubject,
                              'idEvaluationType': idEvaluationType,
-                             'academicYear': academicYear})
+                             'academicYear': academicYear,
+                             'idStudent': idStudent})
     result = await getCountStudentsByScoreController(req)
     response.status_code = st.get(result.status_code)
     return result
