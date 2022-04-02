@@ -577,13 +577,16 @@ class SubjectRepositoryMock(ISubjectRepository):
 
 
     async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
-                                     academicYear: int) -> int:
+                                     academicYear: int, courseId: int, courseYear: int) -> int:
+        students = [row['idStudent'] for row in self._studentsCourse if row['idCourse'] == courseId
+                    and row['courseYear'] == courseYear and row['academicYear'] == academicYear]
 
         return len([row['idStudent'] for row in self._grades
                    if row['value'] == gradeValue
                    and row['codeSubject'].upper() == codeSubject.upper()
                    and row['academicYear'] == academicYear
-                   and row['idEvaluationType'] == idEvaluationType])
+                   and row['idEvaluationType'] == idEvaluationType
+                    and row['idStudent'] in students])
 
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int) -> float:

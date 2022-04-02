@@ -132,109 +132,110 @@ def test_read_scores():
           }
         }
 
-"""
+
 def test_read_bar_chart_data():
-    response = client.get("/estatistica/ecm505/1/2022")
+    response = client.get("/estatistica/ecm505/1/2022/1")
     assert response.status_code == status.HTTP_200_OK
     assert response.json() == {
-        "status_code": 200,
-        "body": {
+          "status_code": 200,
+          "body": {
             "bars": [
-                {
-                    "score": -2.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": -1.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 0.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 0.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 1.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 1.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 2.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 2.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 3.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 3.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 4.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 4.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 5.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 5.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 6.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 6.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 7.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 7.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 8.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 8.5,
-                    "studentCount": 0
-                },
-                {
-                    "score": 9.0,
-                    "studentCount": 0
-                },
-                {
-                    "score": 9.5,
-                    "studentCount": 2
-                },
-                {
-                    "score": 10.0,
-                    "studentCount": 0
-                }
-            ]
+              {
+                "score": -2.0,
+                "studentCount": 0
+              },
+              {
+                "score": -1.0,
+                "studentCount": 0
+              },
+              {
+                "score": 0.0,
+                "studentCount": 0
+              },
+              {
+                "score": 0.5,
+                "studentCount": 0
+              },
+              {
+                "score": 1.0,
+                "studentCount": 0
+              },
+              {
+                "score": 1.5,
+                "studentCount": 0
+              },
+              {
+                "score": 2.0,
+                "studentCount": 0
+              },
+              {
+                "score": 2.5,
+                "studentCount": 0
+              },
+              {
+                "score": 3.0,
+                "studentCount": 0
+              },
+              {
+                "score": 3.5,
+                "studentCount": 0
+              },
+              {
+                "score": 4.0,
+                "studentCount": 0
+              },
+              {
+                "score": 4.5,
+                "studentCount": 0
+              },
+              {
+                "score": 5.0,
+                "studentCount": 0
+              },
+              {
+                "score": 5.5,
+                "studentCount": 0
+              },
+              {
+                "score": 6.0,
+                "studentCount": 0
+              },
+              {
+                "score": 6.5,
+                "studentCount": 0
+              },
+              {
+                "score": 7.0,
+                "studentCount": 0
+              },
+              {
+                "score": 7.5,
+                "studentCount": 0
+              },
+              {
+                "score": 8.0,
+                "studentCount": 0
+              },
+              {
+                "score": 8.5,
+                "studentCount": 0
+              },
+              {
+                "score": 9.0,
+                "studentCount": 0
+              },
+              {
+                "score": 9.5,
+                "studentCount": 2
+              },
+              {
+                "score": 10.0,
+                "studentCount": 0
+              }
+            ],
+            "courseStudentCount": 5
+          }
         }
-    }"""
 
 
 def test_read_all_subjects():

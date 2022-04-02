@@ -21,7 +21,7 @@ class GetScoreStatisticsController:
 
     async def __call__(self, req: HttpRequest) -> HttpResponse:
         try:
-            if req.query['codeSubject'] is None :
+            if req.query['codeSubject'] is None:
                 return BadRequest(f"codeSubject is invalid. (codeSubject = None)")
 
             if req.query['idEvaluationType'] is None:
@@ -44,20 +44,26 @@ class GetScoreStatisticsController:
 
             bars = [GraphBar(score=-2, studentCount=await self._getCountStudentsByScoreUsecase(-2, codeSubject,
                                                                                                idEvaluationType,
-                                                                                               academicYear)),
+                                                                                               academicYear,
+                                                                                               courseId,
+                                                                                               courseYear)),
                     GraphBar(score=-1, studentCount=await self._getCountStudentsByScoreUsecase(-1, codeSubject,
                                                                                                idEvaluationType,
-                                                                                               academicYear))]
+                                                                                               academicYear,
+                                                                                               courseId,
+                                                                                               courseYear))]
 
-            i = 0 # contador
+            i = 0  # contador
             while i <= 10:
                 bars.append(GraphBar(score=i, studentCount=await self._getCountStudentsByScoreUsecase(i, codeSubject,
-                                                                                                       idEvaluationType,
-                                                                                                       academicYear)))
-                i += 0.5 # incremento
+                                                                                                      idEvaluationType,
+                                                                                                      academicYear,
+                                                                                                      courseId,
+                                                                                                      courseYear)))
+                i += 0.5  # incremento
 
             return Ok(BarChart(bars=bars,
-                               curseStudentCount=courseCount))
+                               courseStudentCount=courseCount))
 
         except NoItemsFound as e:
             return NotFound('(GetCountStudentsByScoreController) No students found for grade -> ' + e.message)

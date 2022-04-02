@@ -3,7 +3,7 @@ from src.domain.entities.course import Course
 from src.infra.dtos.db_base import Base
 from sqlalchemy.orm import relationship
 
-class SubjectDTO(Base):
+class CourseDTO(Base):
     __tablename__ = 'Courses'
 
     id = Column(Integer, primary_key=True)

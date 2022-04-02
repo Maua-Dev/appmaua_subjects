@@ -55,11 +55,13 @@ class SubjectRepositoryImp(ISubjectRepository):
             raise error
 
     async def getCountStudentsByScore(self, gradeValue: float, codeSubject: str, idEvaluationType: int,
-                                      academicYear: int) -> int:
+                                      academicYear: int, courseId: int, courseYear: int) -> int:
         try:
             response = await self._datasource.getCountStudentsByScore(gradeValue=gradeValue, codeSubject=codeSubject,
                                                                       idEvaluationType=idEvaluationType,
-                                                                      academicYear=academicYear)
+                                                                      academicYear=academicYear,
+                                                                      courseId=courseId,
+                                                                      courseYear=courseYear)
             return len(list(map(lambda x: x.getIdStudent(), response)))
         except AttributeError:
             return 0
@@ -116,13 +118,40 @@ class SubjectRepositoryImp(ISubjectRepository):
             raise error
 
     async def getCountStudentsByCourse(self, idCourse: int, courseYear: int, academicYear: int) -> int:
-        pass
+        try:
+            response = await self._datasource.getCountStudentsByCourse(idCourse, courseYear, academicYear)
+            return len(list(map(lambda x: x.getIdStudent(), response)))
+        except AttributeError:
+            return 0
+        except Exception as error:
+            raise error
 
     async def getStudentCourseId(self, idStudent: int, academicYear: int) -> int:
-        pass
+        try:
+            response = await self._datasource.getStudentCourseId(idStudent, academicYear)
+            return response.getId()
+
+        except AttributeError:
+            return None
+        except Exception as error:
+            raise error
 
     async def getStudentCourseYear(self, idStudent: int, academicYear: int) -> int:
-        pass
+        try:
+            response = await self._datasource.getStudentCourseYear(idStudent, academicYear)
+            return response.getCourseYear()
+
+        except AttributeError:
+            return None
+        except Exception as error:
+            raise error
 
     async def getCourseName(self, idCourse: int) -> str:
-        pass
+        try:
+            response = await self._datasource.getCourseName(idCourse)
+            return response.getName()
+
+        except AttributeError:
+            return None
+        except Exception as error:
+            raise error
