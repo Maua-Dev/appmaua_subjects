@@ -450,129 +450,95 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'replaces': 2
             }
         ]
-        self._studentsCourseCount = [
-            {
-                'idCourse':1,
-                'courseName':'Engenharia de Computação',
-                'courseYear': 2,
-                'idStudent':1
-            },
-            {
-                'idCourse': 1,
-                'courseName': 'Engenharia de Computação',
-                'courseYear': 2,
-                'idStudent': 2
-            },
-            {
-                'idCourse': 1,
-                'courseName': 'Engenharia de Computação',
-                'courseYear': 2,
-                'idStudent': 3
-            },
-            {
-                'idCourse': 1,
-                'courseName': 'Engenharia de Computação',
-                'courseYear': 2,
-                'idStudent': 4
-            },
-            {
-                'idCourse': 1,
-                'courseName': 'Engenharia de Computação',
-                'courseYear': 2,
-                'idStudent': 5
-            },
-            {
-                'idCourse': 2,
-                'courseName': 'Ciclo Básico',
-                'courseYear': 1,
-                'idStudent': 6
-            },
-            {
-                'idCourse': 2,
-                'courseName': 'Ciclo Básico',
-                'courseYear': 1,
-                'idStudent': 7
-            },
-            {
-                'idCourse': 2,
-                'courseName': 'Ciclo Básico',
-                'courseYear': 1,
-                'idStudent': 8
-            },
-            {
-                'idCourse': 3,
-                'courseName': 'Engenharia de Controle e Automação',
-                'courseYear': 3,
-                'idStudent': 9
-            },
-            {
-                'idCourse': 3,
-                'courseName': 'Engenharia de Controle e Automação',
-                'courseYear': 3,
-                'idStudent': 10
-            }
-        ]
 
         self._studentsCourse = [
             {
                 'idCourse': 1,
-                'courseName':'Engenharia de Computação',
+                'courseName': 'Engenharia de Computação',
                 'courseYear': 2,
-                'idStudent': 1
+                'idStudent': 1,
+                'academicYear': 2022
             },
             {
                 'idCourse': 1,
                 'courseName': 'Engenharia de Computação',
                 'courseYear': 2,
-                'idStudent': 2
+                'idStudent': 2,
+                'academicYear': 2022
             },
             {
                 'idCourse': 1,
                 'courseName': 'Engenharia de Computação',
                 'courseYear': 2,
-                'idStudent': 3
+                'idStudent': 3,
+                'academicYear': 2022
             },
             {
                 'idCourse': 1,
                 'courseName': 'Engenharia de Computação',
                 'courseYear': 2,
-                'idStudent': 4
+                'idStudent': 4,
+                'academicYear': 2022
             },
             {
                 'idCourse': 1,
                 'courseName': 'Engenharia de Computação',
                 'courseYear': 2,
-                'idStudent': 5
+                'idStudent': 5,
+                'academicYear': 2022
             },
             {
                 'idCourse': 2,
                 'courseName': 'Ciclo Básico',
                 'courseYear': 1,
-                'idStudent': 6
+                'idStudent': 6,
+                'academicYear': 2022
             },
             {
                 'idCourse': 2,
                 'courseName': 'Ciclo Básico',
                 'courseYear': 1,
-                'idStudent': 7
+                'idStudent': 7,
+                'academicYear': 2022
             },
             {
                 'idCourse': 2,
                 'courseName': 'Ciclo Básico',
                 'courseYear': 1,
-                'idStudent': 8
+                'idStudent': 8,
+                'academicYear': 2022
             },
             {
                 'idCourse': 3,
                 'courseName': 'Engenharia de Controle e Automação',
                 'courseYear': 3,
-                'idStudent': 9
+                'idStudent': 9,
+                'academicYear': 2022
             },
             {
                 'idCourse': 3,
                 'courseName': 'Engenharia de Controle e Automação',
                 'courseYear': 3,
-                'idStudent': 10
+                'idStudent': 10,
+                'academicYear': 2022
+            }
+        ]
+
+        self._course = [
+            {
+                'id': 1,
+                'courseName': 'Engenharia de Computação',
+                'codeCourse': 'ENGCOMP'
+            },
+            {
+                'id': 2,
+                'courseName': 'Ciclo Básico',
+                'codeCourse': 'CICBAS'
+            },
+            {
+                'id': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'codeCourse': 'ENGCA'
             }
         ]
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
@@ -659,27 +625,35 @@ class SubjectRepositoryMock(ISubjectRepository):
                     and row['idEvaluationType'] == idEvaluationType]
         return toReplace if len(toReplace) > 0 else None
 
-    async def getCountStudentsByCourse(self, idCourse:int, courseYear:int) -> int:
+    async def getCountStudentsByCourse(self, idCourse:int, courseYear:int, academicYear: int) -> int:
+
+      return len([row['idStudent'] for row in self._studentsCourse
+                  if row['idCourse'] == idCourse
+                  and row['courseYear'] == courseYear
+                  and row['academicYear'] == academicYear])
+
+    async def getStudentCourseId(self, idStudent: int, academicYear: int) -> int:
         try:
-          return len([course['idStudent'] for course in self._studentsCourseCount
-                      if course['idCourse'] == idCourse
-                      and course['courseYear'] == courseYear])
+          return [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent
+                                                                and row['academicYear'] == academicYear][0]
 
         except IndexError as error:
           return None
 
-    async def getStudentCourseId(self, idStudent: int) -> int:
+    async def getStudentCourseYear(self, idStudent: int, academicYear: int) -> int:
         try:
-          return [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
+          return [row['courseYear'] for row in self._studentsCourse if row['idStudent'] == idStudent
+                                                                    and row['academicYear'] == academicYear][0]
 
         except IndexError as error:
           return None
 
-    async def getStudentCourseYear(self, idStudent: int) -> int:
+    async def getCourseName(self, idCourse: int) -> str:
         try:
-          return [row['courseYear'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
+            return [row['courseName'] for row in self._course if row['id'] == idCourse][0]
 
         except IndexError as error:
-          return None
+            return None
+
 
 

@@ -48,13 +48,17 @@ class ISubjectRepository(ABC):
 
 
     @abstractmethod
-    async def getCountStudentsByCourse(self, idCourse: int, courseYear: int) -> int:
+    async def getCountStudentsByCourse(self, idCourse: int, courseYear: int, academicYear: int) -> int:
         pass
 
     @abstractmethod
-    async def getStudentCourseId(self, idStudent: int) -> int:
+    async def getStudentCourseId(self, idStudent: int, academicYear: int) -> int:
         pass
 
     @abstractmethod
-    async def getStudentCourseYear(self, idStudent: int) -> int:
+    async def getStudentCourseYear(self, idStudent: int, academicYear: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getCourseName(self, idCourse: int) -> str:
         pass
