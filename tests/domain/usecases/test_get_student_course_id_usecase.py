@@ -9,13 +9,13 @@ class Test_GetStudentCourseIdUsecase:
     @pytest.mark.asyncio
     async def test_get_student_course_id_1(self):
         getStudentCourseIdUsecase = GetStudentCourseIdUsecase(subjectRepository=SubjectRepositoryMock())
-        idCourse = await getStudentCourseIdUsecase(1)
+        idCourse = await getStudentCourseIdUsecase(1, academicYear=2022)
         assert idCourse == 1
 
     @pytest.mark.asyncio
     async def test_get_student_course_id_2(self):
         getStudentCourseIdUsecase = GetStudentCourseIdUsecase(subjectRepository=SubjectRepositoryMock())
-        idCourse = await getStudentCourseIdUsecase(9)
+        idCourse = await getStudentCourseIdUsecase(9, academicYear=2022)
         assert idCourse == 3
 
 

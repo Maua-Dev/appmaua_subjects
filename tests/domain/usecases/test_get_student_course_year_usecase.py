@@ -9,13 +9,13 @@ class Test_GetStudentCourseYearUsecase:
     @pytest.mark.asyncio
     async def test_get_student_course_year_1(self):
         getStudentCourseYearUsecase = GetStudentCourseYearUsecase(subjectRepository=SubjectRepositoryMock())
-        courseYear = await getStudentCourseYearUsecase(1)
+        courseYear = await getStudentCourseYearUsecase(1, academicYear=2022)
         assert courseYear == 2
 
     @pytest.mark.asyncio
     async def test_get_student_course_year_2(self):
         getStudentCourseYearUsecase = GetStudentCourseYearUsecase(subjectRepository=SubjectRepositoryMock())
-        courseYear = await getStudentCourseYearUsecase(9)
+        courseYear = await getStudentCourseYearUsecase(9, academicYear=2022)
         assert courseYear == 3
 
 
@@ -24,4 +24,4 @@ class Test_GetStudentCourseYearUsecase:
     async def test_get_student_course_year_error(self):
         getStudentCourseYearUsecase = GetStudentCourseYearUsecase(subjectRepository=SubjectRepositoryMock())
         with pytest.raises(UnexpectedError):
-            await getStudentCourseYearUsecase(None)
+            await getStudentCourseYearUsecase(None, academicYear=2022)

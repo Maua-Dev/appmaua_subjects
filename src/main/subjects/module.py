@@ -10,7 +10,7 @@ from src.adapters.controllers.get_subject_by_code_controller import GetSubjectBy
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.domain.usecases.get_count_students_by_score_usecase import GetCountStudentsByScoreUsecase
-from src.domain.usecases.get_count_students_by_course_usecase import GetCountStudentsByCourseUsecase
+from src.domain.usecases.get_count_students_by_course_and_year_usecase import GetCountStudentsByCourseAndYearUsecase
 from src.domain.usecases.get_final_score_usecase import GetFinalScoreUsecase
 from src.domain.usecases.get_student_course_id_usecase import GetStudentCourseIdUsecase
 from src.domain.usecases.get_student_course_year_usecase import GetStudentCourseYearUsecase
@@ -70,7 +70,7 @@ class Module:
             GetFinalScoreUsecase,
             GetSubjectEvaluationQuantityUsecase,
             GetSubjectEvaluationWeightUsecase,
-            GetCountStudentsByCourseUsecase,
+            GetCountStudentsByCourseAndYearUsecase,
             GetStudentCourseIdUsecase,
             GetStudentCourseYearUsecase
 
