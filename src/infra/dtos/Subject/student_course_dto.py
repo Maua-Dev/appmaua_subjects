@@ -14,8 +14,8 @@ class StudentCourseDTO(Base):
     def getId(self) -> int:
         return self.id
 
-    def getIdAluno(self) -> int:
-        return self.idAluno
+    def getIdStudent(self) -> int:
+        return self.idStudent
 
     def getIdCourse(self) -> int:
         return self.idCourse

@@ -121,7 +121,7 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getCountStudentsByCourse(idCourse, courseYear, academicYear)
             return len(list(map(lambda x: x.getIdStudent(), response)))
-        except AttributeError:
+        except AttributeError as error:
             return 0
         except Exception as error:
             raise error

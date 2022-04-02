@@ -82,7 +82,7 @@ class PostgresDataSource(IDataSource):
             try:
                 query = await s.execute(
                     select(StudentScoresDTO).
-                    join(StudentCourseDTO.idStudent == StudentScoresDTO.idStudent).
+                    join(StudentCourseDTO, StudentCourseDTO.idStudent == StudentScoresDTO.idStudent).
                         where(StudentScoresDTO.codeSubject == codeSubject,
                               StudentScoresDTO.idEvaluationType == idEvaluationType,
                               StudentScoresDTO.academicYear == academicYear,
