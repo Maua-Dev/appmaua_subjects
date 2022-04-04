@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Tuple
 from src.domain.entities.subject import Subject
 
 
@@ -26,7 +26,7 @@ class ISubjectRepository(ABC):
 
     @abstractmethod
     async def getCountStudentsByScore(self, gradeValue: float, codeSubject:str, idEvaluationType: int,
-                                     academicYear: int) -> int:
+                                     academicYear: int, courseId: int, courseYear: int) -> int:
         pass
 
     @abstractmethod
@@ -44,4 +44,21 @@ class ISubjectRepository(ABC):
 
     @abstractmethod
     async def getWichScoreToReplace(self, codeSubject: str, academicYear: int, idEvaluationType: int) -> List[int]:
+        pass
+
+
+    @abstractmethod
+    async def getCountStudentsByCourse(self, idCourse: int, courseYear: int, academicYear: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getStudentCourseId(self, idStudent: int, academicYear: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getStudentCourseYear(self, idStudent: int, academicYear: int) -> int:
+        pass
+
+    @abstractmethod
+    async def getCourseName(self, idCourse: int) -> str:
         pass

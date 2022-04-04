@@ -8,8 +8,8 @@ class GetCountStudentsByScoreUsecase:
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
 
-    async def __call__(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
-                                     academicYear: int) -> int:
+    async def __call__(self, gradeValue: float, codeSubject: str, idEvaluationType: int,
+                       academicYear: int, courseId: int, courseYear: int) -> int:
         try:
 
             if codeSubject is None:
@@ -34,7 +34,8 @@ class GetCountStudentsByScoreUsecase:
                 raise Exception('codeSubject is invalid')
 
             return await self._subjectRepository.getCountStudentsByScore(gradeValue, codeSubject.upper(),
-                                                                                idEvaluationType, academicYear)
+                                                                         idEvaluationType, academicYear,
+                                                                         courseId, courseYear)
 
         except Exception as error:
             raise UnexpectedError('GetCountStudentsByScore', str(error))

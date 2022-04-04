@@ -3,6 +3,7 @@ from src.adapters.viewmodels.subject_scores import *
 from src.domain.usecases.get_final_score_usecase import GetFinalScoreUsecase
 from src.domain.usecases.get_student_subject_score_usecase import GetStudentSubjectScoreUsecase
 from src.domain.usecases.get_subject_by_code_usecase import GetSubjectByCodeUsecase
+from src.domain.usecases.get_subject_evaluation_weight_usecase import GetSubjectEvaluationWeightUsecase
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 from src.adapters.helpers.http_models import HttpRequest
 from src.domain.usecases.get_subject_evaluation_quantity_usecase import GetSubjectEvaluationQuantityUsecase
@@ -18,7 +19,8 @@ class Test_GetStudentSubjectScoreController:
             getStudentSubjectScoreUsecase=GetStudentSubjectScoreUsecase(SubjectRepositoryMock()),
             getSubjectByCodeUsecase=GetSubjectByCodeUsecase(SubjectRepositoryMock()),
             getFinalScoreUsecase=GetFinalScoreUsecase(SubjectRepositoryMock()),
-            getSubjectEvaluationQuantityUsecase=GetSubjectEvaluationQuantityUsecase(SubjectRepositoryMock()))
+            getSubjectEvaluationQuantityUsecase=GetSubjectEvaluationQuantityUsecase(SubjectRepositoryMock()),
+            getSubjectEvaluationWeightUsecase=GetSubjectEvaluationWeightUsecase(SubjectRepositoryMock()))
 
         req = HttpRequest(query={'codeSubject': 'ecm505',
                                  'idStudent': 1,
@@ -27,14 +29,14 @@ class Test_GetStudentSubjectScoreController:
 
         body: SubjectScores = answer.body
 
-        assert type(body.tests) is list
-        assert len(body.tests) == 2
+        assert type(body.testScores) is dict
+        assert len(body.testScores) == 2
 
-        assert type(body.works) is list
-        assert len(body.works) == 4
+        assert type(body.workScores) is dict
+        assert len(body.workScores) == 4
 
-        assert type(body.subs) is list
-        assert len(body.subs) == 1
+        assert type(body.subScores) is dict
+        assert len(body.subScores) == 1
 
         assert body.name == "Banco de dados"
 
@@ -50,7 +52,8 @@ class Test_GetStudentSubjectScoreController:
             getStudentSubjectScoreUsecase=GetStudentSubjectScoreUsecase(SubjectRepositoryMock()),
             getSubjectByCodeUsecase=GetSubjectByCodeUsecase(SubjectRepositoryMock()),
             getFinalScoreUsecase=GetFinalScoreUsecase(SubjectRepositoryMock()),
-            getSubjectEvaluationQuantityUsecase=GetSubjectEvaluationQuantityUsecase(SubjectRepositoryMock()))
+            getSubjectEvaluationQuantityUsecase=GetSubjectEvaluationQuantityUsecase(SubjectRepositoryMock()),
+            getSubjectEvaluationWeightUsecase=GetSubjectEvaluationWeightUsecase(SubjectRepositoryMock()))
 
         req = HttpRequest(query={'codeSubject': 'ecm501',
                                  'idStudent': 1,
@@ -59,14 +62,14 @@ class Test_GetStudentSubjectScoreController:
 
         body: SubjectScores = answer.body
 
-        assert type(body.tests) is list
-        assert len(body.tests) == 1
+        assert type(body.testScores) is dict
+        assert len(body.testScores) == 1
 
-        assert type(body.works) is list
-        assert len(body.works) == 4
+        assert type(body.workScores) is dict
+        assert len(body.workScores) == 4
 
-        assert type(body.subs) is list
-        assert len(body.subs) == 1
+        assert type(body.subScores) is dict
+        assert len(body.subScores) == 1
 
         assert body.name == "Ciencia de dados"
 

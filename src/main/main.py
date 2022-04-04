@@ -10,7 +10,7 @@ from src.adapters.helpers.http_models import HttpRequest
 from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsController
 from src.main.subjects.module import Modular
 from src.main.helpers.status import status as st
-from src.adapters.controllers.get_count_students_by_score_controller import GetCountStudentsByScoreController
+from src.adapters.controllers.get_score_statistics_controller import GetScoreStatisticsController
 
 app = FastAPI()
 app.add_middleware(
@@ -64,13 +64,15 @@ async def getSubjectByProfessorId(idProfessor: int, response: Response):
     response.status_code = st.get(result.status_code)
     return result
 
-@app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}")
-async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, response: Response):
+@app.get("/estatistica/{codeSubject}/{idEvaluationType}/{academicYear}/{idStudent}")
+async def getCountStudentsByScore(codeSubject: str, idEvaluationType: int, academicYear: int, idStudent: int,
+                                  response: Response):
 
-    getCountStudentsByScoreController = Modular.getInject(GetCountStudentsByScoreController)
+    getCountStudentsByScoreController = Modular.getInject(GetScoreStatisticsController)
     req = HttpRequest(query={'codeSubject': codeSubject,
                              'idEvaluationType': idEvaluationType,
-                             'academicYear': academicYear})
+                             'academicYear': academicYear,
+                             'idStudent': idStudent})
     result = await getCountStudentsByScoreController(req)
     response.status_code = st.get(result.status_code)
     return result

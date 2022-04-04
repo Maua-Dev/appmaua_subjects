@@ -8,4 +8,5 @@ class GraphBar(BaseModel):
 
 class BarChart(BaseModel):
     bars: List[GraphBar]
+    courseStudentCount: int
 

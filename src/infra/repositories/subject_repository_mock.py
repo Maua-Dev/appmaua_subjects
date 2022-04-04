@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
@@ -451,6 +451,96 @@ class SubjectRepositoryMock(ISubjectRepository):
             }
         ]
 
+        self._studentsCourse = [
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 1,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 2,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 3,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 4,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 1,
+                'courseName': 'Engenharia de Computação',
+                'courseYear': 2,
+                'idStudent': 5,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 6,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 7,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 2,
+                'courseName': 'Ciclo Básico',
+                'courseYear': 1,
+                'idStudent': 8,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'courseYear': 3,
+                'idStudent': 9,
+                'academicYear': 2022
+            },
+            {
+                'idCourse': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'courseYear': 3,
+                'idStudent': 10,
+                'academicYear': 2022
+            }
+        ]
+
+        self._course = [
+            {
+                'id': 1,
+                'courseName': 'Engenharia de Computação',
+                'codeCourse': 'ENGCOMP'
+            },
+            {
+                'id': 2,
+                'courseName': 'Ciclo Básico',
+                'codeCourse': 'CICBAS'
+            },
+            {
+                'id': 3,
+                'courseName': 'Engenharia de Controle e Automação',
+                'codeCourse': 'ENGCA'
+            }
+        ]
     async def getStudentSubjects(self, idStudent: int) -> List[Subject]:
 
         subjects = [Subject(codeSubject=row['codeSubject'], name=row['name']) for row in self._studentsSubjects
@@ -487,13 +577,16 @@ class SubjectRepositoryMock(ISubjectRepository):
 
 
     async def getCountStudentsByScore(self, gradeValue:float, codeSubject: str, idEvaluationType: int,
-                                     academicYear: int) -> int:
+                                     academicYear: int, courseId: int, courseYear: int) -> int:
+        students = [row['idStudent'] for row in self._studentsCourse if row['idCourse'] == courseId
+                    and row['courseYear'] == courseYear and row['academicYear'] == academicYear]
 
         return len([row['idStudent'] for row in self._grades
                    if row['value'] == gradeValue
                    and row['codeSubject'].upper() == codeSubject.upper()
                    and row['academicYear'] == academicYear
-                   and row['idEvaluationType'] == idEvaluationType])
+                   and row['idEvaluationType'] == idEvaluationType
+                    and row['idStudent'] in students])
 
     async def getSubjectScoreByEvalType(self, codeSubject: str, idStudent: int, academicYear: int,
                                         idEvaluationType: int) -> float:
@@ -534,5 +627,36 @@ class SubjectRepositoryMock(ISubjectRepository):
                     and row['academicYear'] == academicYear
                     and row['idEvaluationType'] == idEvaluationType]
         return toReplace if len(toReplace) > 0 else None
+
+    async def getCountStudentsByCourse(self, idCourse:int, courseYear:int, academicYear: int) -> int:
+
+      return len([row['idStudent'] for row in self._studentsCourse
+                  if row['idCourse'] == idCourse
+                  and row['courseYear'] == courseYear
+                  and row['academicYear'] == academicYear])
+
+    async def getStudentCourseId(self, idStudent: int, academicYear: int) -> int:
+        try:
+          return [row['idCourse'] for row in self._studentsCourse if row['idStudent'] == idStudent
+                                                                and row['academicYear'] == academicYear][0]
+
+        except IndexError as error:
+          return None
+
+    async def getStudentCourseYear(self, idStudent: int, academicYear: int) -> int:
+        try:
+          return [row['courseYear'] for row in self._studentsCourse if row['idStudent'] == idStudent
+                                                                    and row['academicYear'] == academicYear][0]
+
+        except IndexError as error:
+          return None
+
+    async def getCourseName(self, idCourse: int) -> str:
+        try:
+            return [row['courseName'] for row in self._course if row['id'] == idCourse][0]
+
+        except IndexError as error:
+            return None
+
 
 
