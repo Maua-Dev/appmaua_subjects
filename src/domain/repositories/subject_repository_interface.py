@@ -66,3 +66,7 @@ class ISubjectRepository(ABC):
     @abstractmethod
     async def getCourseNameByStudentId(self, idStudent: int) -> str:
         pass
+
+    @abstractmethod
+    async def getSubjectNameById(self, idSubject: int) -> str:
+        pass
