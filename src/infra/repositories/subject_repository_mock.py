@@ -672,3 +672,10 @@ class SubjectRepositoryMock(ISubjectRepository):
 
         except IndexError as error:
           return None
+
+    async def getSubjectCodeById(self, idSubject: int) -> str:
+        try:
+          return [row['codeSubject'] for row in self._subjects if row['idSubject'] == idSubject][0]
+
+        except IndexError as error:
+          return None
