@@ -2,7 +2,7 @@ from src.domain.errors.errors import UnexpectedError, NoItemsFound
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.domain.enums.evaluation_type import EvaluationType
 
-class GetCourseNameByStudentId:
+class GetCourseNameByStudentIdUsecase:
 
     def __init__(self, subjectRepository: ISubjectRepository) -> None:
         self._subjectRepository = subjectRepository
