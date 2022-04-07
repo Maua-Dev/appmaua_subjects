@@ -659,4 +659,9 @@ class SubjectRepositoryMock(ISubjectRepository):
             return None
 
 
+    async def getCourseNameByStudentId(self, idStudent: int) -> str:
+        try:
+          return [row['courseName'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
 
+        except IndexError as error:
+          return None
