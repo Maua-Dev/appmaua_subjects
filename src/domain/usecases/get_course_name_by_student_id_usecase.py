@@ -13,7 +13,7 @@ class GetCourseNameByStudentIdUsecase:
             if idStudent is None:
                 raise Exception('idStudent is None')
 
-            name = await self._subjectRepository.getStudentCourseName(idStudent)
+            name = await self._subjectRepository.getCourseNameByStudentId(idStudent)
             if name is None:
                 raise Exception('idStudent is invalid')
 
