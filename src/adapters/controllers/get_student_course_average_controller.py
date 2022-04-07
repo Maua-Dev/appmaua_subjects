@@ -34,7 +34,7 @@ class GetStudentCourseAverageController:
             idStudent = req.query['idStudent']
             academicYear = req.query['academicYear']
 
-            ano = await self._getStudentCourseYearUsecase(idStudent=idStudent)
+            ano = await self._getStudentCourseYearUsecase(idStudent=idStudent, academicYear=academicYear)
             nomeGraduacao = await self._getCourseNameByStudentIdUsecase(idStudent=idStudent)
 
             medias = []
@@ -48,12 +48,12 @@ class GetStudentCourseAverageController:
                 )
                 medias.append(AverageViewModel(
                     materia=subject.name,
-                    media=media))
+                    media=media,
+                    isPartialScore=partialScore))
 
             return Ok(AverageSubjectsViewModel(nomeGraduacao=nomeGraduacao,
                                     ano=ano,
-                                    medias=medias,
-                                    isPartialScore=partialScore))
+                                    medias=medias))
 
         except NoItemsFound as e:
             return NotFound('(GetStudentCourseAverageController) No course found -> ' + e.message)
