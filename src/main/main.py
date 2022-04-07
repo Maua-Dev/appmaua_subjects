@@ -11,6 +11,8 @@ from src.adapters.controllers.get_all_subjects_controller import GetAllSubjectsC
 from src.main.subjects.module import Modular
 from src.main.helpers.status import status as st
 from src.adapters.controllers.get_score_statistics_controller import GetScoreStatisticsController
+from src.adapters.controllers.get_student_course_average_controller import GetStudentCourseAverageController
+
 
 app = FastAPI()
 app.add_middleware(
@@ -85,5 +87,15 @@ async def getCountStudentsByScore(codeSubject: str, idStudent: int, academicYear
                              'idStudent': idStudent,
                              'academicYear': academicYear})
     result = await getStudentSubjectScoreController(req)
+    response.status_code = st.get(result.status_code)
+    return result
+
+@app.get("/notas-gerais/{idStudent}/{academicYear}")
+async def GetStudentCourseAverage(idStudent: int, academicYear: int, response: Response):
+
+    getStudentCourseAverageController = Modular.getInject(GetStudentCourseAverageController)
+    req = HttpRequest(query={'idStudent': idStudent,
+                             'academicYear': academicYear})
+    result = await getStudentCourseAverageController(req)
     response.status_code = st.get(result.status_code)
     return result

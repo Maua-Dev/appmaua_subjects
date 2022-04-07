@@ -5,6 +5,7 @@ from typing import List
 
 
 class SubjectRepositoryImp(ISubjectRepository):
+
     def __init__(self, datasource: IDataSource) -> None:
         super().__init__()
         self._datasource = datasource
@@ -155,3 +156,12 @@ class SubjectRepositoryImp(ISubjectRepository):
             return None
         except Exception as error:
             raise error
+
+    async def getCourseNameByStudentId(self, idStudent: int) -> str:
+        pass
+
+    async def getSubjectNameById(self, idSubject: int) -> str:
+        pass
+
+    async def getSubjectCodeById(self, idSubject: int) -> str:
+        pass

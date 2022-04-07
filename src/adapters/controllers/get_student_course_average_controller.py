@@ -9,6 +9,7 @@ from src.domain.usecases.get_final_score_usecase import GetFinalScoreUsecase
 
 from src.adapters.helpers.http_models import *
 
+
 class GetStudentCourseAverageController:
     def __init__(self,
         getStudentCourseYearUsecase: GetStudentCourseYearUsecase,
@@ -40,7 +41,7 @@ class GetStudentCourseAverageController:
             
             listSubjects = await self._getStudentSubjectsUsecase(idStudent=idStudent)
             for subject in listSubjects:
-                media = await self._getFinalScoreUsecase(
+                media, partialScore = await self._getFinalScoreUsecase(
                     codeSubject=subject.codeSubject,
                     academicYear=academicYear,
                     idStudent=idStudent
@@ -51,7 +52,8 @@ class GetStudentCourseAverageController:
 
             return Ok(AverageSubjectsViewModel(nomeGraduacao=nomeGraduacao,
                                     ano=ano,
-                                    medias=medias))
+                                    medias=medias,
+                                    isPartialScore=partialScore))
 
         except NoItemsFound as e:
             return NotFound('(GetStudentCourseAverageController) No course found -> ' + e.message)

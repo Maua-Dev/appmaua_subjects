@@ -8,6 +8,7 @@ from src.adapters.controllers.get_student_subject_scores_controller import GetSt
 from src.adapters.controllers.get_student_subjects_controller import GetStudentSubjectsController
 from src.adapters.controllers.get_subject_by_code_controller import GetSubjectByCodeController
 from src.adapters.controllers.get_subject_by_professor_id_controller import GetSubjectByProfessorIdController
+from src.adapters.controllers.get_student_course_average_controller import GetStudentCourseAverageController
 from src.domain.usecases.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.domain.usecases.get_count_students_by_score_usecase import GetCountStudentsByScoreUsecase
 from src.domain.usecases.get_count_students_by_course_and_year_usecase import GetCountStudentsByCourseAndYearUsecase
@@ -20,6 +21,7 @@ from src.domain.usecases.get_subject_by_professor_id_usecase import GetSubjectBy
 from src.domain.usecases.get_student_subject_score_usecase import GetStudentSubjectScoreUsecase
 from src.domain.usecases.get_subject_evaluation_quantity_usecase import GetSubjectEvaluationQuantityUsecase
 from src.domain.usecases.get_subject_evaluation_weight_usecase import GetSubjectEvaluationWeightUsecase
+from src.domain.usecases.get_course_name_by_student_id_usecase import GetCourseNameByStudentIdUsecase
 from src.envs import Envs
 from src.external.postgres.datasources.postgres_datasource import PostgresDataSource
 from src.infra.repositories.subject_repository_imp import SubjectRepositoryImp
@@ -72,7 +74,9 @@ class Module:
             GetSubjectEvaluationWeightUsecase,
             GetCountStudentsByCourseAndYearUsecase,
             GetStudentCourseIdUsecase,
-            GetStudentCourseYearUsecase
+            GetStudentCourseYearUsecase,
+            GetCourseNameByStudentIdUsecase,
+            GetStudentCourseAverageController
 
         ]
 
