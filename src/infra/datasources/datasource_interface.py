@@ -64,3 +64,15 @@ class IDataSource(ABC):
     @abstractmethod
     async def getCourseName(self, idCourse: int) -> CourseDTO:
         pass
+
+    @abstractmethod
+    async def getCourseNameByStudentId(self, idStudent: int) -> CourseDTO:
+        pass
+
+    @abstractmethod
+    async def getSubjectNameById(self, idSubject: int) -> SubjectDTO:
+        pass
+
+    @abstractmethod
+    async def getSubjectCodeById(self, idSubject: int) -> SubjectDTO:
+        pass
