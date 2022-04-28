@@ -209,3 +209,40 @@ class PostgresDataSource(IDataSource):
 
             except Exception as e:
                 raise Exception(f'DataSource Error. {str(e)}')
+    
+    async def getCourseNameByStudentId(self, idStudent: int) -> CourseDTO:
+        async with AsyncDBConnectionHandler().session() as s:
+            try:
+                query = await s.execute(
+                    select(CourseDTO).
+                        join(CourseDTO).
+                        where(StudentCourseDTO.idStudent == idStudent)
+                )
+                return query.scalars().first()
+
+            except Exception as e:
+                raise Exception(f'DataSource Error. {str(e)}')
+
+    async def getSubjectNameById(self, idSubject: int) -> SubjectDTO:
+        async with AsyncDBConnectionHandler().session() as s:
+            try:
+                query = await s.execute(
+                    select(SubjectDTO).
+                        where(SubjectDTO.id == idSubject)
+                )
+                return query.scalars().first()
+
+            except Exception as e:
+                raise Exception(f'DataSource Error. {str(e)}')
+
+    async def getSubjectCodeById(self, idSubject: int) -> SubjectDTO:
+        async with AsyncDBConnectionHandler().session() as s:
+            try:
+                query = await s.execute(
+                    select(SubjectDTO).
+                        where(SubjectDTO.id == idSubject)
+                )
+                return query.scalars().first()
+
+            except Exception as e:
+                raise Exception(f'DataSource Error. {str(e)}')
