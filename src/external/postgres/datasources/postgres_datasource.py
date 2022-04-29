@@ -215,7 +215,7 @@ class PostgresDataSource(IDataSource):
             try:
                 query = await s.execute(
                     select(CourseDTO).
-                        join(CourseDTO).
+                        join(StudentCourseDTO, StudentCourseDTO.idStudent == CourseDTO.id).
                         where(StudentCourseDTO.idStudent == idStudent)
                 )
                 return query.scalars().first()
