@@ -25,7 +25,7 @@ class Test_GetSubjectNameByIdUsecase:
     async def test_get_name_test_3(self):
         qnt = await self._GetCourseNameByStudentIdUsecase(5)
 
-        assert qnt == 'Controladores'
+        assert qnt == 'Banco de dados'
 
     @pytest.mark.asyncio
     async def test_get_name_eval_error_1(self):

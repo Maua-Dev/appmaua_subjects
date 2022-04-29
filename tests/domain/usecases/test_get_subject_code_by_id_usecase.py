@@ -25,7 +25,7 @@ class Test_GetSubjectCodeByIdUsecase:
     async def test_get_code_test_3(self):
         qnt = await self._GetSubjectCodeByIdUsecase(5)
 
-        assert qnt == 'ECM503'
+        assert qnt == 'ECM505'
 
     @pytest.mark.asyncio
     async def test_get_code_eval_error_1(self):
