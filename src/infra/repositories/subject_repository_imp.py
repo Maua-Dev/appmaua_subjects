@@ -1,3 +1,4 @@
+from urllib import response
 from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 from src.infra.datasources.datasource_interface import IDataSource
@@ -5,6 +6,7 @@ from typing import List
 
 
 class SubjectRepositoryImp(ISubjectRepository):
+
     def __init__(self, datasource: IDataSource) -> None:
         super().__init__()
         self._datasource = datasource
@@ -150,6 +152,36 @@ class SubjectRepositoryImp(ISubjectRepository):
         try:
             response = await self._datasource.getCourseName(idCourse)
             return response.getName()
+
+        except AttributeError:
+            return None
+        except Exception as error:
+            raise error
+
+    async def getCourseNameByStudentId(self, idStudent: int) -> str:
+        try:
+            response = await self._datasource.getCourseNameByStudentId(idStudent=idStudent)
+            return response.getName()
+
+        except AttributeError:
+            return None
+        except Exception as error:
+            raise error
+
+    async def getSubjectNameById(self, idSubject: int) -> str:
+        try:
+            response = await self._datasource.getSubjectNameById(idSubject=idSubject)
+            return response.getName()
+
+        except AttributeError:
+            return None
+        except Exception as error:
+            raise error
+
+    async def getSubjectCodeById(self, idSubject: int) -> str:
+        try:
+            response = await self._datasource.getSubjectCodeById(idSubject=idSubject)
+            return response.getCodeSubject()
 
         except AttributeError:
             return None

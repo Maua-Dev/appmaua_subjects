@@ -132,12 +132,12 @@ class SubjectRepositoryMock(ISubjectRepository):
                 'name': 'IA'
             },
             {
-                'id': 4,
+                'id': 5,
                 'codeSubject': 'ECM505',
                 'name': 'Banco de dados'
             },
             {
-                'id': 5,
+                'id': 4,
                 'codeSubject': 'ECM503',
                 'name': 'Controladores'
             }
@@ -659,4 +659,23 @@ class SubjectRepositoryMock(ISubjectRepository):
             return None
 
 
+    async def getCourseNameByStudentId(self, idStudent: int) -> str:
+        try:
+          return [row['courseName'] for row in self._studentsCourse if row['idStudent'] == idStudent][0]
 
+        except IndexError as error:
+          return None
+
+    async def getSubjectNameById(self, idSubject: int) -> str:
+        try:
+          return [row['name'] for row in self._subjects if row['id'] == idSubject][0]
+
+        except IndexError as error:
+          return None
+
+    async def getSubjectCodeById(self, idSubject: int) -> str:
+        try:
+          return [row['codeSubject'] for row in self._subjects if row['id'] == idSubject][0]
+
+        except IndexError as error:
+          return None
