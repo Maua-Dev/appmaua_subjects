@@ -81,4 +81,34 @@ class Test_SubjectDynamoDTO():
         assert res["Course"] == self.courseMock
         assert res["Degree"] == self.degreeMock
 
+    def test_to_dynamo(self):
 
+        expected = {
+        "subjectCode": "ECM256",
+        "subjectName": "Redes de Computadores",
+        "courseCode": "ECM",
+        "courseName": "Engenharia de Computação",
+        "degreeName": "Engenharia de Computação",
+        "degreeDuration": 5,
+        "degreeCode": "ECM",
+        "degreeSubjects": ["ECM256"],
+        "studentName": "Bruno Vilardi",
+        "studentCodeDegree": "ECM",
+        "studentCode": "19002231",
+        "studentSubjects": ["ECM256"],
+        "scoreValue": 10,
+        "scoreAcademicYear": 2020,
+        "scoreEvaluationType": EvaluationType.P1,
+        "scoreWeight": 3.0
+        }
+
+        subjectDTO = SubjectDynamoDTO()
+        subjectDTO.appendEntity(self.subjectMock)
+        subjectDTO.appendEntity(self.courseMock)
+        subjectDTO.appendEntity(self.degreeMock)
+        subjectDTO.appendEntity(self.studentMock)
+        subjectDTO.appendEntity(self.scoreMock)
+
+        res = subjectDTO.toDynamo()
+
+        assert res == expected

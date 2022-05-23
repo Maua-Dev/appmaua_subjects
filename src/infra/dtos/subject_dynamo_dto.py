@@ -151,19 +151,14 @@ class SubjectDynamoDTO:
             setattr(self, field.get("dto"), getattr(entity, field.get("entity")))
 
 
-    def toDynamoDTO(self) -> dict:
+    def toDynamo(self) -> dict:
         item = {}
         item["subjectCode"] = self.subjectCode
+        item["studentCode"] = self.studentCode
 
-        for entityName in SubjectDynamoDTO.entitiesData.keys():
-            try:
-                entityData = SubjectDynamoDTO.entitiesData[entityName]
-                entityDict = {}
-                for field in entityData["fields"]:
-                    entityDict[field["dto"]] = getattr(self, field.get("entity")) if hasattr(self, field.get("entity")) else field.get("default")
+        for model in SubjectDynamoDTO.entitiesData.keys():
+            entityData = SubjectDynamoDTO.entitiesData[model]
+            for field in entityData["fields"]:
+                item[field["dto"]] = getattr(self, field.get("dto"))
 
-                item[entityName] = entityDict
-
-            except (AttributeError, ValidationError):
-                item[entityName] = None
-        return dto
+        return item
