@@ -10,6 +10,7 @@ from src.domain.errors.errors import EntityError
 class Student(BaseModel):
     name: str
     codeDegree: str
+    ra: str
     subjects: List[str]
 
     @validator('name')
@@ -30,4 +31,10 @@ class Student(BaseModel):
             i = i.upper()
             if len(i) == 0:
                 raise EntityError('subjects')
+        return v
+
+    @validator('ra')
+    def ra_is_not_empty(cls, v: str) -> str:
+        if len(v) == 0:
+            raise EntityError('ra')
         return v
