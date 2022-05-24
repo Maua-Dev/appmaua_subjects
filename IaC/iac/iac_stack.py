@@ -30,6 +30,3 @@ class AppMauaBack(Stack):
             )
         )
 
-
-
-

@@ -10,6 +10,6 @@ env_TEMP = cdk.Environment(account="171487071332", region="us-east-1")
 
 
 app = cdk.App()
-AppMauaBack(app, "IaCStack", env=env_TEMP)
+AppMauaBack(app, "IaCStack", env=cdk.Environment())
 
 app.synth()
