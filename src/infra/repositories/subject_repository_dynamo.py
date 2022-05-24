@@ -13,20 +13,11 @@ class SubjectRepositoryDynamo(ISubjectRepository):
         s = boto3.Session(
             aws_access_key_id=os.environ['AWS_ACCESS_KEY_ID'],
             aws_secret_access_key=os.environ['AWS_SECRET_ACCESS_KEY'])
-        self.dynamo = s.resource('dynamodb')
+        self.dynamo = s.resource('dynamodb', endpoint_url=os.environ.get('AWS_ENDPOINT_URL'))
         self.table = self.dynamo.Table(os.environ['DYNAMO_TABLE_NAME'])
 
 
-    def putItem(self, item):
-        self.table.put_item(Item=item)
 
-    def getItem(self, subjectCode: str, studentCode: str):
-        self.table.get_item(
-            Key={
-                "subjectCode": subjectCode,
-                "studentCode": studentCode
-            }
-        )
 
 
 
