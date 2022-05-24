@@ -8,48 +8,31 @@ Template de MSS para Fast API.
 Comece ao clonar o repositório do modo que achar mais adequado.
 
 
-### Criar um ambiente virtual python:
-###### Windows:
-    py -m venv venv
-###### Linux:
-    virtualenv -p python3.9 venv
+## Subir o ambiente de desenvolvimento
 
-### Ativar ambiente virtual:
-###### Windows:
-    venv\Scripts\activate
-###### Linux:
-    source venv/bin/activate
+### Ir para pasta de infra
 
-### Instalar pacotes necessários (ambos OS)
+    cd IaC
+
+### Subir container de LocalHost:
+    docker-compose up -d
+
+### Instalar dependencias do CDK
+    npm i -g aws-cdk
+
+### Configurar ambiente virtual:
+    py -m venv .venv
+    .venv\Scripts\activate
     pip install -r requirements.txt
 
-# Uso:
+### Carregar a stack
+    cdklocal bootstrap
+    cdklocal deploy
 
-### Desenvolvimento com Docker Composer
+### Observar a table do Dynamo criada
+    awslocal dynamodb list-tables
 
-Para construir a imagem:
-
-    docker-compose build
-
-Para subir o container:
-
-    docker-compose up
-
-### Subir um container PostgreSQL
-##### 1. Obter a imagem do Postgres
-    docker pull postgres
-##### 2. Criar um container
-    docker run --name devmaua_postgres -p 5432:5432 -e POSTGRES_PASSWORD=devmaua -d postgres
-##### 3. Conectar ao postgres
-    docker exec -it devmaua_postgres psql -U postgres -W
-    (senha = devmaua)
-##### 4. Criar o database "Devmaua"
-    create database "Devmaua";
-##### 5. Fechar o cmd
-##### 6. Criar um .bat com o comando:
-    docker exec -it devmaua_postgres psql -U postgres -W -d Devmaua
-Ao executar esse .bat você se conectará automaticamente ao banco (basta inserir a senha "devmaua").
-Obs: o nome do container "devmaua_postgres" pode ser mudado para o que preferir.
+![img.png](docs/tableListExample.png)
 
 
 
