@@ -10,7 +10,7 @@ class ConfigLocal(Config):
         self.access_key = "foo"
         self.secret_key = "bar"
         self.endpoint_url = "http://localhost:4566"
-        self.dynamo_table_name = os.getenv("DYNAMO_TABLE_NAME") or "IaCStack-IaCDynamo5EF9A8C0-e2aded5c"
+        self.dynamo_table_name = os.getenv("DYNAMO_TABLE_NAME") or "IaCStack-IaCDynamo5EF9A8C0-b18f4594"
 
 
 
