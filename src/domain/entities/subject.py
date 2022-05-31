@@ -1,19 +1,54 @@
+from typing import List
+
 from pydantic import validator, BaseModel
-from src.domain.errors.errors import EntityError
+
+from src.domain.entities.grade import Grade
+from src.domain.enums.degree_enum import DegreeEnum
+from src.domain.enums.semester import SEMESTER
+from src.domain.enums.situation import SITUATION
+from src.helpers.errors.domain_errors import EntityError
 
 
-class Subject(BaseModel):    
-    codeSubject: str
+class Subject(BaseModel):
     name: str
-
-    @validator('codeSubject')
-    def codeSubject_is_not_empty(cls,v: str) -> str:
-        if len(v) == 0:
-            raise EntityError('CodeSubject')
-        return v
+    code: str
+    year: int
+    degreeCode: DegreeEnum
+    semester: SEMESTER
+    situation: SITUATION
+    grades: List[Grade]
 
     @validator('name')
+    def codeSubject_is_not_empty(cls,v: str) -> str:
+        if len(v) == 0:
+            raise EntityError('name')
+        return v
+
+    @validator('code')
     def name_is_not_empty(cls,v: str)-> str:
         if len(v) == 0:
-            raise EntityError('Name')
+            raise EntityError('code')
         return v
+
+    @validator('year')
+    def year_makes_sense(cls,v: int) -> int:
+        minimal = 1961
+        maximum = 2100
+        if v < minimal or v > maximum:
+            raise EntityError(f"Year is not valid - should be between {minimal} and {maximum}")
+        return v
+
+    @validator('semester')
+    def semester_is_valid(cls,v: SEMESTER) -> SEMESTER:
+        if v is None:
+            raise EntityError('semester')
+        return v
+
+    @validator('situation')
+    def situation_is_valid(cls,v: SITUATION) -> SITUATION:
+        if v is None:
+            raise EntityError('situation')
+        return v
+
+
+

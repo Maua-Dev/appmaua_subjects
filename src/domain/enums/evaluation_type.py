@@ -1,25 +1,25 @@
 from enum import Enum
 
 
-class EvaluationType(Enum):
-    P1 = 1
-    P2 = 2
-    P3 = 3
-    P4 = 4
-    PS1 = 5
-    PS2 = 6
-    T1 = 7
-    T2 = 8
-    T3 = 9
-    T4 = 10
-    T5 = 11
-    T6 = 12
-    T7 = 13
-    T8 = 14
-    T9 = 15
-    T10 = 16
-    T11 = 17
-    T12 = 18
-    T = 19
-    P = 20
-    PS = 21
+class EVALUATION_TYPE(Enum):
+    P1 = "P1"
+    P2 = "P2"
+    P3 = "P3"
+    P4 = "P4"
+    PS1 = "PS1"
+    PS2 = "PS2"
+    T1 = "T1"
+    T2 = "T2"
+    T3 = "T3"
+    T4 = "T4"
+    T5 = "T5"
+    T6 = "T6"
+    T7 = "T7"
+    T8 = "T8"
+    T9 = "T9"
+    T10 = "T10"
+    T11 = "T11"
+    T12 = "T12"
+    T = "T"
+    P = "P"
+    PS = "PS"

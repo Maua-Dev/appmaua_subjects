@@ -1,17 +1,23 @@
-from typing import List
+from typing import List, Optional
 
 from pydantic.main import BaseModel
 
 from pydantic import validator
 
-from src.domain.errors.errors import EntityError
+from src.domain.entities.subject import Subject
+from src.domain.enums.degree_enum import DegreeEnum
+from src.domain.enums.period import PERIOD
+from src.helpers.errors.domain_errors import EntityError
 
 
 class Student(BaseModel):
     name: str
-    codeDegree: str
     ra: str
-    subjects: List[str]
+    email: str
+    password: Optional[str] = None
+    degreeCode: DegreeEnum
+    subjects: List[Subject]
+    period: PERIOD
 
     @validator('name')
     def name_is_not_empty(cls,v: str) -> str:
@@ -19,22 +25,41 @@ class Student(BaseModel):
             raise EntityError('Name')
         return v.title()
 
-    @validator('codeDegree')
-    def codeDegree_is_not_empty(cls, v: str) -> str:
+    #todo fazer os validators para os outros campos
+    @validator('ra')
+    def ra_is_not_empty(cls,v: str) -> str:
         if len(v) == 0:
-            raise EntityError('codeDegree')
-        return v.upper()
-
-    @validator('subjects')
-    def subjects_is_valid(cls, v: List[str]) -> List[str]:
-        for i in v:
-            i = i.upper()
-            if len(i) == 0:
-                raise EntityError('subjects')
+            raise EntityError('RA')
         return v
 
-    @validator('ra')
-    def ra_is_not_empty(cls, v: str) -> str:
+    @validator('email')
+    def email_is_not_empty(cls,v: str) -> str:
         if len(v) == 0:
-            raise EntityError('ra')
+            raise EntityError('Email')
+        return v
+
+    @validator('degreeCode')
+    def degreeCode_is_not_empty(cls,v: DegreeEnum) -> DegreeEnum:
+        if v is None:
+            raise EntityError('DegreeCode')
+        return v
+
+    @validator('period')
+    def period_is_not_empty(cls,v: PERIOD) -> PERIOD:
+        if v is None:
+            raise EntityError('Period')
+        return v
+
+    @validator('subjects')
+    def subjects_is_not_empty(cls,v: List[Subject]) -> List[Subject]:
+        if v is None:
+            raise EntityError('Subjects')
+        return v
+
+    @validator('password')
+    def password_is_not_empty(cls,v: str) -> str:
+        if v is None:
+            return v
+        if len(v) == 0:
+            raise EntityError('Password')
         return v
