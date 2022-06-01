@@ -13,3 +13,6 @@ class ISubjectRepository(ABC): #todo implementar os metodos
     async def get_subjects_by_student(self, ra:str) -> List[Subject]:
         pass
 
+    @abstractmethod
+    async def get_subject(self, ra: str, code:str) -> Subject:
+        pass
