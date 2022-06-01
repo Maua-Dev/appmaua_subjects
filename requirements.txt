@@ -1,12 +1,6 @@
-fastapi==0.67.0
-uvicorn==0.14.0
 pytest==6.2.4
 pytest-asyncio
 pytest-cov==2.12.1
 pytest-timeout
 requests==2.26.0
-sqlalchemy==1.4.31
-psycopg2-binary
-asyncpg
-alembic
-mangum
+

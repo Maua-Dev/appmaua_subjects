@@ -13,6 +13,7 @@ from src.domain.repositories.subject_repository_interface import ISubjectReposit
 
 
 class SubjectRepositoryMock(ISubjectRepository):
+
     students: List[Student]
     subjects: List[Subject]
     degrees: List[Degree]
@@ -135,7 +136,5 @@ class SubjectRepositoryMock(ISubjectRepository):
             )
         ]
 
-
-
-    async def example(self, idStudent: int) -> List[Subject]:
-        pass
+    async def get_all_subjects(self) -> List[Subject]:
+        return self.subjects
