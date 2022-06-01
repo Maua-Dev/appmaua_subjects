@@ -9,6 +9,7 @@ from src.domain.enums.evaluation_type import EVALUATION_TYPE
 from src.domain.enums.period import PERIOD
 from src.domain.enums.semester import SEMESTER
 from src.domain.enums.situation import SITUATION
+from src.domain.enums.year import YEAR
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
 
 
@@ -24,7 +25,8 @@ class SubjectRepositoryMock(ISubjectRepository):
                 name="Engenharia de Software",
                 code="ECM231",
                 degreeCode=DegreeEnum.ECM,
-                year="2022",
+                year=2022,
+                academicYear=YEAR._4,
                 semester=SEMESTER.AN,
                 situation=SITUATION.IN_PROGRESS,
                 grades=[
@@ -74,7 +76,8 @@ class SubjectRepositoryMock(ISubjectRepository):
                 name="Banco de Dados",
                 code="ECM401",
                 degreeCode=DegreeEnum.ECM,
-                year="2022",
+                year=2022,
+                academicYear=YEAR._4,
                 semester=SEMESTER.AN,
                 situation=SITUATION.IN_PROGRESS,
                 grades=[
@@ -131,6 +134,7 @@ class SubjectRepositoryMock(ISubjectRepository):
                 email="bruno@bruno.com",
                 password="Teste123!",
                 degreeCode=DegreeEnum.ECM,
+                academicYear=YEAR._4,
                 subjects=self.subjects,
                 period=PERIOD.DAY
             )

@@ -6,6 +6,7 @@ from src.domain.entities.grade import Grade
 from src.domain.enums.degree_enum import DegreeEnum
 from src.domain.enums.semester import SEMESTER
 from src.domain.enums.situation import SITUATION
+from src.domain.enums.year import YEAR
 from src.helpers.errors.domain_errors import EntityError
 
 
@@ -13,19 +14,20 @@ class Subject(BaseModel):
     name: str
     code: str
     year: int
+    academicYear: YEAR
     degreeCode: DegreeEnum
     semester: SEMESTER
     situation: SITUATION
     grades: List[Grade]
 
     @validator('name')
-    def codeSubject_is_not_empty(cls,v: str) -> str:
+    def name_is_not_empty(cls,v: str) -> str:
         if len(v) == 0:
             raise EntityError('name')
         return v
 
     @validator('code')
-    def name_is_not_empty(cls,v: str)-> str:
+    def codeSubject_is_not_empty(cls,v: str)-> str:
         if len(v) == 0:
             raise EntityError('code')
         return v
@@ -36,6 +38,12 @@ class Subject(BaseModel):
         maximum = 2100
         if v < minimal or v > maximum:
             raise EntityError(f"Year is not valid - should be between {minimal} and {maximum}")
+        return v
+
+    @validator('academicYear')
+    def academicYear_is_not_empty(cls,v: YEAR) -> YEAR:
+        if v is None:
+            raise EntityError("academicYear")
         return v
 
     @validator('semester')
