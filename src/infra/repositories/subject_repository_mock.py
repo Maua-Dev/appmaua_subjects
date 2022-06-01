@@ -142,3 +142,10 @@ class SubjectRepositoryMock(ISubjectRepository):
 
     async def get_all_subjects(self) -> List[Subject]:
         return self.subjects
+
+    async def get_subjects_by_student(self, ra:str) -> List[Subject]:
+        for student in self.students:
+            if ra == student.ra:
+                return student.subjects
+        return None
+
