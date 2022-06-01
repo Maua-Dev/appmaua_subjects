@@ -7,6 +7,7 @@ from pydantic import validator
 from src.domain.entities.subject import Subject
 from src.domain.enums.degree_enum import DegreeEnum
 from src.domain.enums.period import PERIOD
+from src.domain.enums.year import YEAR
 from src.helpers.errors.domain_errors import EntityError
 
 
@@ -17,6 +18,7 @@ class Student(BaseModel):
     password: Optional[str] = None
     degreeCode: DegreeEnum
     subjects: List[Subject]
+    academicYear: YEAR
     period: PERIOD
 
     @validator('name')
@@ -62,4 +64,10 @@ class Student(BaseModel):
             return v
         if len(v) == 0:
             raise EntityError('Password')
+        return v
+
+    @validator('academicYear')
+    def academicYear_is_not_empty(cls,v: YEAR) -> YEAR:
+        if v is None:
+            raise EntityError('AcademicYear')
         return v
