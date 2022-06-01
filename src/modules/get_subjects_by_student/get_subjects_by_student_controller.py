@@ -7,12 +7,12 @@ from src.modules.get_subjects_by_student.get_subjects_by_student_viewmodel impor
 class GetSubjectsByStudentController:
 
     def __init__(self, usecase:GetSubjectsByStudentUsecase):
-        self.GetSubjectsByStudentUsecase = usecase
+        self.getSubjectsByStudentUsecase = usecase
 
     async def __call__(self, request: HttpRequest) -> HttpResponse:
         try:
 
-            subjects = await self.GetSubjectsByStudentUsecase(ra=request.query_params["ra"])
+            subjects = await self.getSubjectsByStudentUsecase(ra=request.query_params["ra"])
             viewModel = GetSubjectsByStudentViewmodel(subjects)
             return OK(viewModel.to_dict())
 
