@@ -1,13 +1,4 @@
-
-
-class BaseError(Exception):
-    def __init__(self, message: str):
-        self.__message: str = message
-        super().__init__(message)
-
-    @property
-    def message(self):
-        return self.__message
+from src.helpers.errors.base_error import BaseError
 
 
 class EntityError(BaseError):
