@@ -136,7 +136,8 @@ class SubjectRepositoryMock(ISubjectRepository):
                 degreeCode=DegreeEnum.ECM,
                 academicYear=YEAR._4,
                 subjects=self.subjects,
-                period=PERIOD.DAY
+                period=PERIOD.DAY,
+                photo="https://drive.google.com/open?id=1yym6Y5byzn4hhxLnMqrFGh78nUX0vjth" #coloquei foto do brancas por não achar do vilas
             )
         ]
 

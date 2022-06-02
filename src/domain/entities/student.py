@@ -20,6 +20,7 @@ class Student(BaseModel):
     subjects: List[Subject]
     academicYear: YEAR
     period: PERIOD
+    photo: str
 
     @validator('name')
     def name_is_not_empty(cls,v: str) -> str:
@@ -70,4 +71,10 @@ class Student(BaseModel):
     def academicYear_is_not_empty(cls,v: YEAR) -> YEAR:
         if v is None:
             raise EntityError('AcademicYear')
+        return v
+
+    @validator('photo')
+    def photo_is_not_empty(cls, v: str) -> str:
+        if len(v) == 0:
+            raise EntityError('Name')
         return v
