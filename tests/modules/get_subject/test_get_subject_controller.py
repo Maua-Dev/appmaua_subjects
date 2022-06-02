@@ -35,3 +35,15 @@ class Test_GetSubjectController:
 
         assert res.status_code == 404
 
+    @pytest.mark.asyncio
+    async def test_get_subject_controller_bad_request(self):
+        repo = SubjectRepositoryMock()
+        usecase = GetSubjectUsecase(repo)
+        controller = GetSubjectController(usecase)
+
+        req = HttpRequest(query_params={})
+        res = await controller(req)
+
+        assert res.status_code == 400
+
+

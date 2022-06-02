@@ -26,4 +26,27 @@ class Test_GetSubjectsByStudentController:
         for subject_dict in res.body:
             assert subject_dict["code"] in [subject1.code, subject2.code]
 
+        @pytest.mark.asyncio
+        async def test_get_subjects_by_student_controller_no_items_found(self):
+            repo = SubjectRepositoryMock()
+            usecase = GetSubjectsByStudentUsecase(repo)
+            controller = GetSubjectsByStudentController(usecase)
+
+            req = HttpRequest(query_params={
+                "ra": "21010757"
+            })
+            res = await controller(req)
+
+            assert res.status_code == 404
+
+        @pytest.mark.asyncio
+        async def test_get_subjects_by_student_controller_bad_request(self):
+            repo = SubjectRepositoryMock()
+            usecase = GetSubjectsByStudentUsecase(repo)
+            controller = GetSubjectsByStudentController(usecase)
+
+            req = HttpRequest(query_params={})
+            res = await controller(req)
+
+            assert res.status_code == 400
 

@@ -23,4 +23,9 @@ class GetAllSubjectsController:
                 body=e.message
             )
 
+        except Exception as err:
+            return HttpResponse(
+                status_code=HttpStatusCode.INTERNAL_SERVER_ERROR.value,
+                body=err.message
+            )
 
