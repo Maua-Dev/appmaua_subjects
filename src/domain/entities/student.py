@@ -3,7 +3,6 @@ from typing import List, Optional
 from pydantic.main import BaseModel
 
 from pydantic import validator
-
 from src.domain.entities.subject import Subject
 from src.domain.enums.degree_enum import DegreeEnum
 from src.domain.enums.period import PERIOD
@@ -28,7 +27,6 @@ class Student(BaseModel):
             raise EntityError('Name')
         return v.title()
 
-    #todo fazer os validators para os outros campos
     @validator('ra')
     def ra_is_not_empty(cls,v: str) -> str:
         if v != None and len(v) != 8:

@@ -2,6 +2,7 @@ from typing import List, Tuple
 
 from src.domain.entities.degree import Degree
 from src.domain.entities.grade import Grade
+from src.domain.entities.professor import Professor
 from src.domain.entities.student import Student
 from src.domain.entities.subject import Subject
 from src.domain.enums.degree_enum import DegreeEnum
@@ -71,6 +72,15 @@ class SubjectRepositoryMock(ISubjectRepository):
                         weight=0.1
                     )
                 ],
+                professor=Professor(
+                    name="Ana Paula Gonçalves Serra",
+                    email="ana.serra@maua.br",
+                    phoneNumber="4239-3008"),
+                coordinator=Professor(
+                    name="Angelo Sebastiao Zanini",
+                    email="angelo.zanini@maua.br",
+                    phoneNumber="4239-3009"
+                )
             ),
             Subject(
                 name="Banco de Dados",
@@ -112,6 +122,16 @@ class SubjectRepositoryMock(ISubjectRepository):
                         weight=0.1
                     )
                 ],
+                professor=Professor(
+                    name="Aparecido Valdemir de Freitas",
+                    email="aparecido.freitas@maua.br",
+                    phoneNumber="4239-3009"
+                ),
+                coordinator=Professor(
+                    name="Angelo Sebastiao Zanini",
+                    email="angelo.zanini@maua.br",
+                    phoneNumber="4239-3009"
+                )
             )
         ]
 
@@ -120,10 +140,11 @@ class SubjectRepositoryMock(ISubjectRepository):
                 name="Engenharia de Computação",
                 code="ECM",
                 subjects=self.subjects,
-                coordinator={
-                    "name": "Angelo Zanini",
-                    "email": "angeloQualquerCoisa@maua.br"
-                },
+                coordinator=Professor(
+                    name="Angelo Sebastiao Zanini",
+                    email="angelo.zanini@maua.br",
+                    phoneNumber="4239-3009"
+                ),
             )
         ]
 

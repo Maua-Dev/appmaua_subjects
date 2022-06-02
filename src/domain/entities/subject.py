@@ -3,6 +3,7 @@ from typing import List
 from pydantic import validator, BaseModel
 
 from src.domain.entities.grade import Grade
+from src.domain.entities.professor import Professor
 from src.domain.enums.degree_enum import DegreeEnum
 from src.domain.enums.semester import SEMESTER
 from src.domain.enums.situation import SITUATION
@@ -19,6 +20,8 @@ class Subject(BaseModel):
     semester: SEMESTER
     situation: SITUATION
     grades: List[Grade]
+    professor: Professor
+    coordinator: Professor
 
     @validator('name')
     def name_is_not_empty(cls,v: str) -> str:
@@ -58,5 +61,14 @@ class Subject(BaseModel):
             raise EntityError('situation')
         return v
 
+    @validator('professor')
+    def professor_is_valid(cls,v: Professor) -> Professor:
+        if v is None:
+            raise EntityError('professor')
+        return v
 
-
+    @validator('coordinator')
+    def coordinator_is_valid(cls,v: Professor) -> Professor:
+        if v is None:
+            raise EntityError('coordinator')
+        return v
