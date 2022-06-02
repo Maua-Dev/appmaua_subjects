@@ -30,7 +30,7 @@ class Student(BaseModel):
     #todo fazer os validators para os outros campos
     @validator('ra')
     def ra_is_not_empty(cls,v: str) -> str:
-        if len(v) == 0:
+        if v != None and len(v) != 8:
             raise EntityError('RA')
         return v
 
