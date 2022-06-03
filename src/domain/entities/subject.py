@@ -72,3 +72,23 @@ class Subject(BaseModel):
         if v is None:
             raise EntityError('coordinator')
         return v
+
+    @staticmethod
+    def getCurrentGrade(self) -> float:
+        current_grade = 0
+        for grade in self.grades:
+            if grade.value != None:  # se for None, eu somaria à current_grade 0
+                current_grade += grade.value * grade.weight
+
+        return current_grade
+
+    @staticmethod
+    def getPartialGrade(self) -> float:
+        partial_grade = 0
+        partial_weight = 0
+        for grade in self.grades:
+            if grade.value != None:
+                partial_grade += grade.value * grade.weight
+                partial_weight += grade.weight
+
+        return partial_grade / partial_weight
