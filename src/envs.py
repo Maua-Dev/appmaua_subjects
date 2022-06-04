@@ -6,15 +6,22 @@ class Config():
 class ConfigLocal(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = f'postgresql+asyncpg://postgres:devmaua@{os.getenv("DB") or "localhost"}:5432/Devmaua'
+        self.access_key = "foo"
+        self.secret_key = "bar"
+        self.endpoint_url = "http://localhost:4566"
+        self.dynamo_table_name = os.getenv("DYNAMO_TABLE_NAME") or "IaCStack-IaCDynamo5EF9A8C0-b18f4594"
+
+
+
 class ConfigDes(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = f'postgresql+asyncpg://{os.getenv("DB_USER")}:{os.getenv("DB_PW")}@db-devmaua-identifier.cjzimvmkm7zt.sa-east-1.rds.amazonaws.com:5432/{os.getenv("DB_NAME")}'
+
+
 class ConfigProd(Config):
     def __init__(self) -> None:
         super().__init__()
-        self.sqlConnection = ''
+
 
 
 class EnvEnum(Enum):

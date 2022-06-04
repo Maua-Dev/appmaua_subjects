@@ -3,7 +3,7 @@ name: CI
 on:
   push:
   pull_request:
-    branches: [ main ]
+    branches: [ helpers ]
   
   workflow_dispatch:
 
@@ -22,7 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Runs tests
-      run: pytest
+      run: python -m pytest  --ignore=tests/external/dynamo
     - name: Create coverage report
       run: |
-        pytest --cov=./
+        python -m pytest  --ignore=tests/external/dynamo --cov=./
