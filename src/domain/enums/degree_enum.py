@@ -4,9 +4,11 @@ from enum import Enum
 class DegreeEnum(Enum):
     ADM = "Administração"
     DSG = "Design"
-    EFB = "Engenharia Ciclo Básico
+    EFB = "Engenharia Fundamentos Básicos"
+    EFH = "Engenharia Fundamentos Humanos"
+    EAD = "Ensino a Distância"
     ETE = "Engenharia Tronco Eletrica"
-    ETM = "Engenharia Tronco Mecânica
+    ETM = "Engenharia Tronco Mecânica"
     ETQ = "Engenharia Tronco Química"
     TTI = "Tronco Tecnologias da Informação"
     EAL = "Engenharia de Alimentos"
@@ -15,8 +17,9 @@ class DegreeEnum(Enum):
     EQM = "Engenharia Química"
     EPM = "Engenharia de Produção"
     ECA = "Engenharia de Controle e Automação"
-    EET= "Engenharia Elétrica"
+    EET = "Engenharia Elétrica"
     EEN = "Engenharia Eletrônica"
+    EEE = "Engenharia Elétrica e Eletrônica"
     ECM = "Engenharia de Computação"
    
     
