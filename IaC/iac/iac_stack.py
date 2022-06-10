@@ -11,7 +11,7 @@ class AppMauaBack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         dynamo = dynamodb.Table(
-            self, "IaCDynamo",
+            self, "MauApp-SubjectsDB",
             partition_key=dynamodb.Attribute(
                 name="subjectCode",
                 type=dynamodb.AttributeType.STRING
@@ -23,7 +23,14 @@ class AppMauaBack(Stack):
             billing_mode=dynamodb.BillingMode.PAY_PER_REQUEST
         )
         dynamo.add_local_secondary_index(
-            index_name="studentRA-index",
+            index_name="academicYear",
+            sort_key=dynamodb.Attribute(
+                name="studentRA",
+                type=dynamodb.AttributeType.STRING
+            )
+        )
+        dynamo.add_local_secondary_index(
+            index_name="degreeCode",
             sort_key=dynamodb.Attribute(
                 name="studentRA",
                 type=dynamodb.AttributeType.STRING
