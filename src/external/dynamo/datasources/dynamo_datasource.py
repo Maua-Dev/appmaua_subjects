@@ -98,7 +98,7 @@ class DynamoDatasource:
 
         with self.dynamoTable as table:
             resp = table.scan()
-            return resp
+            return resp['Items']
 
     async def query(self, keyConditionExpression):
         """
