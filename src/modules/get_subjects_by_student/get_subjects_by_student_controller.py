@@ -35,5 +35,5 @@ class GetSubjectsByStudentController:
         except Exception as err:
             return HttpResponse(
                 status_code=HttpStatusCode.INTERNAL_SERVER_ERROR.value,
-                body=err.message
+                body=err.args[0]
             )

@@ -14,8 +14,7 @@ class SubjectRepositoryDynamo(ISubjectRepository):
     dynamo: DynamoDatasource
 
     def __init__(self):
-        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name="IaCStack-MauAppSubjectsDB1BBD4F9F-1MV2I9KKTX59M") #TODO COLOCAR NO .ENV PELO AMOR DE DEUS
-
+        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name="IaCStack-MauAppSubjectsDB1BBD4F9F-1KES1YD4D4CXE") #TODO COLOCAR NO .ENV PELO AMOR DE DEUS
 
     async def get_all_subjects(self) -> List[Subject]:
         data = await self.dynamo.getAllItems()
@@ -29,9 +28,6 @@ class SubjectRepositoryDynamo(ISubjectRepository):
 
     async def get_subjects_by_student(self, ra: str) -> List[Subject]:
         keyCondition = Key("studentRA").eq(ra)
-        dynamoQuery = {
-            "Limit": 100,
-        }
         data = await self.dynamo.query(keyConditionExpression=keyCondition, IndexName="studentRA")
 
         subjects = []
