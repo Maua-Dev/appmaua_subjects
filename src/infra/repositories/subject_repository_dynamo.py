@@ -2,6 +2,7 @@ from typing import List
 import os
 from boto3 import resource
 import boto3
+from boto3.dynamodb.conditions import Key
 
 from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
@@ -13,7 +14,7 @@ class SubjectRepositoryDynamo(ISubjectRepository):
     dynamo: DynamoDatasource
 
     def __init__(self):
-        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name="IaCStack-MauAppSubjectsDB1BBD4F9F-QNRBDUJG0XGQ") #TODO COLOCAR NO .ENV PELO AMOR DE DEUS
+        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name="IaCStack-MauAppSubjectsDB1BBD4F9F-1MV2I9KKTX59M") #TODO COLOCAR NO .ENV PELO AMOR DE DEUS
 
 
     async def get_all_subjects(self) -> List[Subject]:
@@ -27,9 +28,25 @@ class SubjectRepositoryDynamo(ISubjectRepository):
         return subjects
 
     async def get_subjects_by_student(self, ra: str) -> List[Subject]:
-        pass
+        keyCondition = Key("studentRA").eq(ra)
+        dynamoQuery = {
+            "Limit": 100,
+        }
+        data = await self.dynamo.query(keyConditionExpression=keyCondition, IndexName="studentRA")
+
+        subjects = []
+        for item in data:
+            dto = SubjectDynamoDTO.fromDynamo(item)
+            subjects.append(dto.toEntity())
+
+        return subjects
 
     async def get_subject(self, ra: str, code: str) -> Subject:
-        pass
+        data = await self.dynamo.getItem(key={
+            "subjectCode": code,
+            "studentRA": ra
+        })
+        dto = SubjectDynamoDTO.fromDynamo(data["Item"])
+        return dto.toEntity()
 
 

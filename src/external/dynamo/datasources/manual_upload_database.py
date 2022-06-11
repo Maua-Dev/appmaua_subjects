@@ -14,7 +14,7 @@ from src.external.dynamo.datasources.mock_db import SUBJECTS # arquivo temporari
 access_key = None
 secret_key = None
 endpoint_url = None
-dynamo_table_name = "IaCStack-MauAppSubjectsDB1BBD4F9F-QNRBDUJG0XGQ"
+dynamo_table_name = "IaCStack-MauAppSubjectsDB1BBD4F9F-1MV2I9KKTX59M"
 
 
 def getDuplicates(data, partition_key, sort_key):

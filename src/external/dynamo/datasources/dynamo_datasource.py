@@ -100,7 +100,7 @@ class DynamoDatasource:
             resp = table.scan()
             return resp['Items']
 
-    async def query(self, keyConditionExpression):
+    async def query(self, keyConditionExpression, **kwargs):
         """
         Query the table with the KeyConditionExpression.
         Example: KeyConditionExpression=Key('Partition').eq('partition') & Key('Sort').gte('sort')
@@ -113,9 +113,9 @@ class DynamoDatasource:
         with self.dynamoTable as table:
             resp = table.query(
                 KeyConditionExpression=keyConditionExpression,
-                ConsistentRead=True
+                **kwargs
             )
-            return resp
+            return resp['Items']
 
     async def batchWriteItems(self, items):
         """
