@@ -6,6 +6,7 @@ from boto3.dynamodb.conditions import Key
 
 from src.domain.entities.subject import Subject
 from src.domain.repositories.subject_repository_interface import ISubjectRepository
+from src.envs import Envs
 from src.external.dynamo.datasources.dynamo_datasource import DynamoDatasource
 from src.infra.dtos.subject_dynamo_dto import SubjectDynamoDTO
 
@@ -14,7 +15,7 @@ class SubjectRepositoryDynamo(ISubjectRepository):
     dynamo: DynamoDatasource
 
     def __init__(self):
-        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name="IaCStack-MauAppSubjectsDB1BBD4F9F-1KES1YD4D4CXE") #TODO COLOCAR NO .ENV PELO AMOR DE DEUS
+        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name=Envs.getConfig().dynamo_table_name)
 
     async def get_all_subjects(self) -> List[Subject]:
         data = await self.dynamo.getAllItems()

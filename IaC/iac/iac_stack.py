@@ -5,7 +5,8 @@ from aws_cdk import (
 )
 from constructs import Construct
 
-from IaC.iac.subject_dynamo_stack import SubjectDynamoStack
+from .lambda_stack import LambdaStack
+from .subject_dynamo_stack import SubjectDynamoStack
 
 
 class AppMauaBack(Stack):
@@ -15,5 +16,7 @@ class AppMauaBack(Stack):
 
         dynamoStack = SubjectDynamoStack(self)
 
+
+        lambdaStack = LambdaStack(self, dynamoStack.dynamo.table_name)
 
 
