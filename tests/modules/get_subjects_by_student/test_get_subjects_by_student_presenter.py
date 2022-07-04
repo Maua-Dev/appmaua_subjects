@@ -1,7 +1,7 @@
 import pytest
 
 
-class Test_Get_Subject_By_Student_Presenter:
+class Test_Get_Subjects_By_Student_Presenter:
 
     @pytest.mark.asyncio
     async def test_get_subject_by_student_presenter_should_return_a_list_of_subjects(self):
