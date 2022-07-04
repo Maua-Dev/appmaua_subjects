@@ -19,7 +19,7 @@ class Test_Get_Subject_By_Student_Presenter:
             "header2": "value1,value2"
           },
           "queryStringParameters": {
-            "ra": "18026176",
+            "ra": "19003315",
             "parameter2": "value"
           },
           "requestContext": {
