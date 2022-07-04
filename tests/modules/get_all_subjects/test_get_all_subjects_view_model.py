@@ -7,13 +7,15 @@ from src.domain.enums.degree_enum import DegreeEnum
 from src.domain.enums.evaluation_type import EVALUATION_TYPE
 from src.domain.enums.semester import SEMESTER
 from src.domain.enums.situation import SITUATION
+from src.modules.get_all_subjects.get_all_subjects_viewmodel import GetAllSubjectsViewmodel
 from src.modules.get_subject.get_subject_viewmodel import GetSubjectViewmodel
 from src.domain.enums.year import YEAR
 
-class Test_GetSubjectViewModel:
+class Test_GetAllSubjectsViewModel:
     @pytest.mark.asyncio
     async def test_get_subject_by_student_view_model(self):
-        subject = Subject(
+        subjects = subjects = [
+            Subject(
                 name="Engenharia de Software",
                 code="ECM231",
                 degreeCode=DegreeEnum.ECM,
@@ -71,19 +73,81 @@ class Test_GetSubjectViewModel:
                     name="Angelo Sebastiao Zanini",
                     email="angelo.zanini@maua.br",
                     phoneNumber="4239-3009"
-                ))
+                )
+            ),
+            Subject(
+                name="Banco de Dados",
+                code="ECM401",
+                degreeCode=DegreeEnum.ECM,
+                year=2022,
+                academicYear=YEAR._4,
+                semester=SEMESTER.AN,
+                situation=SITUATION.IN_PROGRESS,
+                grades=[
+                    Grade(
+                        value=3.0,
+                        evaluationType=EVALUATION_TYPE.P1,
+                        weight=0.2,
+                    ),
+                    Grade(
+                        value=None,
+                        evaluationType=EVALUATION_TYPE.P2,
+                        weight=0.4,
+                    ),
+                    Grade(
+                        value=None,
+                        evaluationType=EVALUATION_TYPE.T1,
+                        weight=0.1
+                    ),
+                    Grade(
+                        value=None,
+                        evaluationType=EVALUATION_TYPE.T2,
+                        weight=0.1
+                    ),
+                    Grade(
+                        value=None,
+                        evaluationType=EVALUATION_TYPE.T3,
+                        weight=0.1
+                    ),
+                    Grade(
+                        value=None,
+                        evaluationType=EVALUATION_TYPE.T4,
+                        weight=0.1
+                    )
+                ],
+                professor=Professor(
+                    name="Aparecido Valdemir de Freitas",
+                    email="aparecido.freitas@maua.br",
+                    phoneNumber="4239-3009"
+                ),
+                coordinator=Professor(
+                    name="Angelo Sebastiao Zanini",
+                    email="angelo.zanini@maua.br",
+                    phoneNumber="4239-3009"
+                )
+            )
+        ]
 
-        subjectViewModel = GetSubjectViewmodel(subject).to_dict()
-        result = {'name': 'Engenharia de Software',
+        subjectsViewModel = GetAllSubjectsViewmodel(subjects).to_dict()
+        result = [{'name': 'Engenharia de Software',
                    'code': 'ECM231',
-                   'grades': [{'value': 8.5,'evaluationType': 'P1','weight': 0.1},
-                              {'value': 4.0,'evaluationType': 'P2','weight': 0.1},
+                   'grades': [{'value': 8.5, 'evaluationType': 'P1', 'weight': 0.1},
+                              {'value': 4.0, 'evaluationType': 'P2', 'weight': 0.1},
                               {'value': None, 'evaluationType': 'P3', 'weight': 0.2},
                               {'value': None, 'evaluationType': 'P4', 'weight': 0.2},
                               {'value': None, 'evaluationType': 'T1', 'weight': 0.1},
                               {'value': None, 'evaluationType': 'T2', 'weight': 0.1},
                               {'value': None, 'evaluationType': 'T3', 'weight': 0.1},
-                              {'value': None, 'evaluationType': 'T4', 'weight': 0.1}]}
+                              {'value': None, 'evaluationType': 'T4', 'weight': 0.1}]},
+                  {'name': 'Banco de Dados',
+                   'code': 'ECM401',
+                   'grades': [{'value': 3.0, 'evaluationType': 'P1', 'weight': 0.2},
+                              {'value': None, 'evaluationType': 'P2', 'weight': 0.4},
+                              {'value': None, 'evaluationType': 'T1', 'weight': 0.1},
+                              {'value': None, 'evaluationType': 'T2', 'weight': 0.1},
+                              {'value': None, 'evaluationType': 'T3', 'weight': 0.1},
+                              {'value': None, 'evaluationType': 'T4', 'weight': 0.1}]
+                   }]
 
 
-        assert subjectViewModel == result
+        assert subjectsViewModel == result

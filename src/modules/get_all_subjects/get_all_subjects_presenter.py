@@ -1,14 +1,21 @@
 import pprint
 import asyncio
 
+from src.helpers.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from src.infra.repositories.subject_repository_dynamo import SubjectRepositoryDynamo
+from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
+from src.modules.get_all_subjects.get_all_subjects_controller import GetAllSubjectsController
 from src.modules.get_all_subjects.get_all_subjects_usecase import GetAllSubjectsUsecase
 
-repo = SubjectRepositoryDynamo()
 
-usecase = GetAllSubjectsUsecase(repo)
+async def lambda_handler(event, context):
+    #repo = SubjectRepositoryDynamo()
+    repo = SubjectRepositoryMock()
+    usecase = GetAllSubjectsUsecase(repo)
+    controller = GetAllSubjectsController(usecase)
 
+    httpRequest = LambdaHttpRequest(data=event)
+    response = await controller(httpRequest)
+    httpResponse = LambdaHttpResponse(status_code=response.status_code, body=response.body, headers=response.headers)
 
-a = asyncio.run(usecase())
-
-print(a)
+    return httpResponse.toDict()
