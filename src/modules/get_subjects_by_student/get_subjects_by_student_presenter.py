@@ -1,3 +1,4 @@
+from src.envs import Envs
 from src.helpers.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from src.infra.repositories.subject_repository_dynamo import SubjectRepositoryDynamo
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
@@ -6,8 +7,7 @@ from src.modules.get_subjects_by_student.get_subjects_by_student_usecase import 
 
 
 async def lambda_handler(event, context):
-    repo = SubjectRepositoryDynamo()
-    #repo = SubjectRepositoryMock()
+    repo = SubjectRepositoryMock() if Envs.IsMock() else SubjectRepositoryDynamo()
     usecase = GetSubjectsByStudentUsecase(repo)
     controller = GetSubjectsByStudentController(usecase)
 

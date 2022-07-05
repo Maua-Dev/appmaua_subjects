@@ -6,11 +6,10 @@ from src.infra.repositories.subject_repository_dynamo import SubjectRepositoryDy
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
 from src.modules.get_all_subjects.get_all_subjects_controller import GetAllSubjectsController
 from src.modules.get_all_subjects.get_all_subjects_usecase import GetAllSubjectsUsecase
-
+from src.envs import Envs
 
 async def lambda_handler(event, context):
-    repo = SubjectRepositoryDynamo()
-    #repo = SubjectRepositoryMock()
+    repo = SubjectRepositoryMock() if Envs.IsMock() else SubjectRepositoryDynamo()
     usecase = GetAllSubjectsUsecase(repo)
     controller = GetAllSubjectsController(usecase)
 
