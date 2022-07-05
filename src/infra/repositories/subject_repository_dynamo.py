@@ -15,7 +15,11 @@ class SubjectRepositoryDynamo(ISubjectRepository):
     dynamo: DynamoDatasource
 
     def __init__(self):
-        self.dynamo = DynamoDatasource(access_key=None, secret_key=None, endpoint_url=None, dynamo_table_name=Envs.getConfig().dynamo_table_name)
+        self.dynamo = DynamoDatasource(access_key=Envs.getConfig().access_key,
+                                       secret_key=Envs.getConfig().secret_key,
+                                       endpoint_url=Envs.getConfig().endpoint_url,
+                                       dynamo_table_name=Envs.getConfig().dynamo_table_name,
+                                       region=Envs.getConfig().region)
 
     async def get_all_subjects(self) -> List[Subject]:
         data = await self.dynamo.getAllItems()

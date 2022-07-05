@@ -61,5 +61,4 @@ class Test_Get_Subjects_By_Student_Presenter:
         from src.modules.get_subjects_by_student.get_subjects_by_student_presenter import lambda_handler
 
         response = await lambda_handler(event, None)
-        print(response)
         assert response["statusCode"] == 200

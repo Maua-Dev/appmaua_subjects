@@ -7,3 +7,4 @@ venv/
 *.pyc
 **/segredos/
 .pytest_cache/
+.env

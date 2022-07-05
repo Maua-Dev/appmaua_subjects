@@ -1,4 +1,4 @@
-import pprint
+
 import asyncio
 
 from src.helpers.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
@@ -9,8 +9,8 @@ from src.modules.get_all_subjects.get_all_subjects_usecase import GetAllSubjects
 
 
 async def lambda_handler(event, context):
-    #repo = SubjectRepositoryDynamo()
-    repo = SubjectRepositoryMock()
+    repo = SubjectRepositoryDynamo()
+    #repo = SubjectRepositoryMock()
     usecase = GetAllSubjectsUsecase(repo)
     controller = GetAllSubjectsController(usecase)
 

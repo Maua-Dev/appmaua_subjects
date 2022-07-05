@@ -13,8 +13,9 @@ class DynamoDatasource:
     - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Table
     """
 
-    def __init__(self, access_key, secret_key, endpoint_url, dynamo_table_name):
-        self.dynamoTable = DynamoTable(access_key=access_key, secret_key=secret_key, endpoint_url=endpoint_url, dynamo_table_name=dynamo_table_name)
+    def __init__(self, access_key, secret_key, endpoint_url, dynamo_table_name, region):
+        self.dynamoTable = DynamoTable(access_key=access_key, secret_key=secret_key, endpoint_url=endpoint_url,
+                                       dynamo_table_name=dynamo_table_name, region=region)
 
     @staticmethod
     def parseFloatToDecimal(item):
@@ -139,4 +140,3 @@ class DynamoDatasource:
             with table.batch_writer() as batch:
                 for k in keys:
                     batch.delete_item(Key=k)
-

@@ -6,8 +6,8 @@ from src.modules.get_subjects_by_student.get_subjects_by_student_usecase import 
 
 
 async def lambda_handler(event, context):
-    #repo = SubjectRepositoryDynamo()
-    repo = SubjectRepositoryMock()
+    repo = SubjectRepositoryDynamo()
+    #repo = SubjectRepositoryMock()
     usecase = GetSubjectsByStudentUsecase(repo)
     controller = GetSubjectsByStudentController(usecase)
 
