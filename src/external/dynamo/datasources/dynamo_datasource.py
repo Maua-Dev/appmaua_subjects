@@ -1,6 +1,10 @@
+import json
+
 from boto3.dynamodb.conditions import Key
 
 from src.external.dynamo.dynamo_table import DynamoTable
+
+from decimal import Decimal
 
 
 class DynamoDatasource:
@@ -9,8 +13,18 @@ class DynamoDatasource:
     - https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Table
     """
 
-    def __init__(self):
-        self.dynamoTable = DynamoTable()
+    def __init__(self, access_key, secret_key, endpoint_url, dynamo_table_name, region):
+        self.dynamoTable = DynamoTable(access_key=access_key, secret_key=secret_key, endpoint_url=endpoint_url,
+                                       dynamo_table_name=dynamo_table_name, region=region)
+
+    @staticmethod
+    def parseFloatToDecimal(item):
+        """
+        Parse float to Decimal
+        @param item: dict with the keys (Partition and Sort) and data to insert
+        """
+        item_parsed = json.loads(json.dumps(item), parse_float=Decimal)
+        return item_parsed
 
     async def putItem(self, item: dict):
         """
@@ -21,7 +35,7 @@ class DynamoDatasource:
         """
 
         with self.dynamoTable as table:
-            return table.put_item(Item=item)
+            return table.put_item(Item=DynamoDatasource.parseFloatToDecimal(item))
 
     async def getItem(self, key):
         """
@@ -44,7 +58,7 @@ class DynamoDatasource:
         """
 
         with self.dynamoTable as table:
-            resp = table.put_item(Item=item)
+            resp = table.put_item(Item=DynamoDatasource.parseFloatToDecimal(item))
             return resp
 
     async def updateItem(self, key, updateAttributes):
@@ -85,9 +99,9 @@ class DynamoDatasource:
 
         with self.dynamoTable as table:
             resp = table.scan()
-            return resp
+            return resp['Items']
 
-    async def query(self, keyConditionExpression):
+    async def query(self, keyConditionExpression, **kwargs):
         """
         Query the table with the KeyConditionExpression.
         Example: KeyConditionExpression=Key('Partition').eq('partition') & Key('Sort').gte('sort')
@@ -100,9 +114,9 @@ class DynamoDatasource:
         with self.dynamoTable as table:
             resp = table.query(
                 KeyConditionExpression=keyConditionExpression,
-                ConsistentRead=True
+                **kwargs
             )
-            return resp
+            return resp['Items']
 
     async def batchWriteItems(self, items):
         """
@@ -113,7 +127,7 @@ class DynamoDatasource:
         with self.dynamoTable as table:
             with table.batch_writer() as batch:
                 for i in items:
-                    batch.put_item(Item=i)
+                    batch.put_item(Item=DynamoDatasource.parseFloatToDecimal(i))
 
     async def batchDeleteItems(self, keys):
         """

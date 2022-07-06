@@ -7,7 +7,7 @@ from src.helpers.errors.domain_errors import NoItemsFound
 
 class GetSubjectsByStudentUsecase:
 
-    def __init__(self, repo:ISubjectRepository):
+    def __init__(self, repo: ISubjectRepository):
         self.repo = repo
 
     async def __call__(self, ra:str) -> List[Subject]:

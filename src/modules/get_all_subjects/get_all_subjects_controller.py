@@ -1,5 +1,6 @@
 from src.helpers.errors.domain_errors import NoItemsFound
 from src.helpers.http_models import HttpRequest, HttpResponse, OK
+from src.helpers.http_status_code import HttpStatusCode
 from src.modules.get_all_subjects.get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.modules.get_all_subjects.get_all_subjects_viewmodel import GetAllSubjectsViewmodel
 

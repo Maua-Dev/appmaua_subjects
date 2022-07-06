@@ -12,7 +12,7 @@ class GetAllSubjectsUsecase:
     async def __call__(self) -> List[Subject]:
         subjects = await self.repo.get_all_subjects()
 
-        if subjects == None or len(subjects) == 0:
+        if subjects is None or len(subjects) == 0:
             raise NoItemsFound('get_all_subjects')
 
         return subjects
