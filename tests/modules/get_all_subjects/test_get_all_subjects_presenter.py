@@ -5,7 +5,9 @@ from src.envs import Envs, EnvEnum
 
 class Test_GetAllSubjectsPresenter:
 
-
+    @pytest.fixture(autouse=True)
+    def mock_setting(self):
+        Envs.appEnv = EnvEnum.MOCK
 
     @pytest.mark.asyncio
     async def test_get_all_subjects(self):

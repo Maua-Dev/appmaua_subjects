@@ -5,7 +5,9 @@ from src.envs import Envs, EnvEnum
 
 class Test_Get_Subjects_By_Student_Presenter:
 
-
+    @pytest.fixture(autouse=True)
+    def mock_setting(self):
+        Envs.appEnv = EnvEnum.MOCK
 
     @pytest.mark.asyncio
     async def test_get_subject_by_student_presenter_should_return_a_list_of_subjects(self):
@@ -23,7 +25,7 @@ class Test_Get_Subjects_By_Student_Presenter:
             "header2": "value1,value2"
           },
           "queryStringParameters": {
-            "ra": "21004765",
+            "ra": "19003315",
             "parameter2": "value"
           },
           "requestContext": {
