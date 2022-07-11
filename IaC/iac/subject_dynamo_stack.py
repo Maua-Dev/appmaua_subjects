@@ -9,10 +9,10 @@ from constructs import Construct
 
 
 class SubjectDynamoStack(NestedStack):
-
     def __init__(self, scope: Construct) -> None:
         super().__init__(scope, "SubjectDynamoStack")
 
+        # Subjects database
         self.dynamo = dynamodb.Table(
             self, "MauApp-SubjectsDB",
             partition_key=dynamodb.Attribute(

@@ -16,7 +16,6 @@ class AppMauaBack(Stack):
 
         dynamoStack = SubjectDynamoStack(self)
 
-
         lambdaStack = LambdaStack(self, dynamoStack.dynamo.table_name)
 
 
