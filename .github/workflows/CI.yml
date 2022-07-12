@@ -23,7 +23,7 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements-dev.txt
     - name: Runs tests
-      run: python -m pytest  --ignore=tests/external/dynamo
+      run: python -m pytest  tests --ignore=tests/external/dynamo
     - name: Create coverage report
       run: |
-        python -m pytest  --ignore=tests/external/dynamo --cov=./
+        python -m pytest  tests --ignore=tests/external/dynamo --cov=./

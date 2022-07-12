@@ -9,8 +9,8 @@ class Test_Get_Subjects_By_Student_Presenter:
     def mock_setting(self):
         Envs.appEnv = EnvEnum.MOCK
 
-    @pytest.mark.asyncio
-    async def test_get_subject_by_student_presenter_should_return_a_list_of_subjects(self):
+
+    def test_get_subject_by_student_presenter_should_return_a_list_of_subjects(self):
         event = {
           "version": "2.0",
           "routeKey": "$default",
@@ -66,5 +66,5 @@ class Test_Get_Subjects_By_Student_Presenter:
 
         from src.modules.get_subjects_by_student.get_subjects_by_student_presenter import lambda_handler
 
-        response = await lambda_handler(event, None)
+        response = lambda_handler(event, None)
         assert response["statusCode"] == 200

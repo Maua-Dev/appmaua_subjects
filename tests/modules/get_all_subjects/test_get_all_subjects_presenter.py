@@ -9,8 +9,8 @@ class Test_GetAllSubjectsPresenter:
     def mock_setting(self):
         Envs.appEnv = EnvEnum.MOCK
 
-    @pytest.mark.asyncio
-    async def test_get_all_subjects(self):
+
+    def test_get_all_subjects(self):
 
         event = {
           "version": "2.0",
@@ -66,5 +66,5 @@ class Test_GetAllSubjectsPresenter:
 
         from src.modules.get_all_subjects.get_all_subjects_presenter import lambda_handler
 
-        response = await lambda_handler(event, None)
+        response = lambda_handler(event, None)
         assert response["statusCode"] == 200
