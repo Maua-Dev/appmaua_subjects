@@ -10,3 +10,5 @@ __pycache__
 cdk.out
 
 lambda_layer_out
+IaC/lambda_layer.zip
+IaC/lambda_layer_requirements.zip

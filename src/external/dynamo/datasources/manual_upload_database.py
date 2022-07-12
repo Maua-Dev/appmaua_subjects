@@ -11,10 +11,11 @@ from src.external.dynamo.datasources.mock_db import SUBJECTS # arquivo temporari
 # dynamo_table_name = os.environ["dynamo_table_name"]
 
 
-access_key = None
-secret_key = None
+access_key = ""
+secret_key = ""
 endpoint_url = None
-dynamo_table_name = "IaCStack-MauAppSubjectsDB1BBD4F9F-1KES1YD4D4CXE"
+dynamo_table_name = ""
+region = "us-east-1"
 
 
 def getDuplicates(data, partition_key, sort_key):
@@ -32,7 +33,7 @@ def getDuplicates(data, partition_key, sort_key):
 
 
 if __name__ == '__main__':
-    dynamo = DynamoDatasource(access_key, secret_key, endpoint_url, dynamo_table_name)
+    dynamo = DynamoDatasource(access_key, secret_key, endpoint_url, dynamo_table_name, region)
     data = SUBJECTS
 
     asyncio.run(dynamo.batchWriteItems(data))

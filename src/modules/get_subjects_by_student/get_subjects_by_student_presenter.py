@@ -2,8 +2,8 @@ from src.envs import Envs
 from src.helpers.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from src.infra.repositories.subject_repository_dynamo import SubjectRepositoryDynamo
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
-from .get_subjects_by_student_controller import GetSubjectsByStudentController
-from .get_subjects_by_student_usecase import GetSubjectsByStudentUsecase
+from get_subjects_by_student_controller import GetSubjectsByStudentController
+from get_subjects_by_student_usecase import GetSubjectsByStudentUsecase
 import asyncio
 
 

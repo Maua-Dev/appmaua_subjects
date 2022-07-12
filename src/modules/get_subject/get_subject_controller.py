@@ -1,7 +1,7 @@
 from src.helpers.errors.controller_erros import MissingParameters
 from src.helpers.http_status_code import HttpStatusCode
-from .get_subject_usecase import GetSubjectUsecase
-from .get_subject_viewmodel import GetSubjectViewmodel
+from get_subject_usecase import GetSubjectUsecase
+from get_subject_viewmodel import GetSubjectViewmodel
 from src.helpers.http_models import HttpRequest, HttpResponse, OK
 from src.helpers.errors.domain_errors import NoItemsFound
 

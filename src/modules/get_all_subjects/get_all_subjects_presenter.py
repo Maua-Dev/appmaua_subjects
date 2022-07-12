@@ -2,8 +2,8 @@ import asyncio
 from src.helpers.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from src.infra.repositories.subject_repository_dynamo import SubjectRepositoryDynamo
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
-from .get_all_subjects_controller import GetAllSubjectsController
-from .get_all_subjects_usecase import GetAllSubjectsUsecase
+from get_all_subjects_controller import GetAllSubjectsController
+from get_all_subjects_usecase import GetAllSubjectsUsecase
 from src.envs import Envs
 
 def lambda_handler(event, context):

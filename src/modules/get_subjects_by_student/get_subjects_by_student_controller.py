@@ -2,8 +2,8 @@ from src.helpers.errors.controller_erros import MissingParameters
 from src.helpers.errors.domain_errors import NoItemsFound
 from src.helpers.http_models import HttpRequest, HttpResponse, OK
 from src.helpers.http_status_code import HttpStatusCode
-from .get_subjects_by_student_usecase import GetSubjectsByStudentUsecase
-from .get_subjects_by_student_viewmodel import GetSubjectsByStudentViewmodel
+from get_subjects_by_student_usecase import GetSubjectsByStudentUsecase
+from get_subjects_by_student_viewmodel import GetSubjectsByStudentViewmodel
 
 
 class GetSubjectsByStudentController:

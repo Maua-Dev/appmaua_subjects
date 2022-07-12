@@ -4,8 +4,8 @@ from src.envs import Envs
 from src.helpers.http_lambda_requests import LambdaHttpRequest, LambdaHttpResponse
 from src.infra.repositories.subject_repository_dynamo import SubjectRepositoryDynamo
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
-from .get_subject_controller import GetSubjectController
-from .get_subject_usecase import GetSubjectUsecase
+from get_subject_controller import GetSubjectController
+from get_subject_usecase import GetSubjectUsecase
 
 
 
