@@ -1,8 +1,10 @@
 import pytest
 from src.helpers.http_models import HttpRequest
 from src.infra.repositories.subject_repository_mock import SubjectRepositoryMock
-from src.modules.get_subject.get_subject_usecase import GetSubjectUsecase
+
 from src.modules.get_subject.get_subject_controller import GetSubjectController
+from src.modules.get_subject.get_subject_usecase import GetSubjectUsecase
+
 
 class Test_GetSubjectController:
 

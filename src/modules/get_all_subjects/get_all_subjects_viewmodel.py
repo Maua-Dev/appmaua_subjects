@@ -1,4 +1,3 @@
-import pprint
 from typing import List
 
 from src.domain.entities.subject import Subject

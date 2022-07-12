@@ -10,11 +10,11 @@ from constructs import Construct
 
 class SubjectDynamoStack(NestedStack):
     def __init__(self, scope: Construct) -> None:
-        super().__init__(scope, "SubjectDynamoStack")
+        super().__init__(scope, "DynamoStack")
 
         # Subjects database
         self.dynamo = dynamodb.Table(
-            self, "MauApp-SubjectsDB",
+            self, "SubjectsDB",
             partition_key=dynamodb.Attribute(
                 name="subjectCode",
                 type=dynamodb.AttributeType.STRING
@@ -27,7 +27,7 @@ class SubjectDynamoStack(NestedStack):
         )
 
         self.dynamo.add_global_secondary_index(
-            index_name="studentRA",
+            index_name="studentRA-index",
             partition_key=dynamodb.Attribute(
                 name="studentRA",
                 type=dynamodb.AttributeType.STRING
@@ -38,20 +38,6 @@ class SubjectDynamoStack(NestedStack):
             )
         )
 
-        self.dynamo.add_local_secondary_index(
-            index_name="academicYear",
-            sort_key=dynamodb.Attribute(
-                name="studentRA",
-                type=dynamodb.AttributeType.STRING
-            )
-        )
-        self.dynamo.add_local_secondary_index(
-            index_name="degreeCode",
-            sort_key=dynamodb.Attribute(
-                name="studentRA",
-                type=dynamodb.AttributeType.STRING
-            )
-        )
 
 
 

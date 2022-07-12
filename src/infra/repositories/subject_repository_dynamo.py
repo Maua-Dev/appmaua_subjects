@@ -33,7 +33,7 @@ class SubjectRepositoryDynamo(ISubjectRepository):
 
     async def get_subjects_by_student(self, ra: str) -> List[Subject]:
         keyCondition = Key("studentRA").eq(ra)
-        data = await self.dynamo.query(keyConditionExpression=keyCondition, IndexName="studentRA")
+        data = await self.dynamo.query(keyConditionExpression=keyCondition, IndexName="studentRA-index")
 
         subjects = []
         for item in data:

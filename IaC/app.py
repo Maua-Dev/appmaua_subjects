@@ -13,6 +13,6 @@ load_lambda_layer_output()
 
 app = cdk.App()
 
-AppMauaBack(app, "IaCStack", env=env)
+AppMauaBack(app, "appmaua_subjects", env=env)
 
 app.synth()

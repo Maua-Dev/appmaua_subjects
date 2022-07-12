@@ -1,7 +1,7 @@
 from src.helpers.errors.controller_erros import MissingParameters
 from src.helpers.http_status_code import HttpStatusCode
-from src.modules.get_subject.get_subject_usecase import GetSubjectUsecase
-from src.modules.get_subject.get_subject_viewmodel import GetSubjectViewmodel
+from .get_subject_usecase import GetSubjectUsecase
+from .get_subject_viewmodel import GetSubjectViewmodel
 from src.helpers.http_models import HttpRequest, HttpResponse, OK
 from src.helpers.errors.domain_errors import NoItemsFound
 
@@ -40,5 +40,5 @@ class GetSubjectController:
         except Exception as err:
             return HttpResponse(
                 status_code=HttpStatusCode.INTERNAL_SERVER_ERROR.value,
-                body=err.message
+                body=err.args[0]
             )
